@@ -908,47 +908,40 @@
             icon.classList.toggle('rotate-180');
         }
 
-        function renderMur() {
+function renderMur() {
             return `
-                <div class="max-w-6xl mx-auto mb-16 px-2 space-y-8">
+                <div class="max-w-4xl mx-auto mb-16 px-2 space-y-8">
                     <!-- En-tête -->
-                    <div class="text-center space-y-2 py-6 bg-brand-black border-2 border-brand-red brutal-card relative overflow-hidden">
-                        <div class="absolute -right-10 -bottom-10 opacity-10 text-8xl font-pancarte text-brand-red select-none pointer-events-none">WALL</div>
-                        <span class="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">/// Zone d'affichage libre & anonyme</span>
+                    <div class="text-center space-y-2 py-6 bg-brand-black border-2 border-brand-red brutal-card p-6">
+                        <span class="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">/// Discussions & Mur d'expression</span>
                         <h2 class="font-pancarte text-3xl sm:text-5xl font-extrabold text-brand-cream tracking-wider">LE MUR DES MURMURES</h2>
                         <p class="text-xs sm:text-sm text-brand-cream/80 max-w-xl mx-auto font-light px-4">
-                            Poste ton post-it, ton coup de gueule ou ton idée sans t'inscrire ni te connecter. Écris directement et colle ta note sur le mur !
+                            Laisse ton mot, réponds aux idées ou participe aux discussions directement via GitHub Discussions (connexion rapide en 1 clic).
                         </p>
                     </div>
 
- <script src="https://giscus.app/client.js"
-        data-repo="ensaseenlutte/ensase-en-lutte"
-        data-repo-id="R_kgDOVltx7A"
-        data-category="Ideas"
-        data-category-id="DIC_kwDOVltx7M4DK1vr"
-        data-mapping="url"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="dark"
-        data-lang="fr"
-        crossorigin="anonymous"
-        async>
-</script>
-
-                                    <div class="flex justify-between items-end border-t border-neutral-900/10 pt-2 text-[10px] font-mono font-bold opacity-80">
-                                        <span>— ${esc(note.author)}</span>
-                                        <span class="text-[9px] font-normal">${note.date}</span>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
+                    <!-- Conteneur Giscus -->
+                    <div class="brutal-card bg-brand-black p-4 sm:p-6">
+                        <script src="https://giscus.app/client.js"
+                                data-repo="ensaseenlutte/ensase-en-lutte"
+                                data-repo-id="R_kgDOVltx7A"
+                                data-category="Ideas"
+                                data-category-id="DIC_kwDOVltx7M4DK1vr"
+                                data-mapping="url"
+                                data-strict="0"
+                                data-reactions-enabled="1"
+                                data-emit-metadata="0"
+                                data-input-position="top"
+                                data-theme="dark"
+                                data-lang="fr"
+                                crossorigin="anonymous"
+                                async>
+                        </script>
                     </div>
                 </div>
             `;
         }
-
+    
         function renderVotes() {
             return `
                 <div class="max-w-4xl mx-auto mb-12 px-2 space-y-8">
