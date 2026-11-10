@@ -284,11 +284,11 @@
             <div class="bg-brand-cream/5 border border-brand-cream/20 p-3 text-xs space-y-1.5 text-brand-cream/80 font-light">
                 <span class="font-bold text-brand-cream font-mono uppercase text-[10px]">Informations demandées sur le site officiel :</span>
                 <ul class="list-disc list-inside space-y-0.5 text-[11px]">
-                    <li>Le titre de l’événement & le type</li>
-                    <li>La date, l'heure (début et fin) & le lieu</li>
+                    <li>Le titre de l’événement, le type, la date</li>
+                    <li>L'heure (début et fin) & le lieu</li>
                     <li>Les totems concernés</li>
                     <li>Une courte description</li>
-                    <li>Précisions pour l'équipe du planning</li>
+                    <li>Précisions pour l'équipe</li>
                 </ul>
             </div>
 
@@ -414,8 +414,8 @@
             { id: 'alimentation', name: 'ALIMENTATION', workshops: [] },
             { id: 'commun', name: 'COMMUN', workshops: [] },
             { id: 'itinerance', name: 'ITINERANCE', workshops: [] },
-            { id: 'memoire', name: 'MEMOIRE', workshops: [] },
             { id: 'mediation', name: 'MEDIATION', workshops: [] },
+            { id: 'memoire', name: 'MEMOIRE', workshops: [] },
             { id: 'soin', name: 'SOIN', workshops: [] },
             { id: 'technique', name: 'TECHNIQUE', workshops: [] },
             { id: 'violence', name: 'VIOLENCE', workshops: [] },
@@ -888,7 +888,12 @@
                                             +
                                         </button>
                                     </div>
-                                    <p class="text-xs text-brand-cream/50 italic py-2">https://eensase.vercel.app/#planning</p>
+                                    <p class="text-xs text-brand-cream/80 py-2">
+                                        Retrouvez tous les ateliers et activités planifiés sur le site officiel : 
+                                        <a href="https://eensase.vercel.app/#planning" target="_blank" rel="noopener noreferrer" class="text-amber-400 font-bold underline hover:text-amber-300">
+                                            https://eensase.vercel.app/#planning ↗
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                         `).join('')}
