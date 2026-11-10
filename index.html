@@ -178,7 +178,7 @@
                 <button onclick="setPage('agenda')" class="nav-link hover:text-brand-red transition-colors py-1">Agenda</button>
                 <button onclick="setPage('totems')" class="nav-link hover:text-brand-red transition-colors py-1">Totems</button>
                 <button onclick="setPage('votes')" class="nav-link hover:text-brand-red transition-colors py-1">Vote & CR</button>
-                <button onclick="setPage('mur')" class="nav-link hover:text-brand-red transition-colors py-1 text-amber-300 font-bold">Expression Libre</button>
+                <button onclick="setPage('mur')" class="nav-link hover:text-brand-red transition-colors py-1 text-amber-300 font-bold">Mur Libre</button>
                 <button onclick="openModal('modal-propose')" class="brutal-btn w-8 h-8 flex items-center justify-center text-base font-bold" title="Proposer un événement / atelier">+</button>
             </nav>
 
@@ -192,7 +192,7 @@
             <button onclick="setPage('agenda'); toggleMobileMenu();" class="py-2 w-full">Agenda</button>
             <button onclick="setPage('totems'); toggleMobileMenu();" class="py-2 w-full">Totems</button>
             <button onclick="setPage('votes'); toggleMobileMenu();" class="py-2 w-full">Vote & CR</button>
-            <button onclick="setPage('mur'); toggleMobileMenu();" class="py-2 w-full text-amber-300">Expression Libre (Form)</button>
+            <button onclick="setPage('mur'); toggleMobileMenu();" class="py-2 w-full text-amber-300">Mur Libre (Padlet)</button>
             <button onclick="openModal('modal-propose'); toggleMobileMenu();" class="brutal-btn py-3 mt-1 w-full text-center uppercase text-base font-black">+ Proposer un événement</button>
         </div>
     </header>
@@ -221,7 +221,7 @@
                     <li><button onclick="setPage('agenda')" class="hover:text-brand-red transition-colors">Agenda de la lutte</button></li>
                     <li><button onclick="setPage('totems')" class="hover:text-brand-red transition-colors">Les 9 totems & activités</button></li>
                     <li><button onclick="setPage('votes')" class="hover:text-brand-red transition-colors">Votes & comptes rendus</button></li>
-                    <li><button onclick="setPage('mur')" class="hover:text-brand-red transition-colors text-amber-300">Expression libre</button></li>
+                    <li><button onclick="setPage('mur')" class="hover:text-brand-red transition-colors text-amber-300">Mur d'expression libre</button></li>
                 </ul>
             </div>
             <div>
@@ -263,7 +263,7 @@
             <i class="fa-solid fa-square-poll-vertical text-sm"></i><span>Votes</span>
         </button>
         <button onclick="setPage('mur')" class="nav-mob-btn flex flex-col items-center gap-1 text-[9px] uppercase font-bold text-amber-300 w-full py-1" data-tab="mur">
-            <i class="fa-solid fa-pen-to-square text-sm"></i><span>Exprimer</span>
+            <i class="fa-solid fa-note-sticky text-sm"></i><span>Mur</span>
         </button>
     </nav>
 
@@ -394,8 +394,8 @@
 
     <script>
         const OFFICIAL_PROPOSE_URL = "https://eensase.vercel.app/proposer/";
-        // Remplace ce lien par ton propre lien Google Form (ou laisse celui du collectif)
-        const GOOGLE_FORM_EMBED_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdU0R95mBnJ45RJwfXfknt2Ov6udkFNdITan9lwqtplz2v1BQ/viewform?embedded=true";
+        const PADLET_URL = "https://padlet.com/ensaseenlutte/totems-s025cbxlgj4unr01rlca";
+        const PADLET_EMBED_URL = "https://padlet.com/embed/ensaseenlutte/totems-s025cbxlgj4unr01rlca";
 
         // Navigation persistante par hash d'URL (onglets principaux)
         let validTabs = ['accueil', 'agenda', 'totems', 'votes', 'mur'];
@@ -688,7 +688,7 @@
                             <i class="fa-solid fa-calendar-days mr-2"></i> Voir l'agenda
                         </button>
                         <button onclick="setPage('mur')" class="brutal-btn-dark px-5 py-3 text-xs uppercase tracking-wider w-full sm:w-auto text-brand-black">
-                            <i class="fa-solid fa-pen-to-square mr-2"></i> Expression libre (Google Forms)
+                            <i class="fa-solid fa-note-sticky mr-2"></i> Mur d'expression (Padlet)
                         </button>
                     </div>
                 </div>
@@ -865,19 +865,25 @@
 
         function renderMur() {
             return `
-                <div class="max-w-4xl mx-auto mb-16 px-2 space-y-6">
-                    <div class="text-center space-y-2 py-6 bg-brand-black border-2 border-brand-red brutal-card p-6">
-                        <span class="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">/// Espace d'expression anonyme & direct</span>
-                        <h2 class="font-pancarte text-3xl sm:text-5xl font-extrabold text-brand-cream tracking-wider">EXPRIMER SANS FILTRE</h2>
+                <div class="max-w-6xl mx-auto mb-16 px-2 space-y-6">
+                    <div class="text-center space-y-2 py-6 bg-brand-black border-2 border-brand-red brutal-card p-6 relative overflow-hidden">
+                        <div class="absolute -right-10 -bottom-10 opacity-10 text-8xl font-pancarte text-brand-red select-none pointer-events-none">WALL</div>
+                        <span class="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">/// Mur d'expression partagé & anonyme</span>
+                        <h2 class="font-pancarte text-3xl sm:text-5xl font-extrabold text-brand-cream tracking-wider">LE MUR DES MURMURES</h2>
                         <p class="text-xs sm:text-sm text-brand-cream/80 max-w-xl mx-auto font-light px-4">
-                            Dépose ton mot, ton idée ou ton retour d'expérience directement via ce formulaire sécurisé (sans inscription requise).
+                            Dépose ton post-it, partage ton avis ou réponds aux autres en direct sur notre Padlet collaboratif, sans inscription requise.
                         </p>
+                        <div class="pt-2">
+                            <a href="${PADLET_URL}" target="_blank" rel="noopener noreferrer" class="text-xs uppercase font-bold text-amber-300 hover:underline">
+                                Ouvrir le Padlet en plein écran ↗
+                            </a>
+                        </div>
                     </div>
 
-                    <!-- Intégration Google Forms (Iframe propre et responsive) -->
+                    <!-- Intégration Padlet (Iframe intégrée) -->
                     <div class="brutal-card bg-brand-black p-2 sm:p-4 overflow-hidden">
-                        <div style="position: relative; width: 100%; height: 750px; background: #fff;">
-                            <iframe src="${GOOGLE_FORM_EMBED_URL}" width="100%" height="750px" frameborder="0" marginheight="0" marginwidth="0" style="display:block;">Chargement du formulaire...</iframe>
+                        <div style="position: relative; width: 100%; height: 700px; background: #121212;">
+                            <iframe src="${PADLET_EMBED_URL}" width="100%" height="700px" style="border:none;display:block;" allow="camera;microphone;geolocation"></iframe>
                         </div>
                     </div>
                 </div>
