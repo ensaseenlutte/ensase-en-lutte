@@ -921,55 +921,21 @@
                         </p>
                     </div>
 
-                    <!-- Formulaire de collage instantané -->
-                    <div class="bg-neutral-900 border-2 border-dashed border-brand-red/60 p-5 rounded-none max-w-2xl mx-auto brutal-card">
-                        <h3 class="font-pancarte text-sm sm:text-base text-brand-cream mb-3 flex items-center gap-2">
-                            <i class="fa-solid fa-thumbtack text-brand-red"></i> Coller un nouveau mot sur le mur :
-                        </h3>
-                        <form onsubmit="handleStreetNoteSubmit(event)" class="space-y-3">
-                            <div>
-                                <textarea id="street-text" rows="3" required placeholder="Écris ton message ici (avis, humeur, blague, revendication...)..." class="w-full bg-neutral-950 border border-brand-cream/30 p-3 text-xs sm:text-sm text-brand-cream focus:border-brand-red outline-none resize-none font-medium"></textarea>
-                            </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[10px] uppercase font-mono text-brand-cream/70 mb-1">Signature / Collectif (optionnel)</label>
-                                    <input type="text" id="street-author" placeholder="ex: L3 Urbanisme, Anonyme..." class="w-full bg-neutral-950 border border-brand-cream/30 p-2 text-xs text-brand-cream focus:border-brand-red outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] uppercase font-mono text-brand-cream/70 mb-1">Couleur du Post-it</label>
-                                    <select id="street-color" class="w-full bg-neutral-950 border border-brand-cream/30 p-2 text-xs text-brand-cream focus:border-brand-red outline-none uppercase font-bold">
-                                        <option value="yellow">🟨 Jaune Post-it classique</option>
-                                        <option value="pink">🟥 Rose fluo</option>
-                                        <option value="blue">🟦 Bleu cyan</option>
-                                        <option value="green">🟩 Vert prairie</option>
-                                        <option value="white">⬜ Blanc brut</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <button type="submit" class="brutal-btn py-3 px-6 text-xs uppercase font-extrabold w-full flex items-center justify-center gap-2 tracking-wider">
-                                <i class="fa-solid fa-paper-plane"></i> Épingler sur le mur instantanément
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Le Mur de Post-its pèle-mêle -->
-                    <div class="pt-4">
-                        <div class="flex justify-between items-center mb-4 border-b border-brand-cream/20 pb-2">
-                            <span class="font-pancarte text-xs uppercase tracking-wider text-brand-cream/60">Messages épinglés :</span>
-                            <span class="text-[11px] font-mono text-brand-red font-bold">${streetNotes.length} notes au mur</span>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4 bg-[#0d0d0d] border-2 border-brand-red/30 texture-overlay min-h-[400px] items-start">
-                            ${streetNotes.length === 0 ? '<p class="text-xs text-brand-cream/40 italic col-span-full text-center py-12">Le mur est vide pour l\'instant. Soyez les premiers à coller un mot !</p>' : ''}
-                            ${streetNotes.map(note => `
-                                <div class="${getColorClass(note.color)} p-4 shadow-xl border relative transform ${note.rotate} hover:rotate-0 hover:scale-105 transition-all duration-200 flex flex-col justify-between min-h-[160px] group">
-                                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-red border border-white shadow-md z-10 flex items-center justify-center text-[8px] text-white">
-                                        <i class="fa-solid fa-thumbtack"></i>
-                                    </div>
-
-                                    <div class="pt-2">
-                                        <p class="font-marker text-sm sm:text-base leading-snug break-words mb-4">"${esc(note.text)}"</p>
-                                    </div>
+ <script src="https://giscus.app/client.js"
+        data-repo="ensaseenlutte/ensase-en-lutte"
+        data-repo-id="R_kgDOVltx7A"
+        data-category="Ideas"
+        data-category-id="DIC_kwDOVltx7M4DK1vr"
+        data-mapping="url"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark"
+        data-lang="fr"
+        crossorigin="anonymous"
+        async>
+</script>
 
                                     <div class="flex justify-between items-end border-t border-neutral-900/10 pt-2 text-[10px] font-mono font-bold opacity-80">
                                         <span>— ${esc(note.author)}</span>
