@@ -30,7 +30,7 @@
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&family=Permanent+Marker&display=swap" rel="stylesheet">
 
 <script>
     tailwind.config = {
@@ -48,7 +48,8 @@
                 },
                 fontFamily: {
                     title: ['Syne', 'sans-serif'],
-                    body: ['Space Grotesk', 'sans-serif']
+                    body: ['Space Grotesk', 'sans-serif'],
+                    marker: ['Permanent Marker', 'cursive']
                 },
                 animation: {
                     'ticker': 'ticker 25s linear infinite',
@@ -147,13 +148,13 @@
     <div class="bg-brand-red text-brand-cream border-b-2 border-brand-cream overflow-hidden select-none z-50 fixed top-0 left-0 right-0 w-full"
          style="padding-top: max(16px, calc(10px + env(safe-area-inset-top))); padding-bottom: 9px;">
         <div class="animate-ticker font-pancarte text-[11px] tracking-wider uppercase">
-            <span class="mx-4">🗓️ JEUDI 12/11 À 14H-15H30 : AG (219 ATELIER L1)</span>
+            <span class="mx-4">🗓️ LUNDI 9/11 À 9H : RÉUNION D'INFORMATION (AMPHI -101)</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🗓️ JEUDI 12/11 À 14H-15H30 : AG (219 ATELIER L1)</span>
+            <span class="mx-4">🔥 MARDI 10/11 À 8H30 : DÉBUT DE L'EXPÉRIMENTATION</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🗓️ JEUDI 12/11 À 14H-15H30 : AG (219 ATELIER L1)</span>
+            <span class="mx-4">🗓️ LUNDI 9/11 À 9H : RÉUNION D'INFORMATION (AMPHI -101)</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🗓️ JEUDI 12/11 À 14H-15H30 : AG (219 ATELIER L1)</span>
+            <span class="mx-4">🔥 MARDI 10/11 À 8H30 : DÉBUT DE L'EXPÉRIMENTATION</span>
             <span class="mx-4">·</span>
         </div>
     </div>
@@ -178,7 +179,8 @@
                 <button onclick="setPage('agenda')" class="nav-link hover:text-brand-red transition-colors py-1">Agenda</button>
                 <button onclick="setPage('totems')" class="nav-link hover:text-brand-red transition-colors py-1">Totems</button>
                 <button onclick="setPage('votes')" class="nav-link hover:text-brand-red transition-colors py-1">Vote & CR</button>
-                <button onclick="openModal('modal-propose')" class="brutal-btn w-8 h-8 flex items-center justify-center text-base font-bold" title="Proposer une action / atelier via Google Forms">+</button>
+                <button onclick="setPage('mur')" class="nav-link hover:text-brand-red transition-colors py-1 text-amber-300 font-bold">Mur Libre</button>
+                <button onclick="openModal('modal-propose')" class="brutal-btn w-8 h-8 flex items-center justify-center text-base font-bold" title="Proposer un événement / atelier">+</button>
             </nav>
 
             <button id="mobile-menu-btn" class="md:hidden text-2xl text-brand-cream focus:outline-none p-1.5" aria-label="Menu" onclick="toggleMobileMenu()">
@@ -191,7 +193,8 @@
             <button onclick="setPage('agenda'); toggleMobileMenu();" class="py-2 w-full">Agenda</button>
             <button onclick="setPage('totems'); toggleMobileMenu();" class="py-2 w-full">Totems</button>
             <button onclick="setPage('votes'); toggleMobileMenu();" class="py-2 w-full">Vote & CR</button>
-            <button onclick="openModal('modal-propose'); toggleMobileMenu();" class="brutal-btn py-3 mt-1 w-full text-center uppercase text-base font-black">+ Proposer une action</button>
+            <button onclick="setPage('mur'); toggleMobileMenu();" class="py-2 w-full text-amber-300">Mur Libre (Street Art)</button>
+            <button onclick="openModal('modal-propose'); toggleMobileMenu();" class="brutal-btn py-3 mt-1 w-full text-center uppercase text-base font-black">+ Proposer un événement</button>
         </div>
     </header>
 
@@ -219,7 +222,7 @@
                     <li><button onclick="setPage('agenda')" class="hover:text-brand-red transition-colors">Agenda de la lutte</button></li>
                     <li><button onclick="setPage('totems')" class="hover:text-brand-red transition-colors">Les 9 totems & activités</button></li>
                     <li><button onclick="setPage('votes')" class="hover:text-brand-red transition-colors">Votes & comptes rendus</button></li>
-                    <li><button onclick="openModal('modal-propose')" class="hover:text-brand-red transition-colors">Proposer une action (Forms)</button></li>
+                    <li><button onclick="setPage('mur')" class="hover:text-brand-red transition-colors text-amber-300">Mur d'expression libre</button></li>
                 </ul>
             </div>
             <div>
@@ -246,51 +249,54 @@
         </div>
     </footer>
 
-    <!-- NAVIGATION MOBILE EN BAS (4 ONGLETS) -->
+    <!-- NAVIGATION MOBILE EN BAS (5 ONGLETS) -->
     <nav class="md:hidden fixed bottom-0 left-0 right-0 w-full bg-brand-black border-t-2 border-brand-red z-40 flex justify-around items-center py-2 px-1" style="padding-bottom: calc(8px + env(safe-area-inset-top));">
-        <button onclick="setPage('accueil')" class="nav-mob-btn flex flex-col items-center gap-1 text-[10px] uppercase font-bold text-brand-cream/70 w-full py-1" data-tab="accueil">
-            <i class="fa-solid fa-house text-base"></i><span>Accueil</span>
+        <button onclick="setPage('accueil')" class="nav-mob-btn flex flex-col items-center gap-1 text-[9px] uppercase font-bold text-brand-cream/70 w-full py-1" data-tab="accueil">
+            <i class="fa-solid fa-house text-sm"></i><span>Accueil</span>
         </button>
-        <button onclick="setPage('agenda')" class="nav-mob-btn flex flex-col items-center gap-1 text-[10px] uppercase font-bold text-brand-cream/70 w-full py-1" data-tab="agenda">
-            <i class="fa-solid fa-calendar-days text-base"></i><span>Agenda</span>
+        <button onclick="setPage('agenda')" class="nav-mob-btn flex flex-col items-center gap-1 text-[9px] uppercase font-bold text-brand-cream/70 w-full py-1" data-tab="agenda">
+            <i class="fa-solid fa-calendar-days text-sm"></i><span>Agenda</span>
         </button>
-        <button onclick="setPage('totems')" class="nav-mob-btn flex flex-col items-center gap-1 text-[10px] uppercase font-bold text-brand-cream/70 w-full py-1" data-tab="totems">
-            <i class="fa-solid fa-star text-base"></i><span>Totems</span>
+        <button onclick="setPage('totems')" class="nav-mob-btn flex flex-col items-center gap-1 text-[9px] uppercase font-bold text-brand-cream/70 w-full py-1" data-tab="totems">
+            <i class="fa-solid fa-star text-sm"></i><span>Totems</span>
         </button>
-        <button onclick="setPage('votes')" class="nav-mob-btn flex flex-col items-center gap-1 text-[10px] uppercase font-bold text-brand-cream/70 w-full py-1" data-tab="votes">
-            <i class="fa-solid fa-square-poll-vertical text-base"></i><span>Vote & CR</span>
+        <button onclick="setPage('votes')" class="nav-mob-btn flex flex-col items-center gap-1 text-[9px] uppercase font-bold text-brand-cream/70 w-full py-1" data-tab="votes">
+            <i class="fa-solid fa-square-poll-vertical text-sm"></i><span>Votes</span>
+        </button>
+        <button onclick="setPage('mur')" class="nav-mob-btn flex flex-col items-center gap-1 text-[9px] uppercase font-bold text-amber-300 w-full py-1" data-tab="mur">
+            <i class="fa-solid fa-note-sticky text-sm"></i><span>Mur</span>
         </button>
     </nav>
 
-    <!-- MODALE PROPOSER : LIEN VERS GOOGLE FORMS -->
+    <!-- MODALE PROPOSER : LIEN VERS SITE OFFICIEL -->
     <div id="modal-propose" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto w-full" onclick="if(event.target === this) closeModal('modal-propose')">
         <div class="bg-brand-black border-2 border-brand-red max-w-md w-full p-5 md:p-6 brutal-card relative my-auto space-y-4">
             <button onclick="closeModal('modal-propose')" class="absolute top-3 right-3 text-brand-cream hover:text-brand-red text-2xl p-1">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <span class="text-[9px] font-mono text-brand-red font-bold uppercase tracking-widest">/// Contribution Étudiante</span>
-            <h2 class="font-pancarte text-xl font-extrabold text-brand-cream mt-1">PROPOSER UNE ACTION / ATELIER</h2>
+            <span class="text-[9px] font-mono text-brand-red font-bold uppercase tracking-widest">/// Proposition Officielle</span>
+            <h2 class="font-pancarte text-xl font-extrabold text-brand-cream mt-1">PROPOSER UN ÉVÉNEMENT</h2>
             
             <p class="text-xs text-brand-cream/80 leading-relaxed font-light">
-                Toutes les propositions d'ateliers, d'actions et de débats sont directement centralisées sur notre <strong>Google Forms officiel</strong> afin que le collectif reçoive et traite vos réponses immédiatement.
+                Vous organisez un atelier, une rencontre ou une projection ? Décrivez-le ici. L’équipe du planning relit chaque proposition, corrige les détails si besoin et l’ajoute au planning si elle correspond à l’expérimentation.
             </p>
 
             <div class="bg-brand-cream/5 border border-brand-cream/20 p-3 text-xs space-y-1.5 text-brand-cream/80 font-light">
-                <span class="font-bold text-brand-cream font-mono uppercase text-[10px]">Informations demandées dans le formulaire :</span>
+                <span class="font-bold text-brand-cream font-mono uppercase text-[10px]">Informations demandées sur le site officiel :</span>
                 <ul class="list-disc list-inside space-y-0.5 text-[11px]">
-                    <li>Prénom / Nom + Statut (L1, L2, L3, M1, M2...)</li>
-                    <li>E-mail universitaire (@st-etienne.archi.fr)</li>
-                    <li>Titre de l'action & Totem de rattachement</li>
-                    <li>Date, lieu envisagé & description détaillée</li>
-                    <li>Nombre de places (ou illimité)</li>
+                    <li>Le titre de l’événement & le type</li>
+                    <li>La date, l'heure (début et fin) & le lieu</li>
+                    <li>Les totems concernés</li>
+                    <li>Une courte description</li>
+                    <li>Précisions pour l'équipe du planning</li>
                 </ul>
             </div>
 
             <div class="pt-2">
-                <a id="btn-open-google-form" href="https://docs.google.com/forms/d/e/1FAIpQLSdU0R95mBnJ45RJwfXfknt2Ov6udkFNdITan9lwqtplz2v1BQ/viewform?usp=header" target="_blank" rel="noopener noreferrer"
+                <a id="btn-open-official-form" href="https://eensase.vercel.app/proposer/" target="_blank" rel="noopener noreferrer"
                    class="w-full brutal-btn py-3 px-4 text-xs uppercase font-bold flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-google text-base"></i>
-                    Ouvrir le formulaire Google Forms ↗
+                    <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
+                    Proposer sur le site officiel (eensase.vercel.app) ↗
                 </a>
             </div>
         </div>
@@ -388,12 +394,20 @@
     <div id="toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 bg-brand-cream text-brand-black px-4 py-2 font-bold text-xs uppercase tracking-wider z-50 hidden border-2 border-brand-red shadow-lg text-center max-w-xs truncate"></div>
 
     <script>
-        const GOOGLE_FORMS_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdU0R95mBnJ45RJwfXfknt2Ov6udkFNdITan9lwqtplz2v1BQ/viewform?usp=header";
+        const OFFICIAL_PROPOSE_URL = "https://eensase.vercel.app/proposer/";
 
-        // Navigation persistante par hash d'URL (4 onglets principaux)
-        let validTabs = ['accueil', 'agenda', 'totems', 'votes'];
+        // Navigation persistante par hash d'URL (onglets principaux)
+        let validTabs = ['accueil', 'agenda', 'totems', 'votes', 'mur'];
         let initialHash = window.location.hash.replace('#', '');
         let currentPage = validTabs.includes(initialHash) ? initialHash : 'accueil';
+
+        // --- DONNÉES DU MUR DE STREET ART / EXPRESSION LIBRE ---
+        let streetNotes = JSON.parse(localStorage.getItem('ensase_street_notes')) || [
+            { id: 1, text: "L'architecture ne se fait pas sans la rue !", author: "L1 Studio 3", color: "yellow", rotate: "rotate-1", type: "text", date: "Hier" },
+            { id: 2, text: "On lâche rien pour le semestre expé !! 🔥", author: "Anonyme", color: "pink", rotate: "-rotate-2", type: "text", date: "Il y a 3h" },
+            { id: 3, text: "Est-ce que quelqu'un a le cours de struct de la semaine dernière ?", author: "M1 Bâtiment", color: "blue", rotate: "rotate-2", type: "text", date: "Aujourd'hui" },
+            { id: 4, text: "Liberté, Égalité, Maquette !", author: "Le Collectif", color: "green", rotate: "-rotate-1", type: "text", date: "Il y a 1h" }
+        ];
 
         // --- LES 9 TOTEMS ---
         let totemsData = [
@@ -401,7 +415,7 @@
             { id: 'commun', name: 'COMMUN', workshops: [] },
             { id: 'itinerance', name: 'ITINERANCE', workshops: [] },
             { id: 'memoire', name: 'MEMOIRE', workshops: [] },
-            { id: 'public', name: 'PUBLIC', workshops: [] },
+            { id: 'mediation', name: 'MEDIATION', workshops: [] },
             { id: 'soin', name: 'SOIN', workshops: [] },
             { id: 'technique', name: 'TECHNIQUE', workshops: [] },
             { id: 'violence', name: 'VIOLENCE', workshops: [] },
@@ -411,15 +425,27 @@
         let eventsData = [
             { 
                 id: 'e1', 
-                day: '12', 
+                day: '09', 
                 month: 'NOV', 
                 year: 2026,
-                time: '14h00', 
-                endTime: '15h30',
-                title: "Assemblée générale", 
+                time: '09h00', 
+                endTime: '11h00',
+                title: "Réunion d'information", 
                 type: 'AG & RÉUNIONS', 
-                place: '219 Atelier L1', 
-                desc: "Retours de la semaine, organisation autour des totems" 
+                place: 'Amphi -101', 
+                desc: "Réunion d'information générale pour lancer la semaine et présenter les enjeux de la mobilisation." 
+            },
+            { 
+                id: 'e2', 
+                day: '10', 
+                month: 'NOV', 
+                year: 2026,
+                time: '08h30', 
+                endTime: '12h00',
+                title: "Début de l'expérimentation", 
+                type: 'ATELIERS', 
+                place: "Toute l'école", 
+                desc: "Lancement officiel du semestre banalisé et mise en place des 9 Totems d'action." 
             }
         ];
 
@@ -466,8 +492,8 @@
             const el = $('#' + id);
             if (el) el.classList.remove('hidden');
             if(id === 'modal-propose') {
-                const btn = $('#btn-open-google-form');
-                if (btn) btn.href = GOOGLE_FORMS_URL;
+                const btn = $('#btn-open-official-form');
+                if (btn) btn.href = OFFICIAL_PROPOSE_URL;
             }
         }
 
@@ -524,11 +550,12 @@
         function updateNavActive() {
             document.querySelectorAll('.nav-mob-btn').forEach(b => {
                 if(b.dataset.tab === currentPage) {
-                    b.classList.add('text-brand-red');
-                    b.classList.remove('text-brand-cream/70');
+                    b.classList.add('text-amber-300');
+                    b.classList.remove('text-brand-cream/70', 'text-brand-red');
                 } else {
-                    b.classList.remove('text-brand-red');
-                    b.classList.add('text-brand-cream/70');
+                    b.classList.remove('text-amber-300');
+                    if(b.dataset.tab === 'mur') b.classList.add('text-amber-300');
+                    else b.classList.add('text-brand-cream/70');
                 }
             });
         }
@@ -641,12 +668,52 @@
             text.textContent = content.classList.contains('hidden') ? 'Voir le compte rendu complet' : 'Masquer le compte rendu';
         }
 
+        // --- GESTION DU MUR DE STREET ART ---
+        function handleStreetNoteSubmit(e) {
+            e.preventDefault();
+            const textInput = $('#street-text').value.trim();
+            const authorInput = $('#street-author').value.trim();
+            const colorInput = $('#street-color').value;
+
+            if (!textInput) return;
+
+            const rotations = ['rotate-1', '-rotate-2', 'rotate-2', '-rotate-1', 'rotate-3', '-rotate-3'];
+            const randomRotate = rotations[Math.floor(Math.random() * rotations.length)];
+
+            const newNote = {
+                id: Date.now(),
+                text: textInput,
+                author: authorInput || 'Anonyme',
+                color: colorInput,
+                rotate: randomRotate,
+                type: 'text',
+                date: "À l'instant"
+            };
+
+            streetNotes.unshift(newNote);
+            localStorage.setItem('ensase_street_notes', JSON.stringify(streetNotes));
+            render();
+            showToast("Ton mot a été collé sur le mur ! 📌");
+        }
+
+        function getColorClass(color) {
+            switch(color) {
+                case 'yellow': return 'bg-amber-200 text-neutral-900 border-amber-400 shadow-amber-900/30';
+                case 'pink': return 'bg-pink-200 text-neutral-900 border-pink-400 shadow-pink-900/30';
+                case 'blue': return 'bg-cyan-200 text-neutral-900 border-cyan-400 shadow-cyan-900/30';
+                case 'green': return 'bg-emerald-200 text-neutral-900 border-emerald-400 shadow-emerald-900/30';
+                case 'white': return 'bg-neutral-100 text-neutral-900 border-neutral-300 shadow-neutral-900/30';
+                default: return 'bg-amber-200 text-neutral-900 border-amber-400 shadow-amber-900/30';
+            }
+        }
+
         function render() {
             const container = $('#app-content');
             if(currentPage === 'accueil') container.innerHTML = renderAccueil();
             else if(currentPage === 'agenda') container.innerHTML = renderAgenda();
             else if(currentPage === 'totems') container.innerHTML = renderTotems();
             else if(currentPage === 'votes') container.innerHTML = renderVotes();
+            else if(currentPage === 'mur') container.innerHTML = renderMur();
             updateNavActive();
         }
 
@@ -666,8 +733,8 @@
                         <button onclick="setPage('agenda')" class="brutal-btn px-5 py-3 text-xs uppercase tracking-wider w-full sm:w-auto">
                             <i class="fa-solid fa-calendar-days mr-2"></i> Voir l'agenda
                         </button>
-                        <button onclick="setPage('totems')" class="brutal-btn-dark px-5 py-3 text-xs uppercase tracking-wider w-full sm:w-auto">
-                            <i class="fa-solid fa-star mr-2"></i> Les 9 totems
+                        <button onclick="setPage('mur')" class="brutal-btn-dark px-5 py-3 text-xs uppercase tracking-wider w-full sm:w-auto text-brand-black">
+                            <i class="fa-solid fa-note-sticky mr-2"></i> Mur d'expression libre
                         </button>
                     </div>
                 </div>
@@ -801,8 +868,8 @@
                     <div class="space-y-3 pt-2">
                         <div class="flex justify-between items-center">
                             <h3 class="font-pancarte text-sm uppercase tracking-wider text-brand-cream/60">Tous les totems :</h3>
-                            <button onclick="openModal('modal-propose')" class="brutal-btn py-1 px-3 text-[10px] uppercase font-bold flex items-center gap-1.5" title="Proposer une action">
-                                <i class="fa-solid fa-plus"></i> Proposer une action
+                            <button onclick="openModal('modal-propose')" class="brutal-btn py-1 px-3 text-[10px] uppercase font-bold flex items-center gap-1.5" title="Proposer un événement">
+                                <i class="fa-solid fa-plus"></i> Proposer un événement
                             </button>
                         </div>
                         ${totemsData.map(t => `
@@ -817,11 +884,11 @@
                                 <div id="content-${t.id}" class="hidden mt-4 pt-4 border-t border-brand-cream/20 space-y-3">
                                     <div class="flex justify-between items-center">
                                         <h4 class="font-pancarte text-[11px] uppercase tracking-widest text-brand-red">Activités et ateliers proposés :</h4>
-                                        <button onclick="openModal('modal-propose')" class="brutal-btn w-6 h-6 flex items-center justify-center text-xs font-bold" title="Proposer un atelier dans ce totem">
+                                        <button onclick="openModal('modal-propose')" class="brutal-btn w-6 h-6 flex items-center justify-center text-xs font-bold" title="Proposer un événement dans ce totem">
                                             +
                                         </button>
                                     </div>
-                                    <p class="text-xs text-brand-cream/50 italic py-2">En cours de réflexion par le CPS...</p>
+                                    <p class="text-xs text-brand-cream/50 italic py-2">https://eensase.vercel.app/#planning</p>
                                 </div>
                             </div>
                         `).join('')}
@@ -835,6 +902,82 @@
             const icon = $(`#icon-${id}`);
             content.classList.toggle('hidden');
             icon.classList.toggle('rotate-180');
+        }
+
+        function renderMur() {
+            return `
+                <div class="max-w-6xl mx-auto mb-16 px-2 space-y-8">
+                    <!-- En-tête style graffiti / urbain -->
+                    <div class="text-center space-y-2 py-6 bg-brand-black border-2 border-brand-red brutal-card relative overflow-hidden">
+                        <div class="absolute -right-10 -bottom-10 opacity-10 text-8xl font-pancarte text-brand-red select-none pointer-events-none">WALL</div>
+                        <span class="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">/// Zone d'affichage libre & sauvage</span>
+                        <h2 class="font-pancarte text-3xl sm:text-5xl font-extrabold text-brand-cream tracking-wider">LE MUR DES MURMURES</h2>
+                        <p class="text-xs sm:text-sm text-brand-cream/80 max-w-xl mx-auto font-light px-4">
+                            Poste ton post-it, ton coup de gueule, ta poésie ou ton idée. Ici, pas besoin de prendre la parole au micro en AG : colle ta note sur le mur !
+                        </p>
+                    </div>
+
+                    <!-- Formulaire de collage de post-it -->
+                    <div class="bg-neutral-900 border-2 border-dashed border-brand-red/60 p-5 rounded-none max-w-2xl mx-auto brutal-card">
+                        <h3 class="font-pancarte text-sm sm:text-base text-brand-cream mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-thumbtack text-brand-red"></i> Coller un nouveau mot sur le mur :
+                        </h3>
+                        <form onsubmit="handleStreetNoteSubmit(event)" class="space-y-3">
+                            <div>
+                                <textarea id="street-text" rows="3" required placeholder="Écris ton message ici (avis, humeur, blague, revendication...)..." class="w-full bg-neutral-950 border border-brand-cream/30 p-3 text-xs sm:text-sm text-brand-cream focus:border-brand-red outline-none resize-none font-medium"></textarea>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[10px] uppercase font-mono text-brand-cream/70 mb-1">Signature / Collectif</label>
+                                    <input type="text" id="street-author" placeholder="ex: L3 Urbanisme, Anonyme..." class="w-full bg-neutral-950 border border-brand-cream/30 p-2 text-xs text-brand-cream focus:border-brand-red outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] uppercase font-mono text-brand-cream/70 mb-1">Couleur du Post-it</label>
+                                    <select id="street-color" class="w-full bg-neutral-950 border border-brand-cream/30 p-2 text-xs text-brand-cream focus:border-brand-red outline-none uppercase font-bold">
+                                        <option value="yellow">🟨 Jaune Post-it classique</option>
+                                        <option value="pink">🟥 Rose fluo</option>
+                                        <option value="blue">🟦 Bleu cyan</option>
+                                        <option value="green">🟩 Vert prairie</option>
+                                        <option value="white">⬜ Blanc brut</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="brutal-btn py-3 px-6 text-xs uppercase font-extrabold w-full flex items-center justify-center gap-2 tracking-wider">
+                                <i class="fa-solid fa-paper-plane"></i> Épingler sur le mur
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Le Mur de Post-its style Street Art / Pèle-mêle -->
+                    <div class="pt-4">
+                        <div class="flex justify-between items-center mb-4 border-b border-brand-cream/20 pb-2">
+                            <span class="font-pancarte text-xs uppercase tracking-wider text-brand-cream/60">Derniers messages épinglés :</span>
+                            <span class="text-[11px] font-mono text-brand-red font-bold">${streetNotes.length} notes au mur</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4 bg-[#0d0d0d] border-2 border-brand-red/30 texture-overlay min-h-[400px] items-start">
+                            ${streetNotes.length === 0 ? '<p class="text-xs text-brand-cream/40 italic col-span-full text-center py-12">Le mur est vide pour l\'instant. Soyez les premiers à coller un mot !</p>' : ''}
+                            ${streetNotes.map(note => `
+                                <div class="${getColorClass(note.color)} p-4 shadow-xl border relative transform ${note.rotate} hover:rotate-0 hover:scale-105 transition-all duration-200 flex flex-col justify-between min-h-[160px] group">
+                                    <!-- Punaise virtuelle -->
+                                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-red border border-white shadow-md z-10 flex items-center justify-center text-[8px] text-white">
+                                        <i class="fa-solid fa-thumbtack"></i>
+                                    </div>
+
+                                    <div class="pt-2">
+                                        <p class="font-marker text-sm sm:text-base leading-snug break-words mb-4">"${esc(note.text)}"</p>
+                                    </div>
+
+                                    <div class="flex justify-between items-end border-t border-neutral-900/10 pt-2 text-[10px] font-mono font-bold opacity-80">
+                                        <span>— ${esc(note.author)}</span>
+                                        <span class="text-[9px] font-normal">${note.date}</span>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         function renderVotes() {
@@ -1156,90 +1299,6 @@
             `;
         }
 
-// --- GESTION DE LA SECTION EXPRESSION LIBRE ---
-        let expressionsData = JSON.parse(localStorage.getItem('ensase_expressions')) || [
-            { id: 1, author: "Étudiant·e L2", category: "Coup de gueule", text: "On a besoin de clarté sur la validation des ECTS pendant cette période expérimentale, l'administration doit nous répondre clairement.", date: "Il y a 2 heures" },
-            { id: 2, author: "Anonyme", category: "Idée d'action", text: "Pourquoi ne pas organiser un grand atelier d'écriture collective pour rédiger notre propre manifeste de l'architecture stéphanoise ?", date: "Il y a 5 heures" }
-        ];
-
-        function renderExpressionSection() {
-            return `
-                <div class="max-w-4xl mx-auto mb-12 px-2 space-y-6">
-                    <div>
-                        <span class="text-brand-red font-mono text-xs uppercase tracking-widest font-bold">/// Mur d'expression</span>
-                        <h2 class="font-pancarte text-3xl sm:text-4xl font-extrabold text-brand-cream mt-1">LA PAROLE AUX ÉTUDIANT·ES</h2>
-                        <p class="text-xs text-brand-cream/70 mt-1">Un espace pour s'exprimer, proposer ou déposer ses doutes sans filtre, à l'oral ou par écrit.</p>
-                    </div>
-
-                    <!-- Formulaire de dépôt -->
-                    <div class="brutal-card bg-brand-black p-4 sm:p-6 space-y-4">
-                        <h3 class="font-pancarte text-lg text-brand-cream">LAISSER UN MOT / UNE IDÉE</h3>
-                        <form onsubmit="handleExpressionSubmit(event)" class="space-y-3">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[10px] uppercase font-mono text-brand-cream/70 mb-1">Signature (optionnelle)</label>
-                                    <input type="text" id="expr-author" placeholder="ex: Étudiant·e L1, Anonyme..." class="w-full bg-brand-cream/5 border border-brand-cream/20 p-2 text-xs text-brand-cream focus:border-brand-red outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] uppercase font-mono text-brand-cream/70 mb-1">Catégorie</label>
-                                    <select id="expr-category" class="w-full bg-brand-black border border-brand-cream/20 p-2 text-xs text-brand-cream focus:border-brand-red outline-none uppercase font-bold">
-                                        <option value="Idée d'action">💡 Idée d'action</option>
-                                        <option value="Coup de gueule">🔥 Coup de gueule</option>
-                                        <option value="Débat pédagogique">🏛️ Débat pédagogique</option>
-                                        <option value="Fanzine / Poésie">✨ Fanzine / Poésie</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-[10px] uppercase font-mono text-brand-cream/70 mb-1">Votre message</label>
-                                <textarea id="expr-text" rows="3" required placeholder="Exprimez-vous ici..." class="w-full bg-brand-cream/5 border border-brand-cream/20 p-2 text-xs text-brand-cream focus:border-brand-red outline-none resize-none"></textarea>
-                            </div>
-                            <button type="submit" class="brutal-btn py-2.5 px-4 text-xs uppercase font-bold w-full sm:w-auto">
-                                Publier sur le mur →
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Liste des messages publiés -->
-                    <div class="space-y-3" id="expressions-list">
-                        ${expressionsData.length === 0 ? '<p class="text-xs text-brand-cream/50 italic">Aucun message pour le moment. Soyez le premier à écrire !</p>' : ''}
-                        ${expressionsData.map(item => `
-                            <div class="brutal-card bg-brand-black p-4 space-y-2">
-                                <div class="flex justify-between items-center text-[10px] font-mono border-b border-brand-cream/10 pb-2">
-                                    <span class="bg-brand-red text-white px-2 py-0.5 font-bold uppercase">${esc(item.category)}</span>
-                                    <span class="text-brand-cream/60">Par <strong class="text-brand-cream">${esc(item.author || 'Anonyme')}</strong> · ${item.date}</span>
-                                </div>
-                                <p class="text-xs text-brand-cream/90 leading-relaxed font-light whitespace-pre-wrap">${esc(item.text)}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        function handleExpressionSubmit(e) {
-            e.preventDefault();
-            const authorInput = $('#expr-author').value.trim();
-            const categoryInput = $('#expr-category').value;
-            const textInput = $('#expr-text').value.trim();
-
-            if (!textInput) return;
-
-            const newMsg = {
-                id: Date.now(),
-                author: authorInput || 'Anonyme',
-                category: categoryInput,
-                text: textInput,
-                date: "À l'instant"
-            };
-
-            expressionsData.unshift(newMsg);
-            localStorage.setItem('ensase_expressions', JSON.stringify(expressionsData));
-            
-            render(); // Met à jour l'affichage
-            showToast("Votre message a été publié sur le mur !");
-        }
-        
         // Lancement initial
         render();
         updateNavActive();
