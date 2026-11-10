@@ -178,7 +178,7 @@
                 <button onclick="setPage('agenda')" class="nav-link hover:text-brand-red transition-colors py-1">Agenda</button>
                 <button onclick="setPage('totems')" class="nav-link hover:text-brand-red transition-colors py-1">Totems</button>
                 <button onclick="setPage('votes')" class="nav-link hover:text-brand-red transition-colors py-1">Vote & CR</button>
-                <button onclick="setPage('mur')" class="nav-link hover:text-brand-red transition-colors py-1 text-amber-300 font-bold">Mur Libre</button>
+                <button onclick="setPage('mur')" class="nav-link hover:text-brand-red transition-colors py-1 text-amber-300 font-bold">Mur d'expression libre</button>
                 <button onclick="openModal('modal-propose')" class="brutal-btn w-8 h-8 flex items-center justify-center text-base font-bold" title="Proposer un événement / atelier">+</button>
             </nav>
 
@@ -192,7 +192,7 @@
             <button onclick="setPage('agenda'); toggleMobileMenu();" class="py-2 w-full">Agenda</button>
             <button onclick="setPage('totems'); toggleMobileMenu();" class="py-2 w-full">Totems</button>
             <button onclick="setPage('votes'); toggleMobileMenu();" class="py-2 w-full">Vote & CR</button>
-            <button onclick="setPage('mur'); toggleMobileMenu();" class="py-2 w-full text-amber-300">Mur Libre (Padlet)</button>
+            <button onclick="setPage('mur'); toggleMobileMenu();" class="py-2 w-full text-amber-300">Mur d'expression libre</button>
             <button onclick="openModal('modal-propose'); toggleMobileMenu();" class="brutal-btn py-3 mt-1 w-full text-center uppercase text-base font-black">+ Proposer un événement</button>
         </div>
     </header>
@@ -221,7 +221,7 @@
                     <li><button onclick="setPage('agenda')" class="hover:text-brand-red transition-colors">Agenda de la lutte</button></li>
                     <li><button onclick="setPage('totems')" class="hover:text-brand-red transition-colors">Les 9 totems & activités</button></li>
                     <li><button onclick="setPage('votes')" class="hover:text-brand-red transition-colors">Votes & comptes rendus</button></li>
-                    <li><button onclick="setPage('mur')" class="hover:text-brand-red transition-colors text-amber-300">Mur d'expression libre</button></li>
+                    <li><button onclick="setPage('mur')" class="hover:text-brand-red transition-colors text-amber-300">Le mur d'expression libre</button></li>
                 </ul>
             </div>
             <div>
@@ -394,25 +394,27 @@
 
     <script>
         const OFFICIAL_PROPOSE_URL = "https://eensase.vercel.app/proposer/";
-        const PADLET_URL = "https://padlet.com/ensaseenlutte/totems-s025cbxlgj4unr01rlca";
-        const PADLET_EMBED_URL = "https://padlet.com/embed/ensaseenlutte/totems-s025cbxlgj4unr01rlca";
 
         // Navigation persistante par hash d'URL (onglets principaux)
         let validTabs = ['accueil', 'agenda', 'totems', 'votes', 'mur'];
         let initialHash = window.location.hash.replace('#', '');
         let currentPage = validTabs.includes(initialHash) ? initialHash : 'accueil';
 
-        // --- LES 9 TOTEMS ---
+        // --- LES 9 TOTEMS (Avec le Padlet de Médiation et les autres en attente) ---
         let totemsData = [
-            { id: 'alimentation', name: 'ALIMENTATION', workshops: [] },
-            { id: 'commun', name: 'COMMUN', workshops: [] },
-            { id: 'itinerance', name: 'ITINERANCE', workshops: [] },
-            { id: 'mediation', name: 'MEDIATION', workshops: [] },
-            { id: 'memoire', name: 'MEMOIRE', workshops: [] },
-            { id: 'soin', name: 'SOIN', workshops: [] },
-            { id: 'technique', name: 'TECHNIQUE', workshops: [] },
-            { id: 'violence', name: 'VIOLENCE', workshops: [] },
-            { id: 'vivant', name: 'VIVANT', workshops: [] }
+            { id: 'alimentation', name: 'ALIMENTATION', padletEmbed: null },
+            { id: 'commun', name: 'COMMUN', padletEmbed: null },
+            { id: 'itinerance', name: 'ITINERANCE', padletEmbed: null },
+            { 
+                id: 'mediation', 
+                name: 'MEDIATION', 
+                padletEmbed: '<div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/s025ccv5ik36sdzsxq57" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p></div>' 
+            },
+            { id: 'memoire', name: 'MEMOIRE', padletEmbed: null },
+            { id: 'soin', name: 'SOIN', padletEmbed: null },
+            { id: 'technique', name: 'TECHNIQUE', padletEmbed: null },
+            { id: 'violence', name: 'VIOLENCE', padletEmbed: null },
+            { id: 'vivant', name: 'VIVANT', padletEmbed: null }
         ];
 
         let eventsData = [
@@ -661,6 +663,13 @@
             text.textContent = content.classList.contains('hidden') ? 'Voir le compte rendu complet' : 'Masquer le compte rendu';
         }
 
+        function toggleTotemAccordion(id) {
+            const content = $(`#content-${id}`);
+            const icon = $(`#icon-${id}`);
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
         function render() {
             const container = $('#app-content');
             if(currentPage === 'accueil') container.innerHTML = renderAccueil();
@@ -688,7 +697,7 @@
                             <i class="fa-solid fa-calendar-days mr-2"></i> Voir l'agenda
                         </button>
                         <button onclick="setPage('mur')" class="brutal-btn-dark px-5 py-3 text-xs uppercase tracking-wider w-full sm:w-auto text-brand-black">
-                            <i class="fa-solid fa-note-sticky mr-2"></i> Mur d'expression (Padlet)
+                            <i class="fa-solid fa-note-sticky mr-2"></i> Le mur d'expression libre
                         </button>
                     </div>
                 </div>
@@ -768,7 +777,7 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        ${filteredEvents.length === 0 ? '<p class="text-xs text-brand-cream/50 italic col-span-full">Aucun événement ne correspond à ce filtre.</p>' : ''}
+                        ${filteredEvents.length === 0 ? '<p class="text-xs text-brand-cream/50 italic col-span-full">Aucun événement ne correspond à ce filtre.</p>': ''}
                         ${filteredEvents.map(e => `
                             <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                 <div>
@@ -796,9 +805,9 @@
             return `
                 <div class="max-w-4xl mx-auto mb-12 px-2 space-y-6">
                     <div>
-                        <span class="text-brand-red font-mono text-xs uppercase tracking-widest font-bold">/// Organisation</span>
-                        <h2 class="font-pancarte text-3xl sm:text-4xl font-extrabold text-brand-cream mt-1">LES 9 TOTEMS & ACTIVITÉS</h2>
-                        <p class="text-xs text-brand-cream/70 mt-1">Découvre les thématiques de travail et rejoins les ateliers.</p>
+                        <span class="text-brand-red font-mono text-xs uppercase tracking-widest font-bold">/// Organisation & Collaboration</span>
+                        <h2 class="font-pancarte text-3xl sm:text-4xl font-extrabold text-brand-cream mt-1">LES 9 TOTEMS & PADLETS</h2>
+                        <p class="text-xs text-brand-cream/70 mt-1">Chaque totem dispose de son Padlet pour partager infos, documents et retours de terrain.</p>
                     </div>
 
                     <!-- BANDEAU OFFICIEL CPS / ECOLE -->
@@ -819,7 +828,7 @@
                     </div>
                     
                     <!-- LISTE DES 9 TOTEMS -->
-                    <div class="space-y-3 pt-2">
+                    <div class="space-y-4 pt-2">
                         <div class="flex justify-between items-center">
                             <h3 class="font-pancarte text-sm uppercase tracking-wider text-brand-cream/60">Tous les totems :</h3>
                             <button onclick="openModal('modal-propose')" class="brutal-btn py-1 px-3 text-[10px] uppercase font-bold flex items-center gap-1.5" title="Proposer un événement">
@@ -836,18 +845,21 @@
                                     <i id="icon-${t.id}" class="fa-solid fa-chevron-down text-brand-red text-lg transition-transform shrink-0"></i>
                                 </div>
                                 <div id="content-${t.id}" class="hidden mt-4 pt-4 border-t border-brand-cream/20 space-y-3">
-                                    <div class="flex justify-between items-center">
-                                        <h4 class="font-pancarte text-[11px] uppercase tracking-widest text-brand-red">Activités et ateliers proposés :</h4>
-                                        <button onclick="openModal('modal-propose')" class="brutal-btn w-6 h-6 flex items-center justify-center text-xs font-bold" title="Proposer un événement dans ce totem">
-                                            +
-                                        </button>
+                                    <div class="flex justify-between items-center flex-wrap gap-2">
+                                        <h4 class="font-pancarte text-[11px] uppercase tracking-widest text-brand-red">Espace collaboratif du Totem (${esc(t.name)}) :</h4>
                                     </div>
-                                    <p class="text-xs text-brand-cream/80 py-2">
-                                        Retrouvez tous les ateliers et activités planifiés sur le site officiel : 
-                                        <a href="https://eensase.vercel.app/#planning" target="_blank" rel="noopener noreferrer" class="text-amber-400 font-bold underline hover:text-amber-300">
-                                            https://eensase.vercel.app/#planning ↗
-                                        </a>
-                                    </p>
+                                    ${t.padletEmbed ? `
+                                        <div class="w-full overflow-hidden border border-brand-red/40 bg-[#121212]">
+                                            ${t.padletEmbed}
+                                        </div>
+                                    ` : `
+                                        <p class="text-xs text-brand-cream/60 italic py-2">
+                                            Le Padlet de ce totem sera bientôt intégré ici. En attendant, retrouvez les plannings et infos sur le site officiel : 
+                                            <a href="https://eensase.vercel.app/#planning" target="_blank" rel="noopener noreferrer" class="text-amber-400 font-bold underline hover:text-amber-300">
+                                                https://eensase.vercel.app/#planning ↗
+                                            </a>
+                                        </p>
+                                    `}
                                 </div>
                             </div>
                         `).join('')}
@@ -856,32 +868,32 @@
             `;
         }
 
-        function toggleTotemAccordion(id) {
-            const content = $(`#content-${id}`);
-            const icon = $(`#icon-${id}`);
-            content.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
-        }
-
         function renderMur() {
             return `
                 <div class="max-w-6xl mx-auto mb-16 px-2 space-y-6">
                     <div class="text-center space-y-2 py-6 bg-brand-black border-2 border-brand-red brutal-card p-6 relative overflow-hidden">
                         <div class="absolute -right-10 -bottom-10 opacity-10 text-8xl font-pancarte text-brand-red select-none pointer-events-none">WALL</div>
-                        <span class="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">/// Mur d'expression partagé & anonyme</span>
-                        <h2 class="font-pancarte text-3xl sm:text-5xl font-extrabold text-brand-cream tracking-wider">LE MUR DES MURMURES</h2>
+                        <span class="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">/// Sondages, commentaires, likes & annonces</span>
+                        <h2 class="font-pancarte text-3xl sm:text-5xl font-extrabold text-brand-cream tracking-wider">LE MUR D'EXPRESSION LIBRE</h2>
                         <p class="text-xs sm:text-sm text-brand-cream/80 max-w-xl mx-auto font-light px-4">
-                            Dépose ton post-it, partage ton avis ou réponds aux autres en direct sur notre Padlet collaboratif, sans inscription requise.
+                            Posez vos questions, partagez vos idées, faites vos demandes d'aide ou un appel aux dons directement ci-dessous en temps réel.
                         </p>
                         <div class="pt-2">
-                            <a href="${PADLET_URL}" target="_blank" rel="noopener noreferrer" class="text-xs uppercase font-bold text-amber-300 hover:underline">
-                                Ouvrir le Padlet en plein écran ↗
+                            <a href="https://padlet.com/ensaseenlutte/totems-s025cbxlgj4unr01rlca" target="_blank" rel="noopener noreferrer" class="text-xs uppercase font-bold text-amber-300 hover:underline">
+                                Ouvrir le mur en plein écran ↗
                             </a>
                         </div>
                     </div>
 
-                    <!-- Intégration Padlet (Iframe intégrée) -->
-<div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/s025cbxlgj4unr01rlca" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p></div>
+                    <!-- Intégration Padlet Mur d'Expression Libre -->
+                    <div class="brutal-card bg-brand-black p-2 sm:p-4 overflow-hidden">
+                        <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4">
+                            <p style="padding:0;margin:0">
+                                <iframe src="https://padlet.com/embed/s025cd2o8e0pv6hvl9sw" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:700px;display:block;padding:0;margin:0"></iframe>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             `;
         }
 
