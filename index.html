@@ -148,13 +148,13 @@
     <div class="bg-brand-red text-brand-cream border-b-2 border-brand-cream overflow-hidden select-none z-50 fixed top-0 left-0 right-0 w-full"
          style="padding-top: max(16px, calc(10px + env(safe-area-inset-top))); padding-bottom: 9px;">
         <div class="animate-ticker font-pancarte text-[11px] tracking-wider uppercase">
-            <span class="mx-4">🗓️ LUNDI 9/11 À 9H : RÉUNION D'INFORMATION (AMPHI -101)</span>
+            <span class="mx-4">🗓️ MERCREDI 12/11 DE 14H À 15H30 (219 ATELIER L1) : AG RETOURS DE SEMAINE</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🔥 MARDI 10/11 À 8H30 : DÉBUT DE L'EXPÉRIMENTATION</span>
+            <span class="mx-4">🔥 LUNDI 16/11 DE 10H À 12H (219 ATELIER L1) : AG SEMAINE 2</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🗓️ LUNDI 9/11 À 9H : RÉUNION D'INFORMATION (AMPHI -101)</span>
+            <span class="mx-4">🗓️ MERCREDI 12/11 DE 14H À 15H30 (219 ATELIER L1) : AG RETOURS DE SEMAINE</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🔥 MARDI 10/11 À 8H30 : DÉBUT DE L'EXPÉRIMENTATION</span>
+            <span class="mx-4">🔥 LUNDI 16/11 DE 10H À 12H (219 ATELIER L1) : AG SEMAINE 2</span>
             <span class="mx-4">·</span>
         </div>
     </div>
@@ -193,7 +193,7 @@
             <button onclick="setPage('agenda'); toggleMobileMenu();" class="py-2 w-full">Agenda</button>
             <button onclick="setPage('totems'); toggleMobileMenu();" class="py-2 w-full">Totems</button>
             <button onclick="setPage('votes'); toggleMobileMenu();" class="py-2 w-full">Vote & CR</button>
-            <button onclick="setPage('mur'); toggleMobileMenu();" class="py-2 w-full text-amber-300">Mur Libre (Street Art)</button>
+            <button onclick="setPage('mur'); toggleMobileMenu();" class="py-2 w-full text-amber-300">Mur Libre (Mentimeter)</button>
             <button onclick="openModal('modal-propose'); toggleMobileMenu();" class="brutal-btn py-3 mt-1 w-full text-center uppercase text-base font-black">+ Proposer un événement</button>
         </div>
     </header>
@@ -284,11 +284,11 @@
             <div class="bg-brand-cream/5 border border-brand-cream/20 p-3 text-xs space-y-1.5 text-brand-cream/80 font-light">
                 <span class="font-bold text-brand-cream font-mono uppercase text-[10px]">Informations demandées sur le site officiel :</span>
                 <ul class="list-disc list-inside space-y-0.5 text-[11px]">
-                    <li>Le titre de l’événement, le type, la date</li>
-                    <li>L'heure (début et fin) & le lieu</li>
+                    <li>Le titre de l’événement & le type</li>
+                    <li>La date, l'heure (début et fin) & le lieu</li>
                     <li>Les totems concernés</li>
                     <li>Une courte description</li>
-                    <li>Précisions pour l'équipe</li>
+                    <li>Précisions pour l'équipe du planning</li>
                 </ul>
             </div>
 
@@ -395,19 +395,12 @@
 
     <script>
         const OFFICIAL_PROPOSE_URL = "https://eensase.vercel.app/proposer/";
+        const MENTIMETER_URL = "https://www.mentimeter.com/"; // Remplace par ton lien Mentimeter direct si tu en as un
 
         // Navigation persistante par hash d'URL (onglets principaux)
         let validTabs = ['accueil', 'agenda', 'totems', 'votes', 'mur'];
         let initialHash = window.location.hash.replace('#', '');
         let currentPage = validTabs.includes(initialHash) ? initialHash : 'accueil';
-
-        // --- DONNÉES DU MUR DE STREET ART / EXPRESSION LIBRE ---
-        let streetNotes = JSON.parse(localStorage.getItem('ensase_street_notes')) || [
-            { id: 1, text: "L'architecture ne se fait pas sans la rue !", author: "L1 Studio 3", color: "yellow", rotate: "rotate-1", type: "text", date: "Hier" },
-            { id: 2, text: "On lâche rien pour le semestre expé !! 🔥", author: "Anonyme", color: "pink", rotate: "-rotate-2", type: "text", date: "Il y a 3h" },
-            { id: 3, text: "Est-ce que quelqu'un a le cours de struct de la semaine dernière ?", author: "M1 Bâtiment", color: "blue", rotate: "rotate-2", type: "text", date: "Aujourd'hui" },
-            { id: 4, text: "Liberté, Égalité, Maquette !", author: "Le Collectif", color: "green", rotate: "-rotate-1", type: "text", date: "Il y a 1h" }
-        ];
 
         // --- LES 9 TOTEMS ---
         let totemsData = [
@@ -425,27 +418,27 @@
         let eventsData = [
             { 
                 id: 'e1', 
-                day: '09', 
+                day: '12', 
                 month: 'NOV', 
                 year: 2026,
-                time: '09h00', 
-                endTime: '11h00',
-                title: "Réunion d'information", 
+                time: '14h00', 
+                endTime: '15h30',
+                title: "AG — Retours de la semaine", 
                 type: 'AG & RÉUNIONS', 
-                place: 'Amphi -101', 
-                desc: "Réunion d'information générale pour lancer la semaine et présenter les enjeux de la mobilisation." 
+                place: '219 Atelier L1', 
+                desc: "Retours de la semaine et organisation collective autour des totems." 
             },
             { 
                 id: 'e2', 
-                day: '10', 
+                day: '16', 
                 month: 'NOV', 
                 year: 2026,
-                time: '08h30', 
+                time: '10h00', 
                 endTime: '12h00',
-                title: "Début de l'expérimentation", 
-                type: 'ATELIERS', 
-                place: "Toute l'école", 
-                desc: "Lancement officiel du semestre banalisé et mise en place des 9 Totems d'action." 
+                title: "AG — Organisation Semaine 2", 
+                type: 'AG & RÉUNIONS', 
+                place: "219 Atelier L1", 
+                desc: "Organisation de la semaine 2 de l'expérimentation pédagogique." 
             }
         ];
 
@@ -668,45 +661,6 @@
             text.textContent = content.classList.contains('hidden') ? 'Voir le compte rendu complet' : 'Masquer le compte rendu';
         }
 
-        // --- GESTION DU MUR DE STREET ART ---
-        function handleStreetNoteSubmit(e) {
-            e.preventDefault();
-            const textInput = $('#street-text').value.trim();
-            const authorInput = $('#street-author').value.trim();
-            const colorInput = $('#street-color').value;
-
-            if (!textInput) return;
-
-            const rotations = ['rotate-1', '-rotate-2', 'rotate-2', '-rotate-1', 'rotate-3', '-rotate-3'];
-            const randomRotate = rotations[Math.floor(Math.random() * rotations.length)];
-
-            const newNote = {
-                id: Date.now(),
-                text: textInput,
-                author: authorInput || 'Anonyme',
-                color: colorInput,
-                rotate: randomRotate,
-                type: 'text',
-                date: "À l'instant"
-            };
-
-            streetNotes.unshift(newNote);
-            localStorage.setItem('ensase_street_notes', JSON.stringify(streetNotes));
-            render();
-            showToast("Ton mot a été collé sur le mur ! 📌");
-        }
-
-        function getColorClass(color) {
-            switch(color) {
-                case 'yellow': return 'bg-amber-200 text-neutral-900 border-amber-400 shadow-amber-900/30';
-                case 'pink': return 'bg-pink-200 text-neutral-900 border-pink-400 shadow-pink-900/30';
-                case 'blue': return 'bg-cyan-200 text-neutral-900 border-cyan-400 shadow-cyan-900/30';
-                case 'green': return 'bg-emerald-200 text-neutral-900 border-emerald-400 shadow-emerald-900/30';
-                case 'white': return 'bg-neutral-100 text-neutral-900 border-neutral-300 shadow-neutral-900/30';
-                default: return 'bg-amber-200 text-neutral-900 border-amber-400 shadow-amber-900/30';
-            }
-        }
-
         function render() {
             const container = $('#app-content');
             if(currentPage === 'accueil') container.innerHTML = renderAccueil();
@@ -734,7 +688,7 @@
                             <i class="fa-solid fa-calendar-days mr-2"></i> Voir l'agenda
                         </button>
                         <button onclick="setPage('mur')" class="brutal-btn-dark px-5 py-3 text-xs uppercase tracking-wider w-full sm:w-auto text-brand-black">
-                            <i class="fa-solid fa-note-sticky mr-2"></i> Mur d'expression libre
+                            <i class="fa-solid fa-note-sticky mr-2"></i> Mur d'expression (Mentimeter)
                         </button>
                     </div>
                 </div>
@@ -763,7 +717,7 @@
                         <button onclick="setPage('agenda')" class="text-xs uppercase font-bold text-brand-red hover:underline">Tout voir →</button>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        ${eventsData.slice(0,3).map(e => `
+                        ${eventsData.map(e => `
                             <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                 <div>
                                     <div class="flex justify-between items-start mb-3">
@@ -911,75 +865,29 @@
 
         function renderMur() {
             return `
-                <div class="max-w-6xl mx-auto mb-16 px-2 space-y-8">
-                    <!-- En-tête style graffiti / urbain -->
-                    <div class="text-center space-y-2 py-6 bg-brand-black border-2 border-brand-red brutal-card relative overflow-hidden">
-                        <div class="absolute -right-10 -bottom-10 opacity-10 text-8xl font-pancarte text-brand-red select-none pointer-events-none">WALL</div>
-                        <span class="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">/// Zone d'affichage libre & sauvage</span>
-                        <h2 class="font-pancarte text-3xl sm:text-5xl font-extrabold text-brand-cream tracking-wider">LE MUR DES MURMURES</h2>
-                        <p class="text-xs sm:text-sm text-brand-cream/80 max-w-xl mx-auto font-light px-4">
-                            Poste ton post-it, ton coup de gueule, ta poésie ou ton idée. Ici, pas besoin de prendre la parole au micro en AG : colle ta note sur le mur !
+                <div class="max-w-4xl mx-auto mb-16 px-2 space-y-8 text-center">
+                    <!-- En-tête Mentimeter -->
+                    <div class="space-y-4 py-10 bg-brand-black border-2 border-brand-red brutal-card p-6 relative overflow-hidden">
+                        <div class="absolute -right-10 -bottom-10 opacity-10 text-8xl font-pancarte text-brand-red select-none pointer-events-none">LIVE</div>
+                        <span class="text-amber-400 font-mono text-xs uppercase tracking-widest font-bold">/// Expression interactive en direct</span>
+                        <h2 class="font-pancarte text-3xl sm:text-5xl font-extrabold text-brand-cream tracking-wider">LE MUR DES MURMURES (MENTIMETER)</h2>
+                        <p class="text-xs sm:text-sm text-brand-cream/80 max-w-xl mx-auto font-light leading-relaxed">
+                            Exprimez-vous en direct lors des AGs ou à distance ! Posez vos questions, partagez vos idées ou vos coups de gueule via notre session Mentimeter interactive projetée et consultable par tous.
                         </p>
+                        
+                        <div class="pt-4">
+                            <a href="${MENTIMETER_URL}" target="_blank" rel="noopener noreferrer" 
+                               class="brutal-btn py-4 px-8 text-sm uppercase font-extrabold inline-flex items-center gap-3 tracking-wider shadow-lg">
+                                <i class="fa-solid fa-comments text-lg"></i> Accéder au Mur Mentimeter en direct ↗
+                            </a>
+                        </div>
                     </div>
 
-                    <!-- Formulaire de collage de post-it -->
-                    <div class="bg-neutral-900 border-2 border-dashed border-brand-red/60 p-5 rounded-none max-w-2xl mx-auto brutal-card">
-                        <h3 class="font-pancarte text-sm sm:text-base text-brand-cream mb-3 flex items-center gap-2">
-                            <i class="fa-solid fa-thumbtack text-brand-red"></i> Coller un nouveau mot sur le mur :
-                        </h3>
-                        <form onsubmit="handleStreetNoteSubmit(event)" class="space-y-3">
-                            <div>
-                                <textarea id="street-text" rows="3" required placeholder="Écris ton message ici (avis, humeur, blague, revendication...)..." class="w-full bg-neutral-950 border border-brand-cream/30 p-3 text-xs sm:text-sm text-brand-cream focus:border-brand-red outline-none resize-none font-medium"></textarea>
-                            </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[10px] uppercase font-mono text-brand-cream/70 mb-1">Signature / Collectif</label>
-                                    <input type="text" id="street-author" placeholder="ex: L3 Urbanisme, Anonyme..." class="w-full bg-neutral-950 border border-brand-cream/30 p-2 text-xs text-brand-cream focus:border-brand-red outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] uppercase font-mono text-brand-cream/70 mb-1">Couleur du Post-it</label>
-                                    <select id="street-color" class="w-full bg-neutral-950 border border-brand-cream/30 p-2 text-xs text-brand-cream focus:border-brand-red outline-none uppercase font-bold">
-                                        <option value="yellow">🟨 Jaune Post-it classique</option>
-                                        <option value="pink">🟥 Rose fluo</option>
-                                        <option value="blue">🟦 Bleu cyan</option>
-                                        <option value="green">🟩 Vert prairie</option>
-                                        <option value="white">⬜ Blanc brut</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <button type="submit" class="brutal-btn py-3 px-6 text-xs uppercase font-extrabold w-full flex items-center justify-center gap-2 tracking-wider">
-                                <i class="fa-solid fa-paper-plane"></i> Épingler sur le mur
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Le Mur de Post-its style Street Art / Pèle-mêle -->
-                    <div class="pt-4">
-                        <div class="flex justify-between items-center mb-4 border-b border-brand-cream/20 pb-2">
-                            <span class="font-pancarte text-xs uppercase tracking-wider text-brand-cream/60">Derniers messages épinglés :</span>
-                            <span class="text-[11px] font-mono text-brand-red font-bold">${streetNotes.length} notes au mur</span>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4 bg-[#0d0d0d] border-2 border-brand-red/30 texture-overlay min-h-[400px] items-start">
-                            ${streetNotes.length === 0 ? '<p class="text-xs text-brand-cream/40 italic col-span-full text-center py-12">Le mur est vide pour l\'instant. Soyez les premiers à coller un mot !</p>' : ''}
-                            ${streetNotes.map(note => `
-                                <div class="${getColorClass(note.color)} p-4 shadow-xl border relative transform ${note.rotate} hover:rotate-0 hover:scale-105 transition-all duration-200 flex flex-col justify-between min-h-[160px] group">
-                                    <!-- Punaise virtuelle -->
-                                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-red border border-white shadow-md z-10 flex items-center justify-center text-[8px] text-white">
-                                        <i class="fa-solid fa-thumbtack"></i>
-                                    </div>
-
-                                    <div class="pt-2">
-                                        <p class="font-marker text-sm sm:text-base leading-snug break-words mb-4">"${esc(note.text)}"</p>
-                                    </div>
-
-                                    <div class="flex justify-between items-end border-t border-neutral-900/10 pt-2 text-[10px] font-mono font-bold opacity-80">
-                                        <span>— ${esc(note.author)}</span>
-                                        <span class="text-[9px] font-normal">${note.date}</span>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
+                    <div class="bg-brand-cream/5 border border-brand-cream/15 p-6 text-xs text-brand-cream/80 space-y-2 text-left brutal-card">
+                        <strong class="text-brand-cream uppercase font-bold text-sm block mb-1">📌 Comment ça marche ?</strong>
+                        <p>1. Cliquez sur le bouton ci-dessus pour ouvrir la session Mentimeter depuis votre téléphone ou votre ordinateur.</p>
+                        <p>2. Tapez votre message, votre question ou votre proposition sans filtre.</p>
+                        <p>3. Les retours sont affichés en direct sur l'écran partagé lors des temps forts de la mobilisation (AGs, réunions d'atelier).</p>
                     </div>
                 </div>
             `;
