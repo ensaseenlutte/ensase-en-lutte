@@ -14,7 +14,7 @@
 
 <!-- Métadonnées Open Graph / Partage -->
 <meta property="og:title" content="ENSASE en lutte — Plateforme collective">
-<meta property="og:description" content="Plateforme d'information, d'organisation et de coordination des 9 totems et ateliers.">
+<meta property="og:description" content="Plateforme indépendante et autogérée du collectif étudiant ENSASE en lutte.">
 <meta property="og:type" content="website">
 
 <!-- Favicon / Web App Icon -->
@@ -143,6 +143,24 @@
 </head>
 <body class="texture-overlay min-h-screen flex flex-col selection:bg-brand-red selection:text-white pb-24">
 
+    <!-- MODALE AVERTISSEMENT / FLASH AU CHARGEMENT -->
+    <div id="modal-disclaimer" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-brand-black border-2 border-brand-red max-w-lg w-full p-6 brutal-card space-y-4">
+            <span class="text-[10px] font-mono text-brand-red font-bold uppercase tracking-widest">/// Avertissement important</span>
+            <h2 class="font-pancarte text-2xl font-extrabold text-brand-cream">AVIS AUX VISITEURS</h2>
+            <p class="text-xs text-brand-cream/90 leading-relaxed font-light">
+                Ce site est la plateforme indépendante et autogérée du collectif <strong>ENSASE en lutte</strong>. 
+                Nous représentons exclusivement les étudiant·es mobilisé·es et en lutte, et non l'administration, les enseignant·es ou l'ensemble de l'école institutionnelle.
+            </p>
+            <p class="text-xs text-brand-cream/80 leading-relaxed font-light">
+                À ne pas confondre avec <strong>EENSASE</strong>, qui désigne l'école expérimentale et institutionnelle dans sa globalité.
+            </p>
+            <button onclick="closeDisclaimer()" class="w-full brutal-btn py-3 text-xs uppercase font-bold tracking-wider">
+                J'ai compris, entrer sur la plateforme
+            </button>
+        </div>
+    </div>
+
     <!-- TICKER FIXÉ -->
     <div class="bg-brand-red text-brand-cream border-b-2 border-brand-cream overflow-hidden select-none z-50 fixed top-0 left-0 right-0 w-full"
          style="padding-top: max(16px, calc(10px + env(safe-area-inset-top))); padding-bottom: 9px;">
@@ -176,10 +194,10 @@
             <nav class="hidden md:flex items-center gap-6 font-semibold text-xs uppercase tracking-wider">
                 <button onclick="setPage('accueil')" class="nav-link hover:text-brand-red transition-colors py-1">Accueil</button>
                 <button onclick="setPage('agenda')" class="nav-link hover:text-brand-red transition-colors py-1">Agenda</button>
-                <button onclick="setPage('totems')" class="nav-link hover:text-brand-red transition-colors py-1">Totems</button>
+                <button onclick="setPage('totems')" class="nav-link hover:text-brand-red transition-colors py-1">EENSASE & Totems</button>
                 <button onclick="setPage('votes')" class="nav-link hover:text-brand-red transition-colors py-1">Vote & CR</button>
                 <button onclick="setPage('mur')" class="nav-link hover:text-brand-red transition-colors py-1 text-amber-300 font-bold">Mur libre</button>
-                <button onclick="openModal('modal-propose')" class="brutal-btn w-8 h-8 flex items-center justify-center text-base font-bold" title="Proposer un événement / atelier">+</button>
+                <button onclick="openModal('modal-propose')" class="brutal-btn w-8 h-8 flex items-center justify-center text-base font-bold" title="Proposer un événement">+</button>
             </nav>
 
             <button id="mobile-menu-btn" class="md:hidden text-2xl text-brand-cream focus:outline-none p-1.5" aria-label="Menu" onclick="toggleMobileMenu()">
@@ -190,7 +208,7 @@
         <div id="mobile-menu" class="hidden md:hidden mt-3 pt-3 border-t border-brand-red/30 flex flex-col gap-2 font-semibold text-center text-xs uppercase w-full">
             <button onclick="setPage('accueil'); toggleMobileMenu();" class="py-2 w-full">Accueil</button>
             <button onclick="setPage('agenda'); toggleMobileMenu();" class="py-2 w-full">Agenda</button>
-            <button onclick="setPage('totems'); toggleMobileMenu();" class="py-2 w-full">Totems</button>
+            <button onclick="setPage('totems'); toggleMobileMenu();" class="py-2 w-full">EENSASE & Totems</button>
             <button onclick="setPage('votes'); toggleMobileMenu();" class="py-2 w-full">Vote & CR</button>
             <button onclick="setPage('mur'); toggleMobileMenu();" class="py-2 w-full text-amber-300">Mur libre</button>
             <button onclick="openModal('modal-propose'); toggleMobileMenu();" class="brutal-btn py-3 mt-1 w-full text-center uppercase text-base font-black">+ Proposer un événement</button>
@@ -211,7 +229,7 @@
                     <span class="font-pancarte text-lg">EN LUTTE</span>
                 </div>
                 <p class="text-xs text-brand-cream/70 leading-relaxed font-light">
-                    Plateforme d'information, d'organisation et de coordination auto-gérée par les étudiants de l'École Nationale Supérieure d'Architecture de Saint-Étienne.
+                    Plateforme indépendante, autogérée et politisée par les étudiant·es en lutte de l'ENSASE.
                 </p>
             </div>
             <div>
@@ -219,7 +237,7 @@
                 <ul class="space-y-2 text-xs font-semibold">
                     <li><button onclick="setPage('accueil')" class="hover:text-brand-red transition-colors">Accueil</button></li>
                     <li><button onclick="setPage('agenda')" class="hover:text-brand-red transition-colors">Agenda de la lutte</button></li>
-                    <li><button onclick="setPage('totems')" class="hover:text-brand-red transition-colors">Les 9 totems & activités</button></li>
+                    <li><button onclick="setPage('totems')" class="hover:text-brand-red transition-colors">EENSASE & Totems</button></li>
                     <li><button onclick="setPage('votes')" class="hover:text-brand-red transition-colors">Votes & comptes rendus</button></li>
                     <li><button onclick="setPage('mur')" class="hover:text-brand-red transition-colors text-amber-300">Le mur d'expression libre</button></li>
                 </ul>
@@ -243,7 +261,7 @@
             </div>
         </div>
         <div class="max-w-5xl mx-auto pt-4 border-t border-brand-cream/10 text-center text-[11px] text-brand-cream/50 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <div>© 2026 ENSASE EN LUTTE — Site contributif libre</div>
+            <div>© 2026 ENSASE EN LUTTE — Collectif étudiant indépendant</div>
             <div class="italic">"Architecture et Mobilisation Sociale"</div>
         </div>
     </footer>
@@ -257,7 +275,7 @@
             <i class="fa-solid fa-calendar-days text-sm"></i><span>Agenda</span>
         </button>
         <button onclick="setPage('totems')" class="nav-mob-btn flex flex-col items-center gap-1 text-[9px] uppercase font-bold text-brand-cream/70 w-full py-1" data-tab="totems">
-            <i class="fa-solid fa-star text-sm"></i><span>Totems</span>
+            <i class="fa-solid fa-star text-sm"></i><span>EENSASE</span>
         </button>
         <button onclick="setPage('votes')" class="nav-mob-btn flex flex-col items-center gap-1 text-[9px] uppercase font-bold text-brand-cream/70 w-full py-1" data-tab="votes">
             <i class="fa-solid fa-square-poll-vertical text-sm"></i><span>Votes</span>
@@ -277,25 +295,14 @@
             <h2 class="font-pancarte text-xl font-extrabold text-brand-cream mt-1">PROPOSER UN ÉVÉNEMENT</h2>
             
             <p class="text-xs text-brand-cream/80 leading-relaxed font-light">
-                Vous organisez un atelier, une rencontre ou une projection ? Décrivez-le ici. L’équipe du planning relit chaque proposition, corrige les détails si besoin et l’ajoute au planning si elle correspond à l’expérimentation.
+                Vous organisez un événement de lutte, une AG ou une manifestation ? Proposez-le ici pour diffusion.
             </p>
-
-            <div class="bg-brand-cream/5 border border-brand-cream/20 p-3 text-xs space-y-1.5 text-brand-cream/80 font-light">
-                <span class="font-bold text-brand-cream font-mono uppercase text-[10px]">Informations demandées sur le site officiel :</span>
-                <ul class="list-disc list-inside space-y-0.5 text-[11px]">
-                    <li>Le titre de l’événement & le type</li>
-                    <li>La date, l'heure (début et fin) & le lieu</li>
-                    <li>Les totems concernés</li>
-                    <li>Une courte description</li>
-                    <li>Précisions pour l'équipe du planning</li>
-                </ul>
-            </div>
 
             <div class="pt-2">
                 <a id="btn-open-official-form" href="https://eensase.vercel.app/proposer/" target="_blank" rel="noopener noreferrer"
                    class="w-full brutal-btn py-3 px-4 text-xs uppercase font-bold flex items-center justify-center gap-2">
                     <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
-                    Proposer sur le site officiel (eensase.vercel.app) ↗
+                    Proposer sur le site officiel EENSASE ↗
                 </a>
             </div>
         </div>
@@ -324,20 +331,12 @@
                         <i class="fa-brands fa-google text-brand-red text-base"></i>
                         Google Calendar (Android / PC)
                     </span>
-                    <span id="badge-android" class="hidden text-[8px] bg-brand-red text-white px-2 py-0.5 font-bold uppercase">Ton appareil</span>
                 </button>
-
                 <button onclick="actionAddApple()" class="w-full brutal-btn py-3 px-4 text-xs uppercase tracking-wider flex items-center justify-between group">
                     <span class="flex items-center gap-2.5 font-bold">
                         <i class="fa-brands fa-apple text-base"></i>
                         Apple Calendar (iPhone / Mac)
                     </span>
-                    <span id="badge-apple" class="hidden text-[8px] bg-white text-brand-black px-2 py-0.5 font-bold uppercase">Ton appareil</span>
-                </button>
-
-                <button onclick="actionAddApple()" class="w-full bg-brand-black border border-brand-cream/30 hover:border-brand-cream text-brand-cream py-2.5 px-4 text-[11px] uppercase tracking-wider flex items-center justify-center gap-2 transition-all">
-                    <i class="fa-solid fa-download"></i>
-                    Télécharger le fichier .ics (Outlook, etc.)
                 </button>
             </div>
         </div>
@@ -353,7 +352,7 @@
             <h2 class="font-pancarte text-xl font-extrabold text-brand-cream mt-1 mb-2">AJOUTER SUR TON ÉCRAN D'ACCUEIL</h2>
             
             <p class="text-xs text-brand-cream/80 mb-4 font-light">
-                Garde la plateforme ENSASE toujours accessible sur ton écran d'accueil comme une application, sans passer par un magasin d'applications.
+                Garde la plateforme ENSASE en lutte accessible sur ton écran d'accueil.
             </p>
 
             <div id="pwa-guide-ios" class="space-y-3 bg-brand-cream/5 border border-brand-cream/20 p-3.5 text-xs text-brand-cream">
@@ -361,9 +360,8 @@
                     <i class="fa-brands fa-apple text-sm"></i> Sur iPhone / iPad (Safari) :
                 </div>
                 <ol class="space-y-2 list-decimal list-inside leading-relaxed text-brand-cream/90">
-                    <li>Appuie sur l'icône de <strong>Partage</strong> <i class="fa-solid fa-arrow-up-from-bracket text-brand-red"></i> en bas de ton écran dans Safari.</li>
-                    <li>Fais défiler et sélectionne <strong>« Sur l'écran d'accueil »</strong> <i class="fa-regular fa-square-plus text-brand-red"></i>.</li>
-                    <li>Appuie sur <strong>« Ajouter »</strong> en haut à droite.</li>
+                    <li>Appuie sur l'icône de <strong>Partage</strong> <i class="fa-solid fa-arrow-up-from-bracket text-brand-red"></i> en bas de ton écran.</li>
+                    <li>Sélectionne <strong>« Sur l'écran d'accueil »</strong>.</li>
                 </ol>
             </div>
 
@@ -371,15 +369,9 @@
                 <div class="font-bold uppercase text-brand-red flex items-center gap-2 font-mono">
                     <i class="fa-brands fa-android text-sm"></i> Sur Android (Chrome) :
                 </div>
-                <div id="btn-native-pwa-container" class="hidden mb-2">
-                    <button id="btn-native-pwa" onclick="triggerPwaInstall()" class="w-full brutal-btn py-2.5 text-xs uppercase font-bold flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-download"></i> Installer le raccourci en 1 clic
-                    </button>
-                </div>
                 <ol class="space-y-2 list-decimal list-inside leading-relaxed text-brand-cream/90">
-                    <li>Appuie sur les <strong>trois points ⋮</strong> en haut à droite de Chrome.</li>
-                    <li>Sélectionne <strong>« Ajouter à l'écran d'accueil »</strong> ou <strong>« Installer l'application »</strong>.</li>
-                    <li>Valide pour créer le raccourci direct.</li>
+                    <li>Appuie sur les <strong>trois points ⋮</strong> en haut à droite.</li>
+                    <li>Sélectionne <strong>« Ajouter à l'écran d'accueil »</strong>.</li>
                 </ol>
             </div>
 
@@ -393,30 +385,25 @@
     <div id="toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 bg-brand-cream text-brand-black px-4 py-2 font-bold text-xs uppercase tracking-wider z-50 hidden border-2 border-brand-red shadow-lg text-center max-w-xs truncate"></div>
 
     <script>
+        // Gestion de l'affichage initial du disclaimer
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('ensase_disclaimer_seen')) {
+                $('#modal-disclaimer').classList.remove('hidden');
+            }
+        });
+
+        function closeDisclaimer() {
+            $('#modal-disclaimer').classList.add('hidden');
+            localStorage.setItem('ensase_disclaimer_seen', 'true');
+        }
+
         const OFFICIAL_PROPOSE_URL = "https://eensase.vercel.app/proposer/";
 
-        // Navigation persistante par hash d'URL (onglets principaux)
         let validTabs = ['accueil', 'agenda', 'totems', 'votes', 'mur'];
         let initialHash = window.location.hash.replace('#', '');
         let currentPage = validTabs.includes(initialHash) ? initialHash : 'accueil';
 
-        // --- LES 9 TOTEMS (Avec le Padlet de Médiation et les autres en attente) ---
-        let totemsData = [
-            { id: 'alimentation', name: 'ALIMENTATION', padletEmbed: null },
-            { id: 'commun', name: 'COMMUN', padletEmbed: null },
-            { id: 'itinerance', name: 'ITINERANCE', padletEmbed: null },
-            { 
-                id: 'mediation', 
-                name: 'MEDIATION', 
-                padletEmbed: '<div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/s025ccv5ik36sdzsxq57" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p></div>' 
-            },
-            { id: 'memoire', name: 'MEMOIRE', padletEmbed: null },
-            { id: 'soin', name: 'SOIN', padletEmbed: null },
-            { id: 'technique', name: 'TECHNIQUE', padletEmbed: null },
-            { id: 'violence', name: 'VIOLENCE', padletEmbed: null },
-            { id: 'vivant', name: 'VIVANT', padletEmbed: null }
-        ];
-
+        // AGENDA : Uniquement les AG, Manifs et événements de lutte (pas d'ateliers)
         let eventsData = [
             { 
                 id: 'e1', 
@@ -425,10 +412,10 @@
                 year: 2026,
                 time: '14h00', 
                 endTime: '15h30',
-                title: "AG du 12 novembre 2026", 
+                title: "AG de mobilisation du 12 novembre", 
                 type: 'AG & RÉUNIONS', 
                 place: '219 Atelier L1', 
-                desc: "Retours de la semaine, organisation autour des totems." 
+                desc: "Retours de la semaine, points de coordination et votes de la lutte." 
             },
             { 
                 id: 'e2', 
@@ -437,10 +424,22 @@
                 year: 2026,
                 time: '10h00', 
                 endTime: '12h00',
-                title: "AG du 16 novembre 2026", 
+                title: "AG Semaine 2 - Organisation de la mobilisation", 
                 type: 'AG & RÉUNIONS', 
                 place: "219 Atelier L1", 
-                desc: "Organisation de la semaine 2 de l'expérimentation." 
+                desc: "Stratégie et actions de la semaine 2." 
+            },
+            { 
+                id: 'e3', 
+                day: '18', 
+                month: 'NOV', 
+                year: 2026,
+                time: '13h30', 
+                endTime: '17h00',
+                title: "Manifestation inter-facultés", 
+                type: 'MANIFS', 
+                place: "Départ ENSASE", 
+                desc: "Rassemblement et cortège commun." 
             }
         ];
 
@@ -506,40 +505,7 @@
         });
 
         window.openInstallModal = function() {
-            const isApple = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-            const isAndroid = /Android/i.test(navigator.userAgent);
-
-            const iosGuide = $('#pwa-guide-ios');
-            const androidGuide = $('#pwa-guide-android');
-
-            if (isApple) {
-                if (iosGuide) iosGuide.classList.remove('hidden');
-                if (androidGuide) androidGuide.classList.add('hidden');
-            } else if (isAndroid) {
-                if (iosGuide) iosGuide.classList.add('hidden');
-                if (androidGuide) androidGuide.classList.remove('hidden');
-                if (deferredPwaPrompt) {
-                    const btnCont = $('#btn-native-pwa-container');
-                    if (btnCont) btnCont.classList.remove('hidden');
-                }
-            } else {
-                if (iosGuide) iosGuide.classList.remove('hidden');
-                if (androidGuide) androidGuide.classList.remove('hidden');
-            }
-
             openModal('modal-pwa');
-        };
-
-        window.triggerPwaInstall = async function() {
-            if (deferredPwaPrompt) {
-                deferredPwaPrompt.prompt();
-                const { outcome } = await deferredPwaPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    showToast("Raccourci installé avec succès !");
-                }
-                deferredPwaPrompt = null;
-                closeModal('modal-pwa');
-            }
         };
 
         function updateNavActive() {
@@ -571,17 +537,7 @@
             }
             
             const start = new Date(year, month, day, hours, minutes, 0);
-            
-            let end;
-            if (e.endTime) {
-                const endParts = e.endTime.replace(':', 'h').split('h');
-                const endHours = parseInt(endParts[0], 10) || (hours + 2);
-                const endMinutes = parseInt(endParts[1], 10) || 0;
-                end = new Date(year, month, day, endHours, endMinutes, 0);
-            } else {
-                end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
-            }
-            
+            const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
             return { start, end };
         }
 
@@ -594,12 +550,6 @@
             $('#cal-modal-time').textContent = `🗓️ ${ev.day} ${ev.month} · ${ev.time}${ev.endTime ? ' - ' + ev.endTime : ''}`;
             $('#cal-modal-place').textContent = `📍 ${ev.place}`;
 
-            const isAndroid = /Android/i.test(navigator.userAgent);
-            const isApple = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent);
-
-            $('#badge-android').classList.toggle('hidden', !isAndroid);
-            $('#badge-apple').classList.toggle('hidden', !isApple);
-
             openModal('modal-calendar');
         };
 
@@ -608,9 +558,7 @@
             const { start, end } = getEventDates(activeCalendarEvent);
             const fmt = d => d.toISOString().replace(/-|:|\.\d+/g, '');
             const dates = `${fmt(start)}/${fmt(end)}`;
-            
             const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(activeCalendarEvent.title)}&dates=${dates}&details=${encodeURIComponent(activeCalendarEvent.desc || '')}&location=${encodeURIComponent(activeCalendarEvent.place || '')}`;
-            
             window.open(url, '_blank');
             closeModal('modal-calendar');
             showToast("Ouverture de Google Calendar...");
@@ -623,22 +571,10 @@
             const nowFmt = fmt(new Date());
 
             const icsContent = [
-                'BEGIN:VCALENDAR',
-                'VERSION:2.0',
-                'PRODID:-//ENSASE en lutte//FR',
-                'CALSCALE:GREGORIAN',
-                'METHOD:PUBLISH',
-                'BEGIN:VEVENT',
-                `UID:${activeCalendarEvent.id}-${start.getTime()}@ensase-en-lutte.fr`,
-                `DTSTAMP:${nowFmt}`,
-                `DTSTART:${fmt(start)}`,
-                `DTEND:${fmt(end)}`,
-                `SUMMARY:${activeCalendarEvent.title.replace(/\n/g, ' ')}`,
-                `DESCRIPTION:${(activeCalendarEvent.desc || '').replace(/\n/g, '\\n')}`,
-                `LOCATION:${(activeCalendarEvent.place || '').replace(/\n/g, ' ')}`,
-                'STATUS:CONFIRMED',
-                'END:VEVENT',
-                'END:VCALENDAR'
+                'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//ENSASE en lutte//FR', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+                'BEGIN:VEVENT', `UID:${activeCalendarEvent.id}@ensase-en-lutte.fr`, `DTSTAMP:${nowFmt}`,
+                `DTSTART:${fmt(start)}`, `DTEND:${fmt(end)}`, `SUMMARY:${activeCalendarEvent.title}`,
+                `DESCRIPTION:${activeCalendarEvent.desc}`, `LOCATION:${activeCalendarEvent.place}`, 'END:VEVENT', 'END:VCALENDAR'
             ].join('\r\n');
 
             const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
@@ -649,9 +585,8 @@
             link.click();
             document.body.removeChild(link);
             window.URL.revokeObjectURL(link.href);
-
             closeModal('modal-calendar');
-            showToast("Événement exporté pour Apple Calendar !");
+            showToast("Événement exporté !");
         };
 
         function toggleCrAccordion(id) {
@@ -661,13 +596,6 @@
             content.classList.toggle('hidden');
             icon.classList.toggle('rotate-180');
             text.textContent = content.classList.contains('hidden') ? 'Voir le compte rendu complet' : 'Masquer le compte rendu';
-        }
-
-        function toggleTotemAccordion(id) {
-            const content = $(`#content-${id}`);
-            const icon = $(`#icon-${id}`);
-            content.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
         }
 
         function render() {
@@ -687,14 +615,26 @@
                         Saint-Étienne
                     </div>
                     <h1 class="font-pancarte text-4xl sm:text-6xl md:text-7xl tracking-tight text-brand-cream mb-4 leading-none strikethrough-title">
-                        LA LUTTE CONTINUE<span class="text-brand-red">.</span>
+                        ENSASE EN LUTTE<span class="text-brand-red">.</span>
                     </h1>
                     <p class="text-xs sm:text-sm md:text-base text-brand-cream/90 max-w-2xl mx-auto font-light leading-relaxed mb-6 px-2">
-                        Un espace commun pour se retrouver, proposer, construire et faire vivre la mobilisation. Tout le monde a sa place pour bâtir le présent et l'avenir de nos études d'architecture.
+                        Plateforme indépendante, autogérée et politisée par les étudiant·es en lutte de l'ENSASE.
                     </p>
+
+                    <!-- BLOC DE CLARIFICATION POLITIQUE -->
+                    <div class="max-w-3xl mx-auto mb-8 bg-brand-black border-2 border-brand-red p-4 text-left brutal-card space-y-2">
+                        <div class="text-[10px] font-mono text-brand-red font-bold uppercase tracking-widest">/// Clarification institutionnelle</div>
+                        <p class="text-xs text-brand-cream/90 leading-relaxed font-light">
+                            <strong>ENSASE en lutte</strong> est un collectif étudiant indépendant et politisé. Nous ne représentons ni l'administration, ni la direction, ni l'ensemble des enseignant·es.
+                        </p>
+                        <p class="text-xs text-brand-cream/80 leading-relaxed font-light">
+                            À la différence d'<strong>EENSASE</strong> (qui désigne l'école expérimentale, le cadre institutionnel et pédagogique global de l'école), notre collectif porte une voix critique et militante au sein de l'établissement.
+                        </p>
+                    </div>
+
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-3 px-2">
                         <button onclick="setPage('agenda')" class="brutal-btn px-5 py-3 text-xs uppercase tracking-wider w-full sm:w-auto">
-                            <i class="fa-solid fa-calendar-days mr-2"></i> Voir l'agenda
+                            <i class="fa-solid fa-calendar-days mr-2"></i> Agenda de la lutte
                         </button>
                         <button onclick="setPage('mur')" class="brutal-btn-dark px-5 py-3 text-xs uppercase tracking-wider w-full sm:w-auto text-brand-black">
                             <i class="fa-solid fa-note-sticky mr-2"></i> Le mur d'expression libre
@@ -711,7 +651,7 @@
                             </div>
                             <div>
                                 <h3 class="font-pancarte text-sm sm:text-base text-brand-cream">AJOUTE LE SITE SUR TON ÉCRAN D'ACCUEIL</h3>
-                                <p class="text-[11px] text-brand-cream/70 font-light mt-0.5">Accède à la plateforme comme un raccourci direct sans chercher le lien.</p>
+                                <p class="text-[11px] text-brand-cream/70 font-light mt-0.5">Accède à la plateforme comme un raccourci direct.</p>
                             </div>
                         </div>
                         <button onclick="openInstallModal()" class="brutal-btn py-2.5 px-4 text-xs uppercase font-bold shrink-0 w-full sm:w-auto flex items-center justify-center gap-2">
@@ -722,7 +662,7 @@
 
                 <div class="max-w-5xl mx-auto mb-12 px-2">
                     <div class="flex justify-between items-end border-b-2 border-brand-red pb-2 mb-4">
-                        <h2 class="font-pancarte text-xl sm:text-2xl text-brand-cream">PROCHAINS RDV</h2>
+                        <h2 class="font-pancarte text-xl sm:text-2xl text-brand-cream">PROCHAINS RDV DE LA LUTTE</h2>
                         <button onclick="setPage('agenda')" class="text-xs uppercase font-bold text-brand-red hover:underline">Tout voir →</button>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -765,17 +705,28 @@
                 <div class="max-w-6xl mx-auto mb-12 px-2">
                     <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
                         <div>
-                            <span class="text-brand-red font-mono text-xs uppercase tracking-widest font-bold">/// Planning & Mobilisation</span>
+                            <span class="text-brand-red font-mono text-xs uppercase tracking-widest font-bold">/// AG, Manifs & Mobilisation</span>
                             <h2 class="font-pancarte text-3xl sm:text-4xl font-extrabold text-brand-cream mt-1">AGENDA DE LA LUTTE</h2>
+                            <p class="text-xs text-brand-cream/70 mt-1">Cet agenda liste exclusivement les temps forts de la mobilisation (AG, manifestations, actions).</p>
                         </div>
                         <div class="flex flex-wrap gap-2 text-xs font-bold uppercase">
                             <button onclick="setAgendaFilter('TOUS')" class="px-3 py-1.5 border-2 ${currentAgendaFilter === 'TOUS' ? 'bg-brand-red text-brand-cream border-brand-red' : 'bg-brand-black text-brand-cream border-brand-cream/30 hover:border-brand-red'} transition-all">Tous</button>
                             <button onclick="setAgendaFilter('AG & RÉUNIONS')" class="px-3 py-1.5 border-2 ${currentAgendaFilter === 'AG & RÉUNIONS' ? 'bg-brand-red text-brand-cream border-brand-red' : 'bg-brand-black text-brand-cream border-brand-cream/30 hover:border-brand-red'} transition-all">AG & Réunions</button>
-                            <button onclick="setAgendaFilter('ATELIERS')" class="px-3 py-1.5 border-2 ${currentAgendaFilter === 'ATELIERS' ? 'bg-brand-red text-brand-cream border-brand-red' : 'bg-brand-black text-brand-cream border-brand-cream/30 hover:border-brand-red'} transition-all">Ateliers</button>
-                            <button onclick="setAgendaFilter('CONFÉRENCES')" class="px-3 py-1.5 border-2 ${currentAgendaFilter === 'CONFÉRENCES' ? 'bg-brand-red text-brand-cream border-brand-red' : 'bg-brand-black text-brand-cream border-brand-cream/30 hover:border-brand-red'} transition-all">Conférences</button>
                             <button onclick="setAgendaFilter('MANIFS')" class="px-3 py-1.5 border-2 ${currentAgendaFilter === 'MANIFS' ? 'bg-brand-red text-brand-cream border-brand-red' : 'bg-brand-black text-brand-cream border-brand-cream/30 hover:border-brand-red'} transition-all">Manifs</button>
                         </div>
                     </div>
+
+                    <!-- LIEN VERS LE PLANNING OFFICIEL EENSASE -->
+                    <div class="bg-brand-black border-2 border-brand-red p-4 mb-6 brutal-card flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                        <div>
+                            <span class="text-brand-red font-bold uppercase font-mono">Cherches-tu les ateliers ou les plannings pédagogiques de l'école ?</span>
+                            <p class="text-xs text-brand-cream/80 font-light mt-0.5">Les ateliers et l'expérimentation globale de l'école sont gérés sur le site institutionnel.</p>
+                        </div>
+                        <a href="https://eensase.vercel.app" target="_blank" rel="noopener noreferrer" class="brutal-btn py-2 px-4 text-xs uppercase font-bold shrink-0">
+                            Voir le planning officiel EENSASE ↗
+                        </a>
+                    </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         ${filteredEvents.length === 0 ? '<p class="text-xs text-brand-cream/50 italic col-span-full">Aucun événement ne correspond à ce filtre.</p>': ''}
                         ${filteredEvents.map(e => `
@@ -805,64 +756,37 @@
             return `
                 <div class="max-w-4xl mx-auto mb-12 px-2 space-y-6">
                     <div>
-                        <span class="text-brand-red font-mono text-xs uppercase tracking-widest font-bold">/// Organisation & Collaboration</span>
-                        <h2 class="font-pancarte text-3xl sm:text-4xl font-extrabold text-brand-cream mt-1">LES 9 TOTEMS & PADLETS</h2>
-                        <p class="text-xs text-brand-cream/70 mt-1">Chaque totem dispose de son Padlet pour partager infos, documents et retours de terrain.</p>
+                        <span class="text-brand-red font-mono text-xs uppercase tracking-widest font-bold">/// École Expérimentale & Institution</span>
+                        <h2 class="font-pancarte text-3xl sm:text-4xl font-extrabold text-brand-cream mt-1">EENSASE & LES TOTEMS</h2>
+                        <p class="text-xs text-brand-cream/70 mt-1">Comprendre la distinction entre l'école (EENSASE) et le collectif militant (ENSASE en lutte).</p>
                     </div>
 
-                    <!-- BANDEAU OFFICIEL CPS / ECOLE -->
-                    <div class="bg-[#181818] border border-brand-red/40 py-2.5 px-3 sm:px-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs brutal-card">
-                        <div class="flex items-center gap-3 flex-wrap">
-                            <span class="bg-brand-red text-brand-cream font-bold text-[10px] tracking-wider px-2 py-0.5 uppercase font-mono shrink-0">
-                                CPS / ÉCOLE
-                            </span>
-                            <span class="text-brand-cream/90 text-xs font-light">
-                                Planning officiel, salles et totems de l’expérimentation pédagogique sur le site de référence.
-                            </span>
+                    <!-- EXPLICATION CLAIRE DE LA DISTINCTION -->
+                    <div class="brutal-card bg-brand-black p-5 space-y-4 text-xs text-brand-cream/90 font-light leading-relaxed">
+                        <div class="border-b border-brand-red/30 pb-3">
+                            <span class="font-bold text-brand-red uppercase font-mono text-sm block mb-1">Qu'est-ce que EENSASE ?</span>
+                            <p><strong>EENSASE</strong> représente l'école, le cadre institutionnel et l'expérimentation pédagogique globale. C'est l'établissement, le lieu d'apprentissage et le cadre de vie qui concerne l'ensemble des étudiants, des enseignants et des équipes administratives. Ce n'est pas un idéal politique, c'est la réalité de l'école.</p>
                         </div>
-                        <a href="https://eensase.vercel.app" target="_blank" rel="noopener noreferrer" 
-                           class="text-brand-red hover:text-brand-lightred font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shrink-0 ml-auto sm:ml-0 transition-colors">
-                            <span>EENSASE.VERCEL.APP</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </a>
+                        <div>
+                            <span class="font-bold text-amber-300 uppercase font-mono text-sm block mb-1">Qu'est-ce que ENSASE en lutte ?</span>
+                            <p><strong>ENSASE en lutte</strong> est notre collectif étudiant, indépendant, autogéré et politisé. Nous portons des revendications et organisons la mobilisation. Nous ne parlons pas au nom de toute l'école ni de l'administration.</p>
+                        </div>
                     </div>
-                    
-                    <!-- LISTE DES 9 TOTEMS -->
-                    <div class="space-y-4 pt-2">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-pancarte text-sm uppercase tracking-wider text-brand-cream/60">Tous les totems :</h3>
-                            <button onclick="openModal('modal-propose')" class="brutal-btn py-1 px-3 text-[10px] uppercase font-bold flex items-center gap-1.5" title="Proposer un événement">
-                                <i class="fa-solid fa-plus"></i> Proposer un événement
-                            </button>
+
+                    <!-- ACCÈS AU SITE OFFICIEL DE L'ÉCOLE -->
+                    <div class="brutal-card bg-brand-black p-6 text-center space-y-4">
+                        <span class="text-[10px] font-mono text-brand-red font-bold uppercase tracking-widest">/// Site institutionnel officiel</span>
+                        <h3 class="font-pancarte text-xl text-brand-cream">PLANNINGS OFFICIELS & TOTEMS DE L'ÉCOLE</h3>
+                        <p class="text-xs text-brand-cream/80 max-w-lg mx-auto font-light">
+                            Pour retrouver le planning officiel de l'expérimentation pédagogique de l'école, les salles et les informations des différents totems, rendez-vous sur le portail de référence de l'école :
+                        </p>
+                        <div class="pt-2">
+                            <a href="https://eensase.vercel.app" target="_blank" rel="noopener noreferrer" 
+                               class="inline-flex items-center gap-2 brutal-btn py-3 px-6 text-xs uppercase font-bold">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
+                                Accéder au site officiel EENSASE (eensase.vercel.app) ↗
+                            </a>
                         </div>
-                        ${totemsData.map(t => `
-                            <div id="totem-${t.id}" class="brutal-card bg-brand-black p-4">
-                                <div class="flex justify-between items-center cursor-pointer" onclick="toggleTotemAccordion('${t.id}')">
-                                    <div>
-                                        <span class="text-[9px] font-bold text-brand-red uppercase tracking-wider">Totem d'action</span>
-                                        <h3 class="font-pancarte text-xl text-brand-cream mt-0.5">${esc(t.name)}</h3>
-                                    </div>
-                                    <i id="icon-${t.id}" class="fa-solid fa-chevron-down text-brand-red text-lg transition-transform shrink-0"></i>
-                                </div>
-                                <div id="content-${t.id}" class="hidden mt-4 pt-4 border-t border-brand-cream/20 space-y-3">
-                                    <div class="flex justify-between items-center flex-wrap gap-2">
-                                        <h4 class="font-pancarte text-[11px] uppercase tracking-widest text-brand-red">Espace collaboratif du Totem (${esc(t.name)}) :</h4>
-                                    </div>
-                                    ${t.padletEmbed ? `
-                                        <div class="w-full overflow-hidden border border-brand-red/40 bg-[#121212]">
-                                            ${t.padletEmbed}
-                                        </div>
-                                    ` : `
-                                        <p class="text-xs text-brand-cream/60 italic py-2">
-                                            Le Padlet de ce totem sera bientôt intégré ici. En attendant, retrouvez les plannings et infos sur le site officiel : 
-                                            <a href="https://eensase.vercel.app/#planning" target="_blank" rel="noopener noreferrer" class="text-amber-400 font-bold underline hover:text-amber-300">
-                                                https://eensase.vercel.app/#planning ↗
-                                            </a>
-                                        </p>
-                                    `}
-                                </div>
-                            </div>
-                        `).join('')}
                     </div>
                 </div>
             `;
@@ -969,27 +893,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="bg-brand-cream/5 border border-brand-cream/15 p-3.5 space-y-2">
-                                <div class="flex justify-between items-start">
-                                    <h4 class="font-bold text-xs uppercase text-brand-cream">Vote 2 : Validation du mode TOTEM</h4>
-                                    <span class="text-[9px] font-mono text-brand-cream/70 bg-brand-cream/10 px-1.5 py-0.5">307 votant·es · Adopté</span>
-                                </div>
-                                <div class="space-y-1.5 text-xs">
-                                    <div>
-                                        <div class="flex justify-between text-[11px] font-bold"><span>POUR (202)</span><span>66%</span></div>
-                                        <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-brand-red h-full" style="width: 66%"></div></div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-[11px] font-bold"><span>CONTRE (77)</span><span>25%</span></div>
-                                        <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-brand-cream h-full" style="width: 25%"></div></div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-[11px] font-bold text-brand-cream/60"><span>ABSTENTION (28)</span><span>9%</span></div>
-                                        <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-stone-500 h-full" style="width: 9%"></div></div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- Accordéon pour le Compte Rendu (AG 3 Nov) -->
@@ -1006,208 +909,9 @@
                                         Compte Rendu Officiel — AG du 03/11/2026
                                     </h4>
                                 </div>
-
                                 <div class="bg-brand-cream/5 p-3 border-l-2 border-brand-red space-y-1">
                                     <strong class="text-brand-cream uppercase font-bold text-[11px]">Objet :</strong>
                                     <p>Organisation de la mobilisation et banalisation du semestre.</p>
-                                    <p class="text-[11px] text-brand-cream/80">L'Assemblée Générale a porté sur la mise en place d'une nouvelle organisation pédagogique dans le cadre de la mobilisation étudiante. L'objectif est de profiter de cette période pour expérimenter d'autres formes d'apprentissage et repenser collectivement le fonctionnement de l'école.</p>
-                                </div>
-
-                                <div class="space-y-1">
-                                    <strong class="text-brand-cream uppercase font-bold text-[11px]">Organisation pédagogique :</strong>
-                                    <p>Les échanges ont principalement porté sur la volonté de sortir d'un enseignement vertical et cloisonné, au profit d'une pédagogie davantage fondée sur la transmission horizontale, l'autonomie des étudiants et le décloisonnement des promotions.</p>
-                                    <p>Plusieurs inquiétudes ont néanmoins été exprimées concernant le maintien des apprentissages fondamentaux, la validation des crédits ECTS, les modalités d'évaluation et la préparation à la professionnalisation, notamment pour les étudiants de master. La question du caractère obligatoire ou facultatif des activités proposées a également été débattue.</p>
-                                </div>
-
-                                <div class="space-y-1">
-                                    <strong class="text-brand-cream uppercase font-bold text-[11px]">Proposition d'ateliers, TOTEMS :</strong>
-                                    <p>Une organisation autour de plusieurs ateliers thématiques, regroupant les différentes promotions, a été proposée. Les thématiques évoquées sont :</p>
-                                    <ul class="list-disc list-inside space-y-0.5 text-brand-cream/80 pl-1">
-                                        <li>Lieux et formes de pouvoir.</li>
-                                        <li>La lutte du vivant.</li>
-                                        <li>Collectivité et vie de quartier.</li>
-                                        <li>Diffusion architecturale.</li>
-                                        <li>Alimentation.</li>
-                                    </ul>
-                                    <p class="text-[11px] text-brand-cream/70">Ces totems pourront prendre la forme de workshops, tables rondes, rencontres avec des intervenants extérieurs et productions collectives. D'autres thématiques pourront être proposées par les étudiants.</p>
-                                </div>
-
-                                <div class="space-y-1">
-                                    <strong class="text-brand-cream uppercase font-bold text-[11px]">Perspectives et revendications :</strong>
-                                    <p>La mobilisation constitue également une occasion de réfléchir plus largement à l'enseignement de l'architecture et à ses liens avec les enjeux sociaux, politiques et environnementaux. Plusieurs pistes sont évoquées : développer les interventions extérieures, multiplier les workshops, renforcer la place des enjeux écologiques et diversifier les possibilités de professionnalisation.</p>
-                                    <p>Une réflexion collective autour d'une charte pédagogique est également en cours. Une restitution des travaux, notamment sous la forme d'une exposition lors des journées portes ouvertes, est proposée.</p>
-                                </div>
-
-                                <div class="bg-brand-red/20 border border-brand-red p-3 text-[11px] space-y-1">
-                                    <span class="font-bold text-brand-cream uppercase">Synthèse de décision :</span>
-                                    <p>L'Assemblée Générale valide le principe d'une banalisation totale du semestre et d'une organisation pédagogique autour de TOTEMS. Cette décision ouvre une période d'expérimentation collective visant à repenser les modalités d'apprentissage, les rapports entre étudiants et enseignants ainsi que la place de l'architecture dans la société. Les modalités concrètes de mise en œuvre, l'organisation des ateliers et les conditions de participation restent à préciser collectivement, et seront notamment débattues par le CPS et la CFVE.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- AG DU 2 NOVEMBRE 2026 -->
-                    <div class="brutal-card bg-brand-black p-4 sm:p-6 space-y-5">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-brand-cream/20 pb-3">
-                            <div>
-                                <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 uppercase font-mono">Assemblée Générale</span>
-                                <h3 class="font-pancarte text-xl sm:text-2xl text-brand-cream mt-1">AG DU 2 NOVEMBRE 2026</h3>
-                            </div>
-                            <span class="text-[11px] font-mono text-brand-cream/70">Étudiant·es, ATOS & Enseignant·es</span>
-                        </div>
-
-                        <div class="space-y-4">
-                            <div class="bg-brand-cream/5 border border-brand-cream/15 p-3.5 space-y-2">
-                                <div class="flex justify-between items-start">
-                                    <h4 class="font-bold text-xs uppercase text-brand-cream">Vote 1 : Blocage de l'ENSASE le 5 novembre</h4>
-                                    <span class="text-[9px] font-mono text-brand-cream/70 bg-brand-cream/10 px-1.5 py-0.5">304 votant·es · Adopté</span>
-                                </div>
-                                <div class="space-y-1.5 text-xs">
-                                    <div>
-                                        <div class="flex justify-between text-[11px] font-bold"><span>POUR (232)</span><span>76%</span></div>
-                                        <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-brand-red h-full" style="width: 76%"></div></div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-[11px] font-bold"><span>CONTRE (31)</span><span>10%</span></div>
-                                        <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-brand-cream h-full" style="width: 10%"></div></div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-[11px] font-bold text-brand-cream/60"><span>ABSTENTION (41)</span><span>14%</span></div>
-                                        <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-stone-500 h-full" style="width: 14%"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-brand-cream/5 border border-brand-cream/15 p-3.5 space-y-2">
-                                <div class="flex justify-between items-start">
-                                    <h4 class="font-bold text-xs uppercase text-brand-cream">Vote 2 : Poursuite de la mobilisation</h4>
-                                    <span class="text-[9px] font-mono text-brand-cream/70 bg-brand-cream/10 px-1.5 py-0.5">311 votant·es · Adopté</span>
-                                </div>
-                                <div class="space-y-1.5 text-xs">
-                                    <div>
-                                        <div class="flex justify-between text-[11px] font-bold"><span>POUR (217)</span><span>70%</span></div>
-                                        <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-brand-red h-full" style="width: 70%"></div></div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-[11px] font-bold"><span>CONTRE (69)</span><span>22%</span></div>
-                                        <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-brand-cream h-full" style="width: 22%"></div></div>
-                                    </div>
-                                    <div>
-                                        <div class="flex justify-between text-[11px] font-bold text-brand-cream/60"><span>ABSTENTION (25)</span><span>8%</span></div>
-                                        <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-stone-500 h-full" style="width: 8%"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-brand-cream/5 border border-brand-cream/15 p-3.5 space-y-2">
-                                <div class="flex justify-between items-start">
-                                    <h4 class="font-bold text-xs uppercase text-brand-cream">Vote 3 : Temporalité de la mobilisation</h4>
-                                    <span class="text-[9px] font-mono text-amber-400 bg-amber-400/10 px-1.5 py-0.5">Trop serré · Reconduit le 03/11</span>
-                                </div>
-                                <div class="space-y-1 text-xs">
-                                    <div class="flex justify-between text-[11px]"><span>1 semaine : <strong>71 voix</strong> (15%)</span><span>2 semaines : <strong>113 voix</strong> (24%)</span></div>
-                                    <div class="flex justify-between text-[11px]"><span>1 mois : <strong>117 voix</strong> (25%)</span><span class="text-brand-red font-bold">Le semestre : 131 voix (28%)</span></div>
-                                    <div class="text-[10px] text-brand-cream/60 pt-0.5">Abstention : 36 voix (8%)</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Accordéon pour le Compte Rendu (AG 2 Nov) -->
-                        <div class="pt-2">
-                            <button onclick="toggleCrAccordion('ag-02-nov')" class="w-full bg-brand-cream/10 hover:bg-brand-cream/20 text-brand-cream py-2 px-3 text-xs uppercase font-bold flex items-center justify-between border border-brand-cream/20 transition-all">
-                                <span id="cr-text-ag-02-nov">Voir le compte rendu complet</span>
-                                <i id="cr-icon-ag-02-nov" class="fa-solid fa-chevron-down text-brand-red transition-transform"></i>
-                            </button>
-
-                            <div id="cr-content-ag-02-nov" class="hidden mt-4 pt-4 border-t border-brand-cream/20 space-y-3 text-xs leading-relaxed text-brand-cream/90 font-light">
-                                <h4 class="font-pancarte text-xs text-brand-red font-bold uppercase tracking-wider">
-                                    📄 Compte rendu des débats & Décisions
-                                </h4>
-                                <p>Un premier vote préalable a acté le principe de l'anonymat des scrutins par système de QCM via QR code.</p>
-                                <p>Le vote sur les modalités ou formes de la mobilisation a été repoussé au 03/11 afin de permettre des discussions approfondies en groupes de travail. Des retours ont également souligné la nécessité de réintégrer la dimension de projet architectural dans les futurs ateliers autogérés.</p>
-                                
-                                <div class="bg-brand-cream/5 p-3 border border-brand-cream/20 space-y-2">
-                                    <strong class="text-brand-cream uppercase font-bold text-[11px]">Programme arrêté pour la journée du 03/11 :</strong>
-                                    <ul class="list-disc list-inside space-y-1 text-[11px] text-brand-cream/80 pl-1">
-                                        <li><strong>9h (Atelier L1) :</strong> Groupes de discussion étudiants autour des modalités (banalisation obligatoire, à la carte, partielle mi-cours/mi-atelier, ateliers inter-promos).</li>
-                                        <li><strong>En parallèle :</strong> Réunion conjointe du CPS et de la CFVE pour examiner les perspectives.</li>
-                                        <li><strong>13h30 :</strong> Assemblée Générale plénière (étudiant·es, enseignant·es, ATOS) en atelier L1 avec vote décisif à 16h.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- AG DU 19 OCTOBRE 2026 -->
-                    <div class="brutal-card bg-brand-black p-4 sm:p-6 space-y-5">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-brand-cream/20 pb-3">
-                            <div>
-                                <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 uppercase font-mono">Assemblée Générale</span>
-                                <h3 class="font-pancarte text-xl sm:text-2xl text-brand-cream mt-1">AG DU 19 OCTOBRE 2026</h3>
-                            </div>
-                            <span class="text-[11px] font-mono text-brand-cream/70">Étudiant·es, ATOS & Enseignant·es</span>
-                        </div>
-
-                        <div class="bg-brand-cream/5 border border-brand-cream/15 p-3.5 space-y-2">
-                            <div class="flex justify-between items-start">
-                                <h4 class="font-bold text-xs uppercase text-brand-cream">Reconduction de la banalisation de la semaine</h4>
-                                <span class="text-[9px] font-mono text-brand-cream/70 bg-brand-cream/10 px-1.5 py-0.5">287 voix · Adopté</span>
-                            </div>
-                            <div class="space-y-1.5 text-xs">
-                                <div>
-                                    <div class="flex justify-between text-[11px] font-bold"><span>POUR (229)</span><span>80%</span></div>
-                                    <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-brand-red h-full" style="width: 80%"></div></div>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between text-[11px] font-bold"><span>CONTRE (6)</span><span>2%</span></div>
-                                    <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-brand-cream h-full" style="width: 2%"></div></div>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between text-[11px] font-bold text-brand-cream/60"><span>ABSTENTION (52)</span><span>18%</span></div>
-                                    <div class="w-full bg-brand-cream/10 h-2 mt-0.5"><div class="bg-stone-500 h-full" style="width: 18%"></div></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Accordéon pour le Compte Rendu (AG 19 Oct) -->
-                        <div class="pt-2">
-                            <button onclick="toggleCrAccordion('ag-19-oct')" class="w-full bg-brand-cream/10 hover:bg-brand-cream/20 text-brand-cream py-2 px-3 text-xs uppercase font-bold flex items-center justify-between border border-brand-cream/20 transition-all">
-                                <span id="cr-text-ag-19-oct">Voir le compte rendu complet</span>
-                                <i id="cr-icon-ag-19-oct" class="fa-solid fa-chevron-down text-brand-red transition-transform"></i>
-                            </button>
-
-                            <div id="cr-content-ag-19-oct" class="hidden mt-4 pt-4 border-t border-brand-cream/20 space-y-3 text-xs leading-relaxed text-brand-cream/90 font-light">
-                                <h4 class="font-pancarte text-xs text-brand-red font-bold uppercase tracking-wider">
-                                    📄 Déroulé de l'Assemblée Générale
-                                </h4>
-                                <p>Environ 280 personnes réunies pour décider collectivement de la suite de la mobilisation. La force du collectif, la qualité des échanges et la diversité des prises de parole donnent de l'élan pour la suite.</p>
-                                
-                                <div class="space-y-2">
-                                    <div>
-                                        <strong class="text-brand-cream font-bold uppercase text-[11px]">En première partie :</strong>
-                                        <ul class="list-disc list-inside space-y-0.5 text-brand-cream/80 pl-1 mt-1 text-[11px]">
-                                            <li>Point info sur la semaine banalisée écoulée ;</li>
-                                            <li>Point info sur la journée du 17 octobre et sur nos revendications ;</li>
-                                            <li>Temps de discussion et prises de parole libres ;</li>
-                                            <li>Vote et adoption de la reconduction de la banalisation.</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <strong class="text-brand-cream font-bold uppercase text-[11px]">En seconde partie :</strong>
-                                        <ul class="list-disc list-inside space-y-0.5 text-brand-cream/80 pl-1 mt-1 text-[11px]">
-                                            <li>Propositions concrètes d'actions et d'ateliers ;</li>
-                                            <li>Répartition des tâches et choix des référent·es.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="pt-2">
-                                    <a href="https://drive.google.com/drive/folders/1-3649JiRgjEQPFm2DBP7QKU9y36jZmbV?usp=drive_link" 
-                                       target="_blank" rel="noopener noreferrer"
-                                       class="brutal-btn py-2.5 px-3.5 text-[11px] uppercase font-bold inline-flex items-center gap-2">
-                                        <i class="fa-brands fa-google-drive text-sm"></i>
-                                        (Re)découvrir les archives de la semaine passée (Drive)
-                                    </a>
                                 </div>
                             </div>
                         </div>
