@@ -339,21 +339,21 @@
         </div>
     </div>
 
-    <!-- MODALE : PARTAGER SUR INSTAGRAM (DA DU SITE) -->
+    <!-- MODALE : PARTAGER EN STORY INSTAGRAM (DA DU SITE) -->
     <div id="modal-instagram" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 overflow-y-auto w-full" onclick="if(event.target === this) closeModal('modal-instagram')">
         <div class="bg-brand-black border-2 border-brand-red max-w-md w-full p-5 md:p-6 brutal-card relative my-auto space-y-4">
             <button onclick="closeModal('modal-instagram')" class="absolute top-3 right-3 text-brand-cream hover:text-brand-red text-2xl p-1">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <span class="text-[9px] font-mono text-brand-red font-bold uppercase tracking-widest">/// Kit de Diffusion Instagram</span>
-            <h2 class="font-pancarte text-xl font-extrabold text-brand-cream mt-1">PARTAGER EN STORY / POST</h2>
+            <h2 class="font-pancarte text-xl font-extrabold text-brand-cream mt-1">PARTAGER EN STORY (9:16)</h2>
             
             <p class="text-xs text-brand-cream/80 leading-relaxed font-light">
-                Visuel généré dans la charte graphique du collectif. Enregistre-le dans ta galerie ou partage-le direct sur Instagram.
+                Visuel vertical optimisé pour les stories Instagram. Enregistre-le dans ta galerie ou partage-le directement.
             </p>
 
-            <!-- APERÇU DU VISUEL (DA BRUTALISTE) -->
-            <div id="insta-preview-card" class="bg-brand-black border-4 border-brand-red p-4 sm:p-5 text-brand-cream relative overflow-hidden shadow-2xl space-y-3" style="aspect-ratio: 4/5;">
+            <!-- APERÇU DU VISUEL EN FORMAT STORY (9:16) -->
+            <div id="insta-preview-card" class="bg-brand-black border-4 border-brand-red p-4 sm:p-5 text-brand-cream relative overflow-hidden shadow-2xl flex flex-col justify-between mx-auto" style="aspect-ratio: 9/16; max-height: 380px;">
                 <div class="absolute top-0 right-0 bg-brand-red text-white text-[9px] font-mono font-bold px-2.5 py-1 uppercase tracking-widest">
                     ENSASE EN LUTTE
                 </div>
@@ -361,10 +361,10 @@
                     <span id="insta-prev-type" class="inline-block bg-brand-cream text-brand-black text-[10px] font-mono font-bold px-2 py-0.5 uppercase"></span>
                     <div id="insta-prev-date" class="font-mono text-xs text-brand-red font-bold uppercase tracking-wider"></div>
                 </div>
-                <div class="py-1">
-                    <h3 id="insta-prev-title" class="font-pancarte text-xl sm:text-2xl font-extrabold text-brand-cream leading-tight"></h3>
+                <div class="py-2">
+                    <h3 id="insta-prev-title" class="font-pancarte text-lg sm:text-xl font-extrabold text-brand-cream leading-tight"></h3>
                 </div>
-                <div class="bg-brand-cream/10 border border-brand-cream/20 p-2.5 space-y-1 text-xs">
+                <div class="bg-brand-cream/10 border border-brand-cream/20 p-2 space-y-1 text-xs">
                     <div class="flex items-center gap-2 font-mono text-amber-300">
                         <i class="fa-solid fa-clock"></i> <span id="insta-prev-time"></span>
                     </div>
@@ -372,8 +372,8 @@
                         <i class="fa-solid fa-location-dot text-brand-red"></i> <span id="insta-prev-place"></span>
                     </div>
                 </div>
-                <p id="insta-prev-desc" class="text-[11px] text-brand-cream/80 line-clamp-3 font-light leading-relaxed"></p>
-                <div class="absolute bottom-3 left-4 right-4 pt-2 border-t border-brand-cream/20 flex justify-between items-center text-[10px] font-mono text-brand-cream/70">
+                <p id="insta-prev-desc" class="text-[10px] text-brand-cream/80 line-clamp-3 font-light leading-relaxed"></p>
+                <div class="pt-2 border-t border-brand-cream/20 flex justify-between items-center text-[10px] font-mono text-brand-cream/70">
                     <span>@ensase_en_lutte</span>
                     <span class="text-brand-red font-bold">#SaintEtienne</span>
                 </div>
@@ -456,7 +456,7 @@
         let initialHash = window.location.hash.replace('#', '');
         let currentPage = validTabs.includes(initialHash) ? initialHash : 'accueil';
 
-        // AGENDA : Uniquement les manifestations et actions de lutte à venir (à partir du 16 nov 2026)
+        // AGENDA : Événements à venir (à partir du 16 nov 2026, sans horaires de fin)
         let eventsData = [
             { 
                 id: 'e3', 
@@ -464,7 +464,6 @@
                 month: 'NOV', 
                 year: 2026,
                 time: '10h30', 
-                endTime: '',
                 title: "Grève générale", 
                 type: 'MANIFS', 
                 place: "Bourse du Travail, Saint-Étienne", 
@@ -476,11 +475,10 @@
                 month: 'NOV', 
                 year: 2026,
                 time: '18h00', 
-                endTime: '',
                 title: "Présentation du programme LFI", 
                 type: 'RÉUNION', 
                 place: "Le lieu rouge, Saint-Étienne", 
-                desc: "Présentation du programme par les jeunes insoumi·es. Moins de 50 personnes." 
+                desc: "Présentation du programme par les jeunes insoumi·es." 
             },
             { 
                 id: 'e5', 
@@ -488,7 +486,6 @@
                 month: 'NOV', 
                 year: 2026,
                 time: '19h00', 
-                endTime: '',
                 title: "Soirée de soutien à l'assemblée lycéenne", 
                 type: 'SOIRÉE', 
                 place: "MJC des Tilleuls, 8 Rue du pavillon chinois, Saint-Étienne", 
@@ -500,7 +497,6 @@
                 month: 'NOV', 
                 year: 2026,
                 time: '10h00', 
-                endTime: '',
                 title: "Matinée d’intégration à la jeunesse communiste", 
                 type: 'RÉUNION', 
                 place: "Le lieu rouge, Saint-Étienne", 
@@ -613,7 +609,7 @@
             activeCalendarEvent = ev;
 
             $('#cal-modal-title').textContent = ev.title;
-            $('#cal-modal-time').textContent = `🗓️ ${ev.day} ${ev.month} · ${ev.time}${ev.endTime ? ' - ' + ev.endTime : ''}`;
+            $('#cal-modal-time').textContent = `🗓️ ${ev.day} ${ev.month} · ${ev.time}`;
             $('#cal-modal-place').textContent = `📍 ${ev.place}`;
 
             openModal('modal-calendar');
@@ -627,7 +623,7 @@
             $('#insta-prev-type').textContent = ev.type || 'ACTION';
             $('#insta-prev-date').textContent = `${ev.day} ${ev.month} ${ev.year || 2026}`;
             $('#insta-prev-title').textContent = ev.title;
-            $('#insta-prev-time').textContent = `${ev.time}${ev.endTime ? ' - ' + ev.endTime : ''}`;
+            $('#insta-prev-time').textContent = ev.time;
             $('#insta-prev-place').textContent = ev.place;
             $('#insta-prev-desc').textContent = ev.desc;
 
@@ -654,72 +650,80 @@
             if (!activeInstaEvent) return;
             const ev = activeInstaEvent;
 
+            // Canvas HD au format Story Instagram (9:16 -> 1080x1920)
             const canvas = document.createElement('canvas');
             canvas.width = 1080;
-            canvas.height = 1350;
+            canvas.height = 1920;
             const ctx = canvas.getContext('2d');
 
             ctx.fillStyle = '#121212';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            // Cadre brutaliste rouge
             ctx.strokeStyle = '#8d211d';
             ctx.lineWidth = 24;
             ctx.strokeRect(12, 12, canvas.width - 24, canvas.height - 24);
 
+            // Badge supérieur
             ctx.fillStyle = '#8d211d';
-            ctx.fillRect(canvas.width - 340, 36, 300, 60);
+            ctx.fillRect(canvas.width - 380, 50, 320, 70);
             ctx.fillStyle = '#f4ede4';
-            ctx.font = 'bold 24px monospace';
-            ctx.fillText('ENSASE EN LUTTE', canvas.width - 325, 75);
+            ctx.font = 'bold 26px monospace';
+            ctx.fillText('ENSASE EN LUTTE', canvas.width - 360, 95);
 
+            // Type d'événement
             ctx.fillStyle = '#f4ede4';
-            ctx.fillRect(60, 140, 220, 50);
+            ctx.fillRect(80, 180, 260, 60);
             ctx.fillStyle = '#121212';
-            ctx.font = 'bold 22px sans-serif';
-            ctx.fillText((ev.type || 'ACTION').toUpperCase(), 80, 172);
+            ctx.font = 'bold 26px sans-serif';
+            ctx.fillText((ev.type || 'ACTION').toUpperCase(), 105, 220);
 
+            // Date
             ctx.fillStyle = '#8d211d';
-            ctx.font = 'bold 30px monospace';
-            ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 60, 245);
+            ctx.font = 'bold 36px monospace';
+            ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 80, 300);
 
+            // Titre de l'événement (Story : typographie XXL)
             ctx.fillStyle = '#f4ede4';
-            ctx.font = 'bold 64px sans-serif';
+            ctx.font = 'bold 76px sans-serif';
             
             let words = ev.title.split(' ');
             let line = '';
-            let y = 350;
-            let maxWidth = 960;
+            let y = 430;
+            let maxWidth = 920;
 
             for(let i = 0; i < words.length; i++) {
                 let testLine = line + words[i] + ' ';
                 if (ctx.measureText(testLine).width > maxWidth && i > 0) {
-                    ctx.fillText(line, 60, y);
+                    ctx.fillText(line, 80, y);
                     line = words[i] + ' ';
-                    y += 80;
+                    y += 95;
                 } else {
                     line = testLine;
                 }
             }
-            ctx.fillText(line, 60, y);
+            ctx.fillText(line, 80, y);
 
-            y += 60;
+            // Bloc Heure & Lieu (milieu-bas de la story)
+            y += 120;
             ctx.fillStyle = 'rgba(244, 237, 228, 0.08)';
-            ctx.fillRect(60, y, 960, 220);
+            ctx.fillRect(80, y, 920, 260);
             ctx.strokeStyle = 'rgba(244, 237, 228, 0.2)';
             ctx.lineWidth = 2;
-            ctx.strokeRect(60, y, 960, 220);
+            ctx.strokeRect(80, y, 920, 260);
 
-            ctx.fillStyle = '#fbbf24';
-            ctx.font = 'bold 32px sans-serif';
-            ctx.fillText(`🕒 ${ev.time}${ev.endTime ? ' - ' + ev.endTime : ''}`, 100, y + 70);
+            ctx.fillStyle = '#fbbf24'; // Ambré
+            ctx.font = 'bold 40px sans-serif';
+            ctx.fillText(`🕒 ${ev.time}`, 130, y + 85);
 
             ctx.fillStyle = '#f4ede4';
-            ctx.font = '28px sans-serif';
-            ctx.fillText(`📍 ${ev.place}`, 100, y + 145, 880);
+            ctx.font = '34px sans-serif';
+            ctx.fillText(`📍 ${ev.place}`, 130, y + 175, 820);
 
-            y += 280;
+            // Description
+            y += 330;
             ctx.fillStyle = 'rgba(244, 237, 228, 0.85)';
-            ctx.font = '30px sans-serif';
+            ctx.font = '36px sans-serif';
             
             let descWords = (ev.desc || '').split(' ');
             let descLine = '';
@@ -727,24 +731,25 @@
             for(let i = 0; i < descWords.length; i++) {
                 let testLine = descLine + descWords[i] + ' ';
                 if (ctx.measureText(testLine).width > maxWidth && i > 0) {
-                    ctx.fillText(descLine, 60, descY);
+                    ctx.fillText(descLine, 80, descY);
                     descLine = descWords[i] + ' ';
-                    descY += 46;
+                    descY += 50;
                 } else {
                     descLine = testLine;
                 }
             }
-            ctx.fillText(descLine, 60, descY);
+            ctx.fillText(descLine, 80, descY);
 
+            // Footer de la Story
             ctx.fillStyle = 'rgba(244, 237, 228, 0.6)';
-            ctx.font = '24px monospace';
-            ctx.fillText('@ensase_en_lutte', 60, canvas.height - 60);
+            ctx.font = '28px monospace';
+            ctx.fillText('@ensase_en_lutte', 80, canvas.height - 80);
             ctx.fillStyle = '#8d211d';
-            ctx.font = 'bold 24px monospace';
-            ctx.fillText('#SaintEtienne', canvas.width - 240, canvas.height - 60);
+            ctx.font = 'bold 28px monospace';
+            ctx.fillText('#SaintEtienne', canvas.width - 300, canvas.height - 80);
 
             canvas.toBlob(async (blob) => {
-                const file = new File([blob], `ensase_lutte_${ev.id}.png`, { type: 'image/png' });
+                const file = new File([blob], `ensase_story_${ev.id}.png`, { type: 'image/png' });
                 
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     try {
@@ -760,10 +765,10 @@
                 }
 
                 const link = document.createElement('a');
-                link.download = `ensase_lutte_${ev.id}_instagram.png`;
+                link.download = `ensase_story_${ev.id}.png`;
                 link.href = URL.createObjectURL(blob);
                 link.click();
-                showToast("Visuel téléchargé !");
+                showToast("Story Instagram téléchargée !");
             }, 'image/png');
         };
 
@@ -876,7 +881,7 @@
                                     <span class="text-[9px] font-mono text-brand-red font-semibold">${e.type}</span>
                                     <div class="flex items-center gap-2">
                                         <button onclick="openInstagramModal('${e.id}')" class="text-xs bg-brand-red text-brand-cream font-bold px-2.5 py-1 border border-brand-cream hover:bg-brand-lightred flex items-center">
-                                            <i class="fa-brands fa-instagram mr-1"></i> Insta
+                                            <i class="fa-brands fa-instagram mr-1"></i> Story
                                         </button>
                                         <button onclick="openCalendarModal('${e.id}')" class="text-xs bg-brand-cream text-brand-black font-bold px-2.5 py-1 border border-brand-red hover:bg-white flex items-center">
                                             <i class="fa-solid fa-plus mr-1"></i> Agenda
@@ -934,7 +939,7 @@
                                     <span class="text-[9px] font-mono text-brand-red font-semibold">${e.type}</span>
                                     <div class="flex items-center gap-2">
                                         <button onclick="openInstagramModal('${e.id}')" class="text-xs bg-brand-red text-brand-cream font-bold px-2.5 py-1 border border-brand-cream hover:bg-brand-lightred flex items-center">
-                                            <i class="fa-brands fa-instagram mr-1"></i> Insta
+                                            <i class="fa-brands fa-instagram mr-1"></i> Story
                                         </button>
                                         <button onclick="openCalendarModal('${e.id}')" class="text-xs bg-brand-cream text-brand-black font-bold px-2.5 py-1 border border-brand-red hover:bg-white flex items-center">
                                             <i class="fa-solid fa-plus mr-1"></i> Agenda
