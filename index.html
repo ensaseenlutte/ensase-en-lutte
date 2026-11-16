@@ -165,13 +165,13 @@
     <div class="bg-brand-red text-brand-cream border-b-2 border-brand-cream overflow-hidden select-none z-50 fixed top-0 left-0 right-0 w-full"
          style="padding-top: max(16px, calc(10px + env(safe-area-inset-top))); padding-bottom: 9px;">
         <div class="animate-ticker font-pancarte text-[11px] tracking-wider uppercase">
-            <span class="mx-4">🚲 SAMEDI 14/11 À 13H30 (GARE DE CHÂTEAUCREUX) : VÉLORUTION</span>
+            <span class="mx-4">🔥 MARDI 17/11 À 10H30 : GRÈVE GÉNÉRALE</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🔥 SAMEDI 14/11 À 14H00 (BOURSE DU TRAVAIL) : MANIF CONTRE LE PERMIS DE TUER</span>
+            <span class="mx-4">✊ JEUDI 19/11 À 18H00 : PRÉSENTATION DU PROGRAMME LFI (@LIEU.ROUGE)</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🚲 SAMEDI 14/11 À 13H30 (GARE DE CHÂTEAUCREUX) : VÉLORUTION</span>
+            <span class="mx-4">🔥 MARDI 17/11 À 10H30 : GRÈVE GÉNÉRALE</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🔥 SAMEDI 14/11 À 14H00 (BOURSE DU TRAVAIL) : MANIF CONTRE LE PERMIS DE TUER</span>
+            <span class="mx-4">✊ JEUDI 19/11 À 18H00 : PRÉSENTATION DU PROGRAMME LFI (@LIEU.ROUGE)</span>
             <span class="mx-4">·</span>
         </div>
     </div>
@@ -349,7 +349,7 @@
             <h2 class="font-pancarte text-xl font-extrabold text-brand-cream mt-1">PARTAGER EN STORY / POST</h2>
             
             <p class="text-xs text-brand-cream/80 leading-relaxed font-light">
-                Visuel généré dans la charte graphique du collectif, prêt à être téléchargé pour vos réseaux, accompagné de la légende adaptée.
+                Visuel généré dans la charte graphique du collectif. Enregistre-le dans ta galerie ou partage-le direct sur Instagram.
             </p>
 
             <!-- APERÇU DU VISUEL (DA BRUTALISTE) -->
@@ -379,9 +379,9 @@
                 </div>
             </div>
 
-            <!-- BOUTON TÉLÉCHARGER LE VISUEL -->
-            <button onclick="downloadInstaImage()" class="w-full brutal-btn py-3 text-xs uppercase font-bold tracking-wider flex items-center justify-center gap-2">
-                <i class="fa-solid fa-download text-base"></i> Télécharger le visuel (Image PNG)
+            <!-- BOUTON ENREGISTRER / PARTAGER NATIVEMENT -->
+            <button onclick="shareOrSaveInstaImage()" class="w-full brutal-btn py-3 text-xs uppercase font-bold tracking-wider flex items-center justify-center gap-2">
+                <i class="fa-solid fa-share-nodes text-base"></i> Enregistrer dans la galerie / Partager
             </button>
 
             <!-- LÉGENDE INSTAGRAM -->
@@ -456,32 +456,8 @@
         let initialHash = window.location.hash.replace('#', '');
         let currentPage = validTabs.includes(initialHash) ? initialHash : 'accueil';
 
-        // AGENDA : Uniquement les manifestations et actions de lutte
+        // AGENDA : Uniquement les manifestations et actions de lutte à venir (à partir du 16 nov 2026)
         let eventsData = [
-            { 
-                id: 'e1', 
-                day: '14', 
-                month: 'NOV', 
-                year: 2026,
-                time: '13h30', 
-                endTime: '14h00',
-                title: "Vélorution", 
-                type: 'MANIFS', 
-                place: 'Gare de Châteaucreux, Saint-Étienne', 
-                desc: "Randonnée cycliste revendicative pour promouvoir les mobilités douces, l'écologie urbaine et l'aménagement cyclable." 
-            },
-            { 
-                id: 'e2', 
-                day: '14', 
-                month: 'NOV', 
-                year: 2026,
-                time: '14h00', 
-                endTime: '17h00',
-                title: "Manifestation du samedi", 
-                type: 'MANIFS', 
-                place: "Bourse du travail, Saint-Étienne", 
-                desc: "Rassemblement et manifestation contre le permis de tuer." 
-            },
             { 
                 id: 'e3', 
                 day: '17', 
@@ -492,10 +468,22 @@
                 title: "Grève générale", 
                 type: 'MANIFS', 
                 place: "Bourse du Travail, Saint-Étienne", 
-                desc: "Grève générale pour exiger des augmentations de salaires et le financement des services publics" 
+                desc: "Grève générale pour exiger des augmentations de salaires et le financement des services publics." 
             },
             { 
                 id: 'e4', 
+                day: '19', 
+                month: 'NOV', 
+                year: 2026,
+                time: '18h00', 
+                endTime: '20h00',
+                title: "Présentation du programme LFI", 
+                type: 'RÉUNION', 
+                place: "Le lieu rouge, Saint-Étienne", 
+                desc: "Présentation du programme par les jeunes insoumi·es. Moins de 50 personnes." 
+            },
+            { 
+                id: 'e5', 
                 day: '20', 
                 month: 'NOV', 
                 year: 2026,
@@ -505,6 +493,18 @@
                 type: 'SOIRÉE', 
                 place: "MJC des Tilleuls, 8 Rue du pavillon chinois, Saint-Étienne", 
                 desc: "Concerts, table ronde autour du mouvement lycéen. Entrée et cantine à prix libre." 
+            },
+            { 
+                id: 'e6', 
+                day: '21', 
+                month: 'NOV', 
+                year: 2026,
+                time: '10h00', 
+                endTime: '12h00',
+                title: "Matinée d’intégration à la jeunesse communiste", 
+                type: 'RÉUNION', 
+                place: "Le lieu rouge, Saint-Étienne", 
+                desc: "Présentation du fonctionnement de l'organisation. Formation de base sur le marxisme. Repas commun (gratuit)." 
             }
         ];
 
@@ -624,7 +624,6 @@
             if (!ev) return;
             activeInstaEvent = ev;
 
-            // Remplir l'aperçu dans la modale
             $('#insta-prev-type').textContent = ev.type || 'ACTION';
             $('#insta-prev-date').textContent = `${ev.day} ${ev.month} ${ev.year || 2026}`;
             $('#insta-prev-title').textContent = ev.title;
@@ -632,9 +631,7 @@
             $('#insta-prev-place').textContent = ev.place;
             $('#insta-prev-desc').textContent = ev.desc;
 
-            // Générer la légende Instagram type
-            const caption = `🔥 ${ev.title.toUpperCase()} 🔥\n\n🗓️ Date : ${ev.day} ${ev.month} ${ev.year || 2026} à ${ev.time}\n📍 Lieu : ${ev.place}\n\n${ev.desc}\n\nRejoignez le mouvement, restez solidaires et mobilisé·es !\n\n---
-#EnsaseEnLutte #SaintEtienne #ArchitectureEnLutte #MobilisationEtudiante #GreveGenerale #Ensase @ensase_en_lutte`;
+            const caption = `🔥 ${ev.title.toUpperCase()} 🔥\n\n🗓️ Date : ${ev.day} ${ev.month} ${ev.year || 2026} à ${ev.time}\n📍 Lieu : ${ev.place}\n\n${ev.desc}\n\nRejoignez le mouvement, restez solidaires et mobilisé·es !\n\n---\n#EnsaseEnLutte #SaintEtienne #ArchitectureEnLutte #MobilisationEtudiante #Ensase @ensase_en_lutte`;
             
             $('#insta-caption-text').value = caption;
 
@@ -653,45 +650,38 @@
             });
         };
 
-        window.downloadInstaImage = function() {
+        window.shareOrSaveInstaImage = function() {
             if (!activeInstaEvent) return;
             const ev = activeInstaEvent;
 
-            // Canvas HD aux dimensions 1080x1350 (Story / Post vertical)
             const canvas = document.createElement('canvas');
             canvas.width = 1080;
             canvas.height = 1350;
             const ctx = canvas.getContext('2d');
 
-            // Fond noir de l'école/lutte
             ctx.fillStyle = '#121212';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Cadre brutaliste rouge
             ctx.strokeStyle = '#8d211d';
             ctx.lineWidth = 24;
             ctx.strokeRect(12, 12, canvas.width - 24, canvas.height - 24);
 
-            // Étiquette coin supérieur droit
             ctx.fillStyle = '#8d211d';
             ctx.fillRect(canvas.width - 340, 36, 300, 60);
             ctx.fillStyle = '#f4ede4';
             ctx.font = 'bold 24px monospace';
             ctx.fillText('ENSASE EN LUTTE', canvas.width - 325, 75);
 
-            // Badge Type
             ctx.fillStyle = '#f4ede4';
             ctx.fillRect(60, 140, 220, 50);
             ctx.fillStyle = '#121212';
             ctx.font = 'bold 22px sans-serif';
             ctx.fillText((ev.type || 'ACTION').toUpperCase(), 80, 172);
 
-            // Date
             ctx.fillStyle = '#8d211d';
             ctx.font = 'bold 30px monospace';
             ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 60, 245);
 
-            // Titre de l'événement (avec retour automatique à la ligne)
             ctx.fillStyle = '#f4ede4';
             ctx.font = 'bold 64px sans-serif';
             
@@ -712,7 +702,6 @@
             }
             ctx.fillText(line, 60, y);
 
-            // Bloc Heure & Lieu
             y += 60;
             ctx.fillStyle = 'rgba(244, 237, 228, 0.08)';
             ctx.fillRect(60, y, 960, 220);
@@ -720,7 +709,7 @@
             ctx.lineWidth = 2;
             ctx.strokeRect(60, y, 960, 220);
 
-            ctx.fillStyle = '#fbbf24'; // Ambré
+            ctx.fillStyle = '#fbbf24';
             ctx.font = 'bold 32px sans-serif';
             ctx.fillText(`🕒 ${ev.time}${ev.endTime ? ' - ' + ev.endTime : ''}`, 100, y + 70);
 
@@ -728,7 +717,6 @@
             ctx.font = '28px sans-serif';
             ctx.fillText(`📍 ${ev.place}`, 100, y + 145, 880);
 
-            // Description
             y += 280;
             ctx.fillStyle = 'rgba(244, 237, 228, 0.85)';
             ctx.font = '30px sans-serif';
@@ -748,7 +736,6 @@
             }
             ctx.fillText(descLine, 60, descY);
 
-            // Footer du visuel
             ctx.fillStyle = 'rgba(244, 237, 228, 0.6)';
             ctx.font = '24px monospace';
             ctx.fillText('@ensase_en_lutte', 60, canvas.height - 60);
@@ -756,12 +743,28 @@
             ctx.font = 'bold 24px monospace';
             ctx.fillText('#SaintEtienne', canvas.width - 240, canvas.height - 60);
 
-            // Déclenchement du téléchargement
-            const link = document.createElement('a');
-            link.download = `ensase_lutte_${ev.id}_instagram.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            showToast("Visuel Instagram téléchargé !");
+            canvas.toBlob(async (blob) => {
+                const file = new File([blob], `ensase_lutte_${ev.id}.png`, { type: 'image/png' });
+                
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({
+                            files: [file],
+                            title: ev.title,
+                            text: `🔥 ${ev.title} — ${ev.day} ${ev.month}\n\n@ensase_en_lutte`
+                        });
+                        return;
+                    } catch (err) {
+                        if (err.name === 'AbortError') return;
+                    }
+                }
+
+                const link = document.createElement('a');
+                link.download = `ensase_lutte_${ev.id}_instagram.png`;
+                link.href = URL.createObjectURL(blob);
+                link.click();
+                showToast("Visuel téléchargé !");
+            }, 'image/png');
         };
 
         window.actionAddGoogle = function() {
