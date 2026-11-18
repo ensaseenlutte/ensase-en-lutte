@@ -349,7 +349,7 @@
             <h2 class="font-pancarte text-xl font-extrabold text-brand-cream mt-1">PARTAGER EN STORY (9:16)</h2>
             
             <p class="text-xs text-brand-cream/80 leading-relaxed font-light">
-                Visuel vertical optimisé pour les stories Instagram. Enregistre-le dans ta galerie ou partage-le directement.
+                Visuel vertical ultra-impactant optimisé pour les stories Instagram. Enregistre-le dans ta galerie ou partage-le directement.
             </p>
 
             <!-- APERÇU DU VISUEL EN FORMAT STORY (9:16) -->
@@ -362,7 +362,7 @@
                     <div id="insta-prev-date" class="font-mono text-xs text-brand-red font-bold uppercase tracking-wider"></div>
                 </div>
                 <div class="py-2">
-                    <h3 id="insta-prev-title" class="font-pancarte text-lg sm:text-xl font-extrabold text-brand-cream leading-tight"></h3>
+                    <h3 id="insta-prev-title" class="font-pancarte text-base sm:text-lg font-extrabold text-brand-cream leading-tight"></h3>
                 </div>
                 <div class="bg-brand-cream/10 border border-brand-cream/20 p-2 space-y-1 text-xs">
                     <div class="flex items-center gap-2 font-mono text-amber-300">
@@ -638,32 +638,34 @@
             openModal('modal-instagram');
         };
 
-        // Partager le programme complet d'une semaine en Story
+        // Partager le programme complet de la semaine en Story avec la liste des titres et dates
         window.openWeeklyInstagramModal = function(weekName) {
             const weekEvents = eventsData.filter(e => e.weekLabel === weekName);
             if (weekEvents.length === 0) return;
 
             activeInstaEvent = {
-                type: 'PROGRAMME',
+                type: 'PROGRAMME DE LA SEMAINE',
                 day: weekName,
                 month: '',
                 year: 2026,
-                title: `Rendez-vous de la ${weekName}`,
+                isWeekly: true,
+                weekEvents: weekEvents,
+                title: `LES RDV DE LA SEMAINE`,
                 time: `${weekEvents.length} événements`,
                 place: 'Saint-Étienne',
-                desc: weekEvents.map(e => `• ${e.day} ${e.month} (${e.time}) : ${e.title} @ ${e.place}`).join('\n')
+                desc: weekEvents.map(e => `• ${e.day} ${e.month} (${e.time}) : ${e.title}`).join('\n')
             };
 
             $('#insta-prev-type').textContent = 'PROGRAMME HEBDOMADAIRE';
             $('#insta-prev-date').textContent = weekName;
             $('#insta-prev-title').textContent = `PROGRAMME DE LA SEMAINE`;
-            $('#insta-prev-time').textContent = `${weekEvents.length} rdv prévus`;
-            $('#insta-prev-place').textContent = 'Saint-Étienne (Voir détails)';
-            $('#insta-prev-desc').textContent = weekEvents.map(e => `[${e.day} ${e.month} - ${e.time}] ${e.title}`).join(' | ');
+            $('#insta-prev-time').textContent = `${weekEvents.length} rdv de lutte`;
+            $('#insta-prev-place').textContent = 'Saint-Étienne';
+            $('#insta-prev-desc').textContent = weekEvents.map(e => `• ${e.day} ${e.month} (${e.time}) : ${e.title}`).join(' | ');
 
             const caption = `🔥 PROGRAMME DE LA SEMAINE — ${weekName.toUpperCase()} 🔥\n\n` + 
                 weekEvents.map(e => `🗓️ ${e.day} ${e.month} à ${e.time} : ${e.title}\n📍 ${e.place}\n`).join('\n') + 
-                `\n👉 Retrouve tous les détails et les mises à jour sur notre site ! Lien en bio @ensase_en_lutte\n\n---\n#EnsaseEnLutte #SaintEtienne #ArchitectureEnLutte #MobilisationEtudiante #Ensase @ensase_en_lutte`;
+                `\n👉 Retrouve tous les détails sur notre site ! Lien en bio @ensase_en_lutte\n\n---\n#EnsaseEnLutte #SaintEtienne #ArchitectureEnLutte #MobilisationEtudiante #Ensase @ensase_en_lutte`;
 
             $('#insta-caption-text').value = caption;
             openModal('modal-instagram');
@@ -691,113 +693,152 @@
             canvas.height = 1920;
             const ctx = canvas.getContext('2d');
 
+            // Fond noir stylé avec texture visuelle
             ctx.fillStyle = '#121212';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Cadre brutaliste rouge
+            // Cadre brutaliste rouge vif très épais
             ctx.strokeStyle = '#8d211d';
-            ctx.lineWidth = 24;
-            ctx.strokeRect(12, 12, canvas.width - 24, canvas.height - 24);
+            ctx.lineWidth = 32;
+            ctx.strokeRect(16, 16, canvas.width - 32, canvas.height - 32);
 
-            // Badge supérieur
+            // En-tête / Badge "ENSASE EN LUTTE"
             ctx.fillStyle = '#8d211d';
-            ctx.fillRect(canvas.width - 380, 50, 320, 70);
+            ctx.fillRect(canvas.width - 440, 60, 380, 80);
             ctx.fillStyle = '#f4ede4';
-            ctx.font = 'bold 26px monospace';
-            ctx.fillText('ENSASE EN LUTTE', canvas.width - 360, 95);
+            ctx.font = 'bold 30px monospace';
+            ctx.fillText('ENSASE EN LUTTE', canvas.width - 415, 112);
 
-            // Type d'événement
+            // Type d'action / Badge
             ctx.fillStyle = '#f4ede4';
-            ctx.fillRect(80, 180, 340, 60);
+            ctx.fillRect(80, 180, 420, 70);
             ctx.fillStyle = '#121212';
-            ctx.font = 'bold 24px sans-serif';
-            ctx.fillText((ev.type || 'ACTION').toUpperCase(), 105, 220);
+            ctx.font = 'bold 28px sans-serif';
+            ctx.fillText((ev.type || 'ACTION').toUpperCase(), 110, 225);
 
-            // Date
-            ctx.fillStyle = '#8d211d';
-            ctx.font = 'bold 36px monospace';
-            ctx.fillText(`${ev.day} ${ev.month}`.toUpperCase(), 80, 300);
+            // Si c'est la story hebdomadaire avec liste des événements
+            if (ev.isWeekly && ev.weekEvents) {
+                // Titre principal XXL de la semaine
+                ctx.fillStyle = '#fbbf24'; // Jaune ambré percutant
+                ctx.font = 'bold 72px sans-serif';
+                ctx.fillText('PROGRAMME', 80, 340);
+                ctx.fillStyle = '#f4ede4';
+                ctx.fillText('DE LA SEMAINE', 80, 420);
 
-            // Titre de l'événement (Story : typographie XXL)
-            ctx.fillStyle = '#f4ede4';
-            ctx.font = 'bold 68px sans-serif';
-            
-            let words = ev.title.split(' ');
-            let line = '';
-            let y = 430;
-            let maxWidth = 920;
+                let listY = 520;
+                ev.weekEvents.forEach((item, idx) => {
+                    // Boîte pour chaque événement
+                    ctx.fillStyle = 'rgba(244, 237, 228, 0.08)';
+                    ctx.fillRect(80, listY, 920, 210);
+                    ctx.strokeStyle = '#8d211d';
+                    ctx.lineWidth = 3;
+                    ctx.strokeRect(80, listY, 920, 210);
 
-            for(let i = 0; i < words.length; i++) {
-                let testLine = line + words[i] + ' ';
-                if (ctx.measureText(testLine).width > maxWidth && i > 0) {
-                    ctx.fillText(line, 80, y);
-                    line = words[i] + ' ';
-                    y += 85;
-                } else {
-                    line = testLine;
+                    // Date et heure en haut du bloc
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.font = 'bold 32px monospace';
+                    ctx.fillText(`🗓️ ${item.day} ${item.month} — 🕒 ${item.time}`, 120, listY + 55);
+
+                    // Titre de l'événement
+                    ctx.fillStyle = '#f4ede4';
+                    ctx.font = 'bold 38px sans-serif';
+                    ctx.fillText(item.title, 120, listY + 110, 840);
+
+                    // Lieu
+                    ctx.fillStyle = 'rgba(244, 237, 228, 0.75)';
+                    ctx.font = '28px sans-serif';
+                    ctx.fillText(`📍 ${item.place}`, 120, listY + 165, 840);
+
+                    listY += 240;
+                });
+
+            } else {
+                // Story d'un événement unique (ultra percutante)
+                ctx.fillStyle = '#8d211d';
+                ctx.font = 'bold 42px monospace';
+                ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 80, 300);
+
+                // Titre de l'événement (Typographie XXL)
+                ctx.fillStyle = '#f4ede4';
+                ctx.font = 'bold 84px sans-serif';
+                
+                let words = ev.title.split(' ');
+                let line = '';
+                let y = 430;
+                let maxWidth = 920;
+
+                for(let i = 0; i < words.length; i++) {
+                    let testLine = line + words[i] + ' ';
+                    if (ctx.measureText(testLine).width > maxWidth && i > 0) {
+                        ctx.fillText(line, 80, y);
+                        line = words[i] + ' ';
+                        y += 100;
+                    } else {
+                        line = testLine;
+                    }
                 }
-            }
-            ctx.fillText(line, 80, y);
+                ctx.fillText(line, 80, y);
 
-            // Bloc Heure & Lieu (milieu-bas de la story)
-            y += 100;
-            ctx.fillStyle = 'rgba(244, 237, 228, 0.08)';
-            ctx.fillRect(80, y, 920, 260);
-            ctx.strokeStyle = 'rgba(244, 237, 228, 0.2)';
-            ctx.lineWidth = 2;
-            ctx.strokeRect(80, y, 920, 260);
+                // Bloc Heure & Lieu massif
+                y += 100;
+                ctx.fillStyle = 'rgba(244, 237, 228, 0.1)';
+                ctx.fillRect(80, y, 920, 260);
+                ctx.strokeStyle = '#fbbf24';
+                ctx.lineWidth = 3;
+                ctx.strokeRect(80, y, 920, 260);
 
-            ctx.fillStyle = '#fbbf24'; // Ambré
-            ctx.font = 'bold 38px monospace';
-            ctx.fillText(`🕒 ${ev.time}`, 130, y + 85);
+                ctx.fillStyle = '#fbbf24';
+                ctx.font = 'bold 44px monospace';
+                ctx.fillText(`🕒 ${ev.time}`, 130, y + 90);
 
-            ctx.fillStyle = '#f4ede4';
-            ctx.font = '32px sans-serif';
-            ctx.fillText(`📍 ${ev.place}`, 130, y + 175, 820);
+                ctx.fillStyle = '#f4ede4';
+                ctx.font = '36px sans-serif';
+                ctx.fillText(`📍 ${ev.place}`, 130, y + 180, 820);
 
-            // Description
-            y += 300;
-            ctx.fillStyle = 'rgba(244, 237, 228, 0.85)';
-            ctx.font = '32px sans-serif';
-            
-            let descWords = (ev.desc || '').split(' ');
-            let descLine = '';
-            let descY = y;
-            for(let i = 0; i < descWords.length; i++) {
-                let testLine = descLine + descWords[i] + ' ';
-                if (ctx.measureText(testLine).width > maxWidth && i > 0) {
-                    ctx.fillText(descLine, 80, descY);
-                    descLine = descWords[i] + ' ';
-                    descY += 45;
-                } else {
-                    descLine = testLine;
+                // Description courte
+                y += 310;
+                ctx.fillStyle = 'rgba(244, 237, 228, 0.85)';
+                ctx.font = '34px sans-serif';
+                
+                let descWords = (ev.desc || '').split(' ');
+                let descLine = '';
+                let descY = y;
+                for(let i = 0; i < descWords.length; i++) {
+                    let testLine = descLine + descWords[i] + ' ';
+                    if (ctx.measureText(testLine).width > maxWidth && i > 0) {
+                        ctx.fillText(descLine, 80, descY);
+                        descLine = descWords[i] + ' ';
+                        descY += 50;
+                    } else {
+                        descLine = testLine;
+                    }
                 }
+                ctx.fillText(descLine, 80, descY);
             }
-            ctx.fillText(descLine, 80, descY);
 
-            // BANDEAU EXPLICITE INCITANT À ALLER SUR LE SITE (Lien en bio Instagram)
-            const bannerY = canvas.height - 220;
+            // BANDEAU INCITATIF BAS (Lien en bio Instagram)
+            const bannerY = canvas.height - 240;
             ctx.fillStyle = '#8d211d';
-            ctx.fillRect(80, bannerY, 920, 110);
-            ctx.strokeStyle = '#f4ede4';
-            ctx.lineWidth = 3;
-            ctx.strokeRect(80, bannerY, 920, 110);
+            ctx.fillRect(80, bannerY, 920, 120);
+            ctx.strokeStyle = '#fbbf24';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(80, bannerY, 920, 120);
 
             ctx.fillStyle = '#fbbf24';
-            ctx.font = 'bold 34px sans-serif';
-            ctx.fillText('👉 + D\'INFOS SUR LE SITE', 120, bannerY + 45);
+            ctx.font = 'bold 38px sans-serif';
+            ctx.fillText('👉 + D\'INFOS SUR LE SITE', 120, bannerY + 50);
 
             ctx.fillStyle = '#f4ede4';
-            ctx.font = 'bold 28px monospace';
-            ctx.fillText('Lien en bio Instagram @ensase_en_lutte', 120, bannerY + 88);
+            ctx.font = 'bold 30px monospace';
+            ctx.fillText('Lien en bio Instagram @ensase_en_lutte', 120, bannerY + 95);
 
-            // Footer de la Story
+            // Footer minimaliste de la Story
             ctx.fillStyle = 'rgba(244, 237, 228, 0.6)';
-            ctx.font = '26px monospace';
-            ctx.fillText('@ensase_en_lutte', 80, canvas.height - 50);
+            ctx.font = '28px monospace';
+            ctx.fillText('@ensase_en_lutte', 80, canvas.height - 60);
             ctx.fillStyle = '#8d211d';
-            ctx.font = 'bold 26px monospace';
-            ctx.fillText('#SaintEtienne', canvas.width - 280, canvas.height - 50);
+            ctx.font = 'bold 28px monospace';
+            ctx.fillText('#SaintEtienne', canvas.width - 320, canvas.height - 60);
 
             canvas.toBlob(async (blob) => {
                 const file = new File([blob], `ensase_story_${ev.id || 'semaine'}.png`, { type: 'image/png' });
