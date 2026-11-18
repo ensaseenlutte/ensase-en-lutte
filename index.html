@@ -454,20 +454,8 @@
         let initialHash = window.location.hash.replace('#', '');
         let currentPage = validTabs.includes(initialHash) ? initialHash : 'accueil';
 
-        // AGENDA : Événements à venir (à partir du 18 nov 2026)
+        // AGENDA : Événements triés strictement par ordre chronologique
         let eventsData = [
-            { 
-                id: 'e3', 
-                day: '20-22', 
-                month: 'NOV', 
-                year: 2026,
-                weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: 'Toute la période', 
-                title: "Mobilisation européenne contre la vie chère", 
-                type: 'MOBILISATION', 
-                place: "Europe / Saint-Étienne (à suivre)", 
-                desc: "Syndicats, Gilets jaunes et associations de sept pays appellent à manifester contre la vie chère, pour les salaires et le contrôle des prix. Modalités locales à Saint-Étienne à suivre." 
-            },
             { 
                 id: 'e4', 
                 day: '19', 
@@ -479,6 +467,18 @@
                 type: 'RÉUNION', 
                 place: "Le lieu rouge, Saint-Étienne", 
                 desc: "Présentation du programme par les jeunes insoumi·es." 
+            },
+            { 
+                id: 'e3', 
+                day: '20-22', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 16 au 22 novembre 2026',
+                time: 'Infos à venir', 
+                title: "Mobilisation européenne contre la vie chère", 
+                type: 'MOBILISATION', 
+                place: "Europe / Saint-Étienne (à suivre)", 
+                desc: "Syndicats, Gilets jaunes et associations de sept pays appellent à manifester contre la vie chère, pour les salaires et le contrôle des prix. Modalités locales à Saint-Étienne à suivre." 
             },
             { 
                 id: 'e5', 
@@ -648,7 +648,7 @@
             openModal('modal-instagram');
         };
 
-        // Partager le programme complet de la semaine avec gros titre "PLANNING DE LA SEMAINE" en haut et centrage parfait
+        // Partager le programme complet de la semaine
         window.openWeeklyInstagramModal = function(weekName) {
             const weekEvents = eventsData.filter(e => e.weekLabel === weekName);
             if (weekEvents.length === 0) return;
@@ -732,23 +732,25 @@
                 let spacing = Math.min(230, Math.floor((1300 - (ev.weekEvents.length * 90)) / ev.weekEvents.length) + 90);
 
                 ev.weekEvents.forEach((item, idx) => {
-                    // Numéro de jour à gauche
+                    // Date ou plage de dates à gauche avec gestion de la largeur pour éviter les superpositions (ex: "20-22")
                     ctx.fillStyle = '#f4ede4';
-                    ctx.font = 'bold 95px sans-serif';
+                    // Si la date est longue (ex: 20-22), on réduit légèrement la police pour qu'elle tienne bien
+                    let dateFontSize = item.day.length > 3 ? 75 : 95;
+                    ctx.font = `bold ${dateFontSize}px sans-serif`;
                     ctx.fillText(item.day, 80, currentY + 80);
 
-                    // Infos sur la droite (Heure, Titre, Lieu)
+                    // Infos sur la droite (Heure, Titre, Lieu) décalées à 340px pour laisser de la marge au "20-22"
                     ctx.fillStyle = '#fbbf24';
                     ctx.font = 'bold 24px monospace';
-                    ctx.fillText(`🕒 ${item.time}`, 270, currentY + 25);
+                    ctx.fillText(`🕒 ${item.time}`, 340, currentY + 28);
 
                     ctx.fillStyle = '#f4ede4';
                     ctx.font = 'bold 28px sans-serif';
-                    ctx.fillText(item.title, 270, currentY + 62, 730);
+                    ctx.fillText(item.title, 340, currentY + 68, 660);
 
                     ctx.fillStyle = 'rgba(244, 237, 228, 0.8)';
                     ctx.font = '22px sans-serif';
-                    ctx.fillText(`📍 ${item.place}`, 270, currentY + 98, 730);
+                    ctx.fillText(`📍 ${item.place}`, 340, currentY + 104, 660);
 
                     currentY += spacing;
 
@@ -766,7 +768,7 @@
                 });
 
             } else {
-                // Story d'un événement unique avec description complète pour combler le vide
+                // Story d'un événement unique avec description complète
                 ctx.fillStyle = '#f4ede4';
                 ctx.font = 'bold 42px monospace';
                 ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 80, 180);
@@ -806,7 +808,7 @@
                 ctx.font = '32px sans-serif';
                 ctx.fillText(`📍 ${ev.place}`, 130, y + 150, 820);
 
-                // Ajout de la description complète pour combler le vide du dessous
+                // Description complète pour combler le vide du dessous
                 y += 270;
                 ctx.fillStyle = '#f4ede4';
                 ctx.font = '32px sans-serif';
@@ -974,7 +976,7 @@
                             <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                 <div>
                                     <div class="flex justify-between items-start mb-3">
-                                        <div class="bg-brand-red text-white text-xs font-mono font-black px-3 py-1.5 border border-brand-cream uppercase tracking-wider shadow">
+                                        <div class="bg-brand-red text-white text-[11px] font-mono font-bold px-2.5 py-1 border border-brand-cream uppercase tracking-wide">
                                             🗓️ ${e.day} ${e.month} · 🕒 ${e.time}
                                         </div>
                                         <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
@@ -1050,7 +1052,7 @@
                                     <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                         <div>
                                             <div class="flex justify-between items-start mb-3">
-                                                <div class="bg-brand-red text-white text-xs font-mono font-black px-3 py-1.5 border border-brand-cream uppercase tracking-wider shadow">
+                                                <div class="bg-brand-red text-white text-[11px] font-mono font-bold px-2.5 py-1 border border-brand-cream uppercase tracking-wide">
                                                     🗓️ ${e.day} ${e.month} · 🕒 ${e.time}
                                                 </div>
                                                 <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
