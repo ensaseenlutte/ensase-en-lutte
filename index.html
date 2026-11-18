@@ -656,7 +656,7 @@
                 desc: weekEvents.map(e => `• ${e.day} ${e.month} (${e.time}) : ${e.title}`).join('\n')
             };
 
-            $('#insta-prev-type').textContent = 'UPCOMING EVENTS';
+            $('#insta-prev-type').textContent = 'PROGRAMME DE LA SEMAINE';
             $('#insta-prev-date').textContent = weekName;
             $('#insta-prev-title').textContent = `PROGRAMME DE LA SEMAINE`;
             $('#insta-prev-time').textContent = `${weekEvents.length} rdv de lutte`;
@@ -697,13 +697,13 @@
             ctx.fillStyle = '#7a2219';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Si c'est le planning hebdomadaire style "Upcoming Events"
+            // Si c'est le planning hebdomadaire style "Programme de la semaine"
             if (ev.isWeekly && ev.weekEvents) {
-                // En-tête : UPCOMING EVENTS à gauche, Mois/Nom de la semaine en grand à droite
+                // En-tête : PROGRAMME DE LA SEMAINE à gauche, Mois en grand à droite
                 ctx.fillStyle = '#f4ede4';
                 ctx.font = 'bold 36px sans-serif';
-                ctx.fillText('UPCOMING', 80, 120);
-                ctx.fillText('EVENTS', 80, 165);
+                ctx.fillText('PROGRAMME', 80, 120);
+                ctx.fillText('DE LA SEMAINE', 80, 165);
 
                 ctx.font = 'bold 72px sans-serif';
                 ctx.textAlign = 'right';
@@ -719,43 +719,44 @@
                 ctx.stroke();
 
                 let currentY = 250;
+                let spacing = Math.min(240, Math.floor((1350 - (ev.weekEvents.length * 100)) / ev.weekEvents.length) + 100);
+
                 ev.weekEvents.forEach((item, idx) => {
-                    // Numéro de jour immense à gauche (style MAAP / calendrier minimaliste)
+                    // Numéro de jour immense à gauche
                     ctx.fillStyle = '#f4ede4';
-                    ctx.font = 'bold 130px sans-serif';
-                    ctx.fillText(item.day, 80, currentY + 110);
+                    ctx.font = 'bold 120px sans-serif';
+                    ctx.fillText(item.day, 80, currentY + 95);
 
                     // Infos sur la droite (Heure, Titre, Lieu)
                     ctx.fillStyle = '#fbbf24'; // Jaune ambré pour l'heure
                     ctx.font = 'bold 28px monospace';
-                    ctx.fillText(`🕒 ${item.time}`, 320, currentY + 35);
+                    ctx.fillText(`🕒 ${item.time}`, 300, currentY + 30);
 
                     ctx.fillStyle = '#f4ede4';
-                    ctx.font = 'bold 32px sans-serif';
-                    // Gestion multiligne pour le titre si nécessaire
-                    ctx.fillText(item.title, 320, currentY + 75, 680);
+                    ctx.font = 'bold 30px sans-serif';
+                    ctx.fillText(item.title, 300, currentY + 70, 700);
 
                     ctx.fillStyle = 'rgba(244, 237, 228, 0.8)';
                     ctx.font = '24px sans-serif';
-                    ctx.fillText(`📍 ${item.place}`, 320, currentY + 115, 680);
+                    ctx.fillText(`📍 ${item.place}`, 300, currentY + 110, 700);
 
-                    currentY += 150;
+                    currentY += spacing;
 
-                    // Ligne pointillée / fine de séparation entre chaque événement
+                    // Ligne pointillée de séparation entre chaque événement
                     ctx.strokeStyle = 'rgba(244, 237, 228, 0.3)';
                     ctx.lineWidth = 2;
                     ctx.setLineDash([6, 6]);
                     ctx.beginPath();
-                    ctx.moveTo(80, currentY + 10);
-                    ctx.lineTo(canvas.width - 80, currentY + 10);
+                    ctx.moveTo(80, currentY);
+                    ctx.lineTo(canvas.width - 80, currentY);
                     ctx.stroke();
                     ctx.setLineDash([]); // reset dash
 
-                    currentY += 40;
+                    currentY += 30;
                 });
 
             } else {
-                // Story d'un événement unique (Design brut de décoffrage)
+                // Story d'un événement unique
                 ctx.fillStyle = '#f4ede4';
                 ctx.font = 'bold 42px monospace';
                 ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 80, 200);
@@ -797,28 +798,28 @@
             }
 
             // BANDEAU INCITATIF BAS (Lien en bio Instagram)
-            const bannerY = canvas.height - 220;
+            const bannerY = canvas.height - 200;
             ctx.fillStyle = '#121212';
-            ctx.fillRect(80, bannerY, 920, 110);
+            ctx.fillRect(80, bannerY, 920, 100);
             ctx.strokeStyle = '#fbbf24';
             ctx.lineWidth = 3;
-            ctx.strokeRect(80, bannerY, 920, 110);
+            ctx.strokeRect(80, bannerY, 920, 100);
 
             ctx.fillStyle = '#fbbf24';
-            ctx.font = 'bold 34px sans-serif';
-            ctx.fillText('👉 + D\'INFOS SUR LE SITE', 120, bannerY + 42);
+            ctx.font = 'bold 32px sans-serif';
+            ctx.fillText('👉 + D\'INFOS SUR LE SITE', 110, bannerY + 38);
 
             ctx.fillStyle = '#f4ede4';
-            ctx.font = 'bold 28px monospace';
-            ctx.fillText('Lien en bio Instagram @ensase_en_lutte', 120, bannerY + 85);
+            ctx.font = 'bold 26px monospace';
+            ctx.fillText('Lien en bio Instagram @ensase_en_lutte', 110, bannerY + 76);
 
             // Footer minimaliste de la Story
             ctx.fillStyle = 'rgba(244, 237, 228, 0.7)';
             ctx.font = '26px monospace';
-            ctx.fillText('ENSASE EN LUTTE', 80, canvas.height - 60);
+            ctx.fillText('ENSASE EN LUTTE', 80, canvas.height - 50);
             ctx.fillStyle = '#fbbf24';
             ctx.font = 'bold 26px monospace';
-            ctx.fillText('#SaintEtienne', canvas.width - 280, canvas.height - 60);
+            ctx.fillText('#SaintEtienne', canvas.width - 280, canvas.height - 50);
 
             canvas.toBlob(async (blob) => {
                 const file = new File([blob], `ensase_story_${ev.id || 'semaine'}.png`, { type: 'image/png' });
@@ -943,7 +944,9 @@
                             <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                 <div>
                                     <div class="flex justify-between items-start mb-3">
-                                        <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 uppercase">${e.day} ${e.month} · ${e.time}</span>
+                                        <div class="bg-brand-red text-white text-xs font-mono font-black px-3 py-1 border border-brand-cream uppercase tracking-wider shadow">
+                                            🗓️ ${e.day} ${e.month} · 🕒 ${e.time}
+                                        </div>
                                         <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
                                     </div>
                                     <h3 class="font-pancarte text-base font-bold text-brand-cream mb-1.5">${esc(e.title)}</h3>
@@ -1017,7 +1020,9 @@
                                     <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                         <div>
                                             <div class="flex justify-between items-start mb-3">
-                                                <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 uppercase">${e.day} ${e.month} · ${e.time}</span>
+                                                <div class="bg-brand-red text-white text-xs font-mono font-black px-3 py-1 border border-brand-cream uppercase tracking-wider shadow">
+                                                    🗓️ ${e.day} ${e.month} · 🕒 ${e.time}
+                                                </div>
                                                 <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
                                             </div>
                                             <h4 class="font-pancarte text-base font-bold text-brand-cream mb-1.5">${esc(e.title)}</h4>
