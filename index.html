@@ -165,13 +165,13 @@
     <div class="bg-brand-red text-brand-cream border-b-2 border-brand-cream overflow-hidden select-none z-50 fixed top-0 left-0 right-0 w-full"
          style="padding-top: max(16px, calc(10px + env(safe-area-inset-top))); padding-bottom: 9px;">
         <div class="animate-ticker font-pancarte text-[11px] tracking-wider uppercase">
-            <span class="mx-4">🔥 MARDI 17/11 À 10H30 : GRÈVE GÉNÉRALE</span>
+            <span class="mx-4">✊ JEUDI 19/11 À 18H00 : PRÉSENTATION DU PROGRAMME LFI (@LIEU.ROUGE)</span>
+            <span class="mx-4">·</span>
+            <span class="mx-4">🔥 LUNDI 23/11 À 18H00 : AG & PROJECTION "UN PAYS QUI SE TIENT SAGE" (@MÉLIÈS SAINT-FRANÇOIS)</span>
             <span class="mx-4">·</span>
             <span class="mx-4">✊ JEUDI 19/11 À 18H00 : PRÉSENTATION DU PROGRAMME LFI (@LIEU.ROUGE)</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🔥 MARDI 17/11 À 10H30 : GRÈVE GÉNÉRALE</span>
-            <span class="mx-4">·</span>
-            <span class="mx-4">✊ JEUDI 19/11 À 18H00 : PRÉSENTATION DU PROGRAMME LFI (@LIEU.ROUGE)</span>
+            <span class="mx-4">🔥 LUNDI 23/11 À 18H00 : AG & PROJECTION "UN PAYS QUI SE TIENT SAGE" (@MÉLIÈS SAINT-FRANÇOIS)</span>
             <span class="mx-4">·</span>
         </div>
     </div>
@@ -456,19 +456,8 @@
         let initialHash = window.location.hash.replace('#', '');
         let currentPage = validTabs.includes(initialHash) ? initialHash : 'accueil';
 
-        // AGENDA : Événements à venir (à partir du 16 nov 2026, sans horaires de fin)
+        // AGENDA : Événements à venir (à partir du 18 nov 2026)
         let eventsData = [
-            { 
-                id: 'e3', 
-                day: '17', 
-                month: 'NOV', 
-                year: 2026,
-                time: '10h30', 
-                title: "Grève générale", 
-                type: 'MANIFS', 
-                place: "Bourse du Travail, Saint-Étienne", 
-                desc: "Grève générale pour exiger des augmentations de salaires et le financement des services publics." 
-            },
             { 
                 id: 'e4', 
                 day: '19', 
@@ -501,6 +490,17 @@
                 type: 'RÉUNION', 
                 place: "Le lieu rouge, Saint-Étienne", 
                 desc: "Présentation du fonctionnement de l'organisation. Formation de base sur le marxisme. Repas commun (gratuit)." 
+            },
+            { 
+                id: 'e7', 
+                day: '23', 
+                month: 'NOV', 
+                year: 2026,
+                time: '18h00', 
+                title: "Assemblée Générale & Projection : Un pays qui se tient sage", 
+                type: 'AG & CINÉ', 
+                place: "Le Méliès Saint-François, 8 Rue de la Valse, Saint-Étienne", 
+                desc: "Assemblée générale à 18h suivie à 19h de la projection du film 'Un pays qui se tient sage' et d'une discussion sur 'le monopole de la violence légitime'. Entrée prix libre reversée aux caisses de soutien lycéennes (gratuit pour les lycéen·nes et étudiant·es)." 
             }
         ];
 
