@@ -366,16 +366,16 @@
                 </div>
                 <div class="bg-brand-cream/10 border border-brand-cream/20 p-2 space-y-1 text-xs">
                     <div class="flex items-center gap-2 font-mono text-amber-300">
-                        <i class="fa-solid fa-clock"></i> <span id="insta-prev-time"></span>
+                        <i class="fa-solid fa-clock"></i> <span id="insta-prev-time" class="font-mono"></span>
                     </div>
                     <div class="flex items-center gap-2 text-brand-cream/90">
                         <i class="fa-solid fa-location-dot text-brand-red"></i> <span id="insta-prev-place"></span>
                     </div>
                 </div>
                 <p id="insta-prev-desc" class="text-[10px] text-brand-cream/80 line-clamp-3 font-light leading-relaxed"></p>
-                <div class="pt-2 border-t border-brand-cream/20 flex justify-between items-center text-[10px] font-mono text-brand-cream/70">
-                    <span>@ensase_en_lutte</span>
-                    <span class="text-brand-red font-bold">#SaintEtienne</span>
+                <div class="pt-2 border-t border-brand-cream/20 flex flex-col text-[10px] font-mono text-brand-cream/90">
+                    <span class="text-amber-300 font-bold">👉 + D'INFOS SUR LE SITE</span>
+                    <span class="text-brand-cream/70">Lien en bio Instagram @ensase_en_lutte</span>
                 </div>
             </div>
 
@@ -463,6 +463,7 @@
                 day: '19', 
                 month: 'NOV', 
                 year: 2026,
+                weekLabel: 'Semaine du 16 au 22 novembre 2026',
                 time: '18h00', 
                 title: "Présentation du programme LFI", 
                 type: 'RÉUNION', 
@@ -474,6 +475,7 @@
                 day: '20', 
                 month: 'NOV', 
                 year: 2026,
+                weekLabel: 'Semaine du 16 au 22 novembre 2026',
                 time: '19h00', 
                 title: "Soirée de soutien à l'assemblée lycéenne", 
                 type: 'SOIRÉE', 
@@ -485,6 +487,7 @@
                 day: '21', 
                 month: 'NOV', 
                 year: 2026,
+                weekLabel: 'Semaine du 16 au 22 novembre 2026',
                 time: '10h00', 
                 title: "Matinée d’intégration à la jeunesse communiste", 
                 type: 'RÉUNION', 
@@ -496,6 +499,7 @@
                 day: '23', 
                 month: 'NOV', 
                 year: 2026,
+                weekLabel: 'Semaine du 23 au 29 novembre 2026',
                 time: '18h00', 
                 title: "Assemblée Générale & Projection : Un pays qui se tient sage", 
                 type: 'AG & CINÉ', 
@@ -627,10 +631,41 @@
             $('#insta-prev-place').textContent = ev.place;
             $('#insta-prev-desc').textContent = ev.desc;
 
-            const caption = `🔥 ${ev.title.toUpperCase()} 🔥\n\n🗓️ Date : ${ev.day} ${ev.month} ${ev.year || 2026} à ${ev.time}\n📍 Lieu : ${ev.place}\n\n${ev.desc}\n\nRejoignez le mouvement, restez solidaires et mobilisé·es !\n\n---\n#EnsaseEnLutte #SaintEtienne #ArchitectureEnLutte #MobilisationEtudiante #Ensase @ensase_en_lutte`;
+            const caption = `🔥 ${ev.title.toUpperCase()} 🔥\n\n🗓️ Date : ${ev.day} ${ev.month} ${ev.year || 2026} à ${ev.time}\n📍 Lieu : ${ev.place}\n\n${ev.desc}\n\n👉 + d'infos et tous les rendez-vous sur le site ! Lien en bio @ensase_en_lutte\n\n---\n#EnsaseEnLutte #SaintEtienne #ArchitectureEnLutte #MobilisationEtudiante #Ensase @ensase_en_lutte`;
             
             $('#insta-caption-text').value = caption;
 
+            openModal('modal-instagram');
+        };
+
+        // Partager le programme complet d'une semaine en Story
+        window.openWeeklyInstagramModal = function(weekName) {
+            const weekEvents = eventsData.filter(e => e.weekLabel === weekName);
+            if (weekEvents.length === 0) return;
+
+            activeInstaEvent = {
+                type: 'PROGRAMME',
+                day: weekName,
+                month: '',
+                year: 2026,
+                title: `Rendez-vous de la ${weekName}`,
+                time: `${weekEvents.length} événements`,
+                place: 'Saint-Étienne',
+                desc: weekEvents.map(e => `• ${e.day} ${e.month} (${e.time}) : ${e.title} @ ${e.place}`).join('\n')
+            };
+
+            $('#insta-prev-type').textContent = 'PROGRAMME HEBDOMADAIRE';
+            $('#insta-prev-date').textContent = weekName;
+            $('#insta-prev-title').textContent = `PROGRAMME DE LA SEMAINE`;
+            $('#insta-prev-time').textContent = `${weekEvents.length} rdv prévus`;
+            $('#insta-prev-place').textContent = 'Saint-Étienne (Voir détails)';
+            $('#insta-prev-desc').textContent = weekEvents.map(e => `[${e.day} ${e.month} - ${e.time}] ${e.title}`).join(' | ');
+
+            const caption = `🔥 PROGRAMME DE LA SEMAINE — ${weekName.toUpperCase()} 🔥\n\n` + 
+                weekEvents.map(e => `🗓️ ${e.day} ${e.month} à ${e.time} : ${e.title}\n📍 ${e.place}\n`).join('\n') + 
+                `\n👉 Retrouve tous les détails et les mises à jour sur notre site ! Lien en bio @ensase_en_lutte\n\n---\n#EnsaseEnLutte #SaintEtienne #ArchitectureEnLutte #MobilisationEtudiante #Ensase @ensase_en_lutte`;
+
+            $('#insta-caption-text').value = caption;
             openModal('modal-instagram');
         };
 
@@ -673,19 +708,19 @@
 
             // Type d'événement
             ctx.fillStyle = '#f4ede4';
-            ctx.fillRect(80, 180, 260, 60);
+            ctx.fillRect(80, 180, 340, 60);
             ctx.fillStyle = '#121212';
-            ctx.font = 'bold 26px sans-serif';
+            ctx.font = 'bold 24px sans-serif';
             ctx.fillText((ev.type || 'ACTION').toUpperCase(), 105, 220);
 
             // Date
             ctx.fillStyle = '#8d211d';
             ctx.font = 'bold 36px monospace';
-            ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 80, 300);
+            ctx.fillText(`${ev.day} ${ev.month}`.toUpperCase(), 80, 300);
 
             // Titre de l'événement (Story : typographie XXL)
             ctx.fillStyle = '#f4ede4';
-            ctx.font = 'bold 76px sans-serif';
+            ctx.font = 'bold 68px sans-serif';
             
             let words = ev.title.split(' ');
             let line = '';
@@ -697,7 +732,7 @@
                 if (ctx.measureText(testLine).width > maxWidth && i > 0) {
                     ctx.fillText(line, 80, y);
                     line = words[i] + ' ';
-                    y += 95;
+                    y += 85;
                 } else {
                     line = testLine;
                 }
@@ -705,7 +740,7 @@
             ctx.fillText(line, 80, y);
 
             // Bloc Heure & Lieu (milieu-bas de la story)
-            y += 120;
+            y += 100;
             ctx.fillStyle = 'rgba(244, 237, 228, 0.08)';
             ctx.fillRect(80, y, 920, 260);
             ctx.strokeStyle = 'rgba(244, 237, 228, 0.2)';
@@ -713,17 +748,17 @@
             ctx.strokeRect(80, y, 920, 260);
 
             ctx.fillStyle = '#fbbf24'; // Ambré
-            ctx.font = 'bold 40px sans-serif';
+            ctx.font = 'bold 38px monospace';
             ctx.fillText(`🕒 ${ev.time}`, 130, y + 85);
 
             ctx.fillStyle = '#f4ede4';
-            ctx.font = '34px sans-serif';
+            ctx.font = '32px sans-serif';
             ctx.fillText(`📍 ${ev.place}`, 130, y + 175, 820);
 
             // Description
-            y += 330;
+            y += 300;
             ctx.fillStyle = 'rgba(244, 237, 228, 0.85)';
-            ctx.font = '36px sans-serif';
+            ctx.font = '32px sans-serif';
             
             let descWords = (ev.desc || '').split(' ');
             let descLine = '';
@@ -733,30 +768,46 @@
                 if (ctx.measureText(testLine).width > maxWidth && i > 0) {
                     ctx.fillText(descLine, 80, descY);
                     descLine = descWords[i] + ' ';
-                    descY += 50;
+                    descY += 45;
                 } else {
                     descLine = testLine;
                 }
             }
             ctx.fillText(descLine, 80, descY);
 
+            // BANDEAU EXPLICITE INCITANT À ALLER SUR LE SITE (Lien en bio Instagram)
+            const bannerY = canvas.height - 220;
+            ctx.fillStyle = '#8d211d';
+            ctx.fillRect(80, bannerY, 920, 110);
+            ctx.strokeStyle = '#f4ede4';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(80, bannerY, 920, 110);
+
+            ctx.fillStyle = '#fbbf24';
+            ctx.font = 'bold 34px sans-serif';
+            ctx.fillText('👉 + D\'INFOS SUR LE SITE', 120, bannerY + 45);
+
+            ctx.fillStyle = '#f4ede4';
+            ctx.font = 'bold 28px monospace';
+            ctx.fillText('Lien en bio Instagram @ensase_en_lutte', 120, bannerY + 88);
+
             // Footer de la Story
             ctx.fillStyle = 'rgba(244, 237, 228, 0.6)';
-            ctx.font = '28px monospace';
-            ctx.fillText('@ensase_en_lutte', 80, canvas.height - 80);
+            ctx.font = '26px monospace';
+            ctx.fillText('@ensase_en_lutte', 80, canvas.height - 50);
             ctx.fillStyle = '#8d211d';
-            ctx.font = 'bold 28px monospace';
-            ctx.fillText('#SaintEtienne', canvas.width - 300, canvas.height - 80);
+            ctx.font = 'bold 26px monospace';
+            ctx.fillText('#SaintEtienne', canvas.width - 280, canvas.height - 50);
 
             canvas.toBlob(async (blob) => {
-                const file = new File([blob], `ensase_story_${ev.id}.png`, { type: 'image/png' });
+                const file = new File([blob], `ensase_story_${ev.id || 'semaine'}.png`, { type: 'image/png' });
                 
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     try {
                         await navigator.share({
                             files: [file],
                             title: ev.title,
-                            text: `🔥 ${ev.title} — ${ev.day} ${ev.month}\n\n@ensase_en_lutte`
+                            text: `🔥 ${ev.title} — ${ev.day}\n\n👉 + d'infos sur le site ! Lien en bio @ensase_en_lutte`
                         });
                         return;
                     } catch (err) {
@@ -765,7 +816,7 @@
                 }
 
                 const link = document.createElement('a');
-                link.download = `ensase_story_${ev.id}.png`;
+                link.download = `ensase_story_${ev.id || 'semaine'}.png`;
                 link.href = URL.createObjectURL(blob);
                 link.click();
                 showToast("Story Instagram téléchargée !");
@@ -914,44 +965,62 @@
         }
 
         function renderAgenda() {
+            const weeksMap = {};
+            eventsData.forEach(e => {
+                const w = e.weekLabel || 'Autres événements';
+                if (!weeksMap[w]) weeksMap[w] = [];
+                weeksMap[w].push(e);
+            });
+
             return `
                 <div class="max-w-6xl mx-auto mb-12 px-2">
                     <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
                         <div>
                             <span class="text-brand-red font-mono text-xs uppercase tracking-widest font-bold">/// Manifestations & Actions</span>
                             <h2 class="font-pancarte text-3xl sm:text-4xl font-extrabold text-brand-cream mt-1">AGENDA DE LA LUTTE</h2>
-                            <p class="text-xs text-brand-cream/70 mt-1">Cet agenda répertorie exclusivement les manifestations et actions militantes de rue.</p>
+                            <p class="text-xs text-brand-cream/70 mt-1">Classé par semaine pour suivre et relayer les mobilisations.</p>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        ${eventsData.map(e => `
-                            <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
-                                <div>
-                                    <div class="flex justify-between items-start mb-3">
-                                        <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 uppercase">${e.day} ${e.month} · ${e.time}</span>
-                                        <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
-                                    </div>
-                                    <h3 class="font-pancarte text-base font-bold text-brand-cream mb-1.5">${esc(e.title)}</h3>
-                                    <p class="text-xs text-brand-cream/80 mb-3 leading-relaxed">${esc(e.desc)}</p>
-                                </div>
-                                <div class="pt-3 border-t border-brand-cream/20 flex justify-between items-center">
-                                    <span class="text-[9px] font-mono text-brand-red font-semibold">${e.type}</span>
-                                    <div class="flex items-center gap-2">
-                                        <button onclick="openInstagramModal('${e.id}')" class="text-xs bg-brand-red text-brand-cream font-bold px-2.5 py-1 border border-brand-cream hover:bg-brand-lightred flex items-center">
-                                            <i class="fa-brands fa-instagram mr-1"></i> Story
-                                        </button>
-                                        <button onclick="openCalendarModal('${e.id}')" class="text-xs bg-brand-cream text-brand-black font-bold px-2.5 py-1 border border-brand-red hover:bg-white flex items-center">
-                                            <i class="fa-solid fa-plus mr-1"></i> Agenda
-                                        </button>
-                                    </div>
-                                </div>
+                    ${Object.entries(weeksMap).map(([weekName, weekEvents]) => `
+                        <div class="mb-10 space-y-4">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-brand-red pb-2 gap-2">
+                                <h3 class="font-pancarte text-lg sm:text-xl text-amber-300 uppercase">${esc(weekName)}</h3>
+                                <button onclick="openWeeklyInstagramModal('${esc(weekName)}')" class="text-xs bg-brand-red text-brand-cream font-bold px-3 py-1.5 border border-brand-cream hover:bg-brand-lightred flex items-center gap-1.5 w-fit">
+                                    <i class="fa-brands fa-instagram"></i> Partager le programme de la semaine en story
+                                </button>
                             </div>
-                        `).join('')}
-                    </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                ${weekEvents.map(e => `
+                                    <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
+                                        <div>
+                                            <div class="flex justify-between items-start mb-3">
+                                                <span class="bg-brand-red text-white text-[9px] font-bold px-2 py-0.5 uppercase">${e.day} ${e.month} · ${e.time}</span>
+                                                <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
+                                            </div>
+                                            <h4 class="font-pancarte text-base font-bold text-brand-cream mb-1.5">${esc(e.title)}</h4>
+                                            <p class="text-xs text-brand-cream/80 mb-3 leading-relaxed">${esc(e.desc)}</p>
+                                        </div>
+                                        <div class="pt-3 border-t border-brand-cream/20 flex justify-between items-center">
+                                            <span class="text-[9px] font-mono text-brand-red font-semibold">${e.type}</span>
+                                            <div class="flex items-center gap-2">
+                                                <button onclick="openInstagramModal('${e.id}')" class="text-xs bg-brand-red text-brand-cream font-bold px-2.5 py-1 border border-brand-cream hover:bg-brand-lightred flex items-center">
+                                                    <i class="fa-brands fa-instagram mr-1"></i> Story
+                                                </button>
+                                                <button onclick="openCalendarModal('${e.id}')" class="text-xs bg-brand-cream text-brand-black font-bold px-2.5 py-1 border border-brand-red hover:bg-white flex items-center">
+                                                    <i class="fa-solid fa-plus mr-1"></i> Agenda
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
 
                     <!-- LIEN VERS LE PLANNING OFFICIEL EENSASE -->
-                    <div class="bg-brand-black border-2 border-brand-red p-4 brutal-card flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                    <div class="bg-brand-black border-2 border-brand-red p-4 brutal-card flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs mt-8">
                         <div>
                             <span class="text-brand-red font-bold uppercase font-mono">Cherches-tu les ateliers ou les plannings pédagogiques de l'école ?</span>
                             <p class="text-xs text-brand-cream/80 font-light mt-0.5">Les ateliers et l'expérimentation globale de l'école sont gérés sur le site institutionnel.</p>
