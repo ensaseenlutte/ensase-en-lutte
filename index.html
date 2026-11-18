@@ -347,7 +347,7 @@
             <h2 class="font-pancarte text-xl font-extrabold text-brand-cream mt-1">PARTAGER EN STORY (9:16)</h2>
             
             <p class="text-xs text-brand-cream/80 leading-relaxed font-light">
-                Visuel vertical ultra-impactant inspiré des plannings minimalistes et optimisé pour les stories Instagram. Enregistre-le dans ta galerie ou partage-le directement.
+                Visuel vertical ultra-impactant avec zones de sécurité respectées en haut pour Instagram. Enregistre-le dans ta galerie ou partage-le directement.
             </p>
 
             <!-- APERÇU DU VISUEL EN FORMAT STORY (9:16) -->
@@ -474,7 +474,7 @@
                 month: 'NOV', 
                 year: 2026,
                 weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: 'Infos à venir', 
+                time: 'Toute la période', 
                 title: "Mobilisation européenne contre la vie chère", 
                 type: 'MOBILISATION', 
                 place: "Europe / Saint-Étienne (à suivre)", 
@@ -709,48 +709,47 @@
 
             // Si c'est le planning hebdomadaire
             if (ev.isWeekly && ev.weekEvents) {
-                // Gros titre "PLANNING DE LA SEMAINE" tout en haut et centré
+                // ZONE DE SÉCURITÉ HAUTE RESPECTÉE (Y démarre à 220px pour ne pas être caché par l'UI Instagram)
                 ctx.fillStyle = '#f4ede4';
                 ctx.font = 'bold 50px sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('PLANNING DE LA SEMAINE', canvas.width / 2, 130);
+                ctx.fillText('PLANNING DE LA SEMAINE', canvas.width / 2, 220);
 
                 ctx.font = 'bold 28px monospace';
                 ctx.fillStyle = '#fbbf24';
-                ctx.fillText(ev.day.toUpperCase(), canvas.width / 2, 175);
+                ctx.fillText(ev.day.toUpperCase(), canvas.width / 2, 265);
                 ctx.textAlign = 'left'; // reset
 
                 // Ligne de séparation sous le titre
                 ctx.strokeStyle = 'rgba(244, 237, 228, 0.4)';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
-                ctx.moveTo(80, 210);
-                ctx.lineTo(canvas.width - 80, 210);
+                ctx.moveTo(80, 310);
+                ctx.lineTo(canvas.width - 80, 310);
                 ctx.stroke();
 
-                let currentY = 250;
-                let spacing = Math.min(230, Math.floor((1300 - (ev.weekEvents.length * 90)) / ev.weekEvents.length) + 90);
+                let currentY = 350;
+                let spacing = Math.min(240, Math.floor((1200 - (ev.weekEvents.length * 90)) / ev.weekEvents.length) + 90);
 
                 ev.weekEvents.forEach((item, idx) => {
-                    // Date ou plage de dates à gauche avec gestion de la largeur pour éviter les superpositions (ex: "20-22")
+                    // Date ou plage de dates à gauche avec police ajustée si longue (ex: "20-22") pour éviter toute superposition
                     ctx.fillStyle = '#f4ede4';
-                    // Si la date est longue (ex: 20-22), on réduit légèrement la police pour qu'elle tienne bien
-                    let dateFontSize = item.day.length > 3 ? 75 : 95;
+                    let dateFontSize = item.day.length > 3 ? 65 : 85;
                     ctx.font = `bold ${dateFontSize}px sans-serif`;
-                    ctx.fillText(item.day, 80, currentY + 80);
+                    ctx.fillText(item.day, 80, currentY + 75);
 
-                    // Infos sur la droite (Heure, Titre, Lieu) décalées à 340px pour laisser de la marge au "20-22"
+                    // Infos à droite décalées à 350px pour laisser de la place au texte de gauche
                     ctx.fillStyle = '#fbbf24';
                     ctx.font = 'bold 24px monospace';
-                    ctx.fillText(`🕒 ${item.time}`, 340, currentY + 28);
+                    ctx.fillText(`🕒 ${item.time}`, 350, currentY + 25);
 
                     ctx.fillStyle = '#f4ede4';
                     ctx.font = 'bold 28px sans-serif';
-                    ctx.fillText(item.title, 340, currentY + 68, 660);
+                    ctx.fillText(item.title, 350, currentY + 62, 650);
 
                     ctx.fillStyle = 'rgba(244, 237, 228, 0.8)';
                     ctx.font = '22px sans-serif';
-                    ctx.fillText(`📍 ${item.place}`, 340, currentY + 104, 660);
+                    ctx.fillText(`📍 ${item.place}`, 350, currentY + 98, 650);
 
                     currentY += spacing;
 
@@ -768,17 +767,17 @@
                 });
 
             } else {
-                // Story d'un événement unique avec description complète
+                // Story d'un événement unique (zone haute sécurisée également)
                 ctx.fillStyle = '#f4ede4';
                 ctx.font = 'bold 42px monospace';
-                ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 80, 180);
+                ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 80, 240);
 
                 ctx.fillStyle = '#f4ede4';
                 ctx.font = 'bold 76px sans-serif';
                 
                 let words = ev.title.split(' ');
                 let line = '';
-                let y = 300;
+                let y = 350;
                 let maxWidth = 920;
 
                 for(let i = 0; i < words.length; i++) {
@@ -976,9 +975,7 @@
                             <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                 <div>
                                     <div class="flex justify-between items-start mb-3">
-                                        <div class="bg-brand-red text-white text-[11px] font-mono font-bold px-2.5 py-1 border border-brand-cream uppercase tracking-wide">
-                                            🗓️ ${e.day} ${e.month} · 🕒 ${e.time}
-                                        </div>
+                                        <span class="bg-brand-red text-white text-[10px] font-mono font-bold px-2 py-0.5 uppercase">${e.day} ${e.month} · ${e.time}</span>
                                         <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
                                     </div>
                                     <h3 class="font-pancarte text-base font-bold text-brand-cream mb-1.5">${esc(e.title)}</h3>
@@ -1052,9 +1049,7 @@
                                     <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                         <div>
                                             <div class="flex justify-between items-start mb-3">
-                                                <div class="bg-brand-red text-white text-[11px] font-mono font-bold px-2.5 py-1 border border-brand-cream uppercase tracking-wide">
-                                                    🗓️ ${e.day} ${e.month} · 🕒 ${e.time}
-                                                </div>
+                                                <span class="bg-brand-red text-white text-[10px] font-mono font-bold px-2 py-0.5 uppercase">${e.day} ${e.month} · ${e.time}</span>
                                                 <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
                                             </div>
                                             <h4 class="font-pancarte text-base font-bold text-brand-cream mb-1.5">${esc(e.title)}</h4>
