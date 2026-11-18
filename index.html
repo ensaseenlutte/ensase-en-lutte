@@ -504,7 +504,7 @@
                 title: "Assemblée Générale & Projection : Un pays qui se tient sage", 
                 type: 'AG & CINÉ', 
                 place: "Le Méliès Saint-François, 8 Rue de la Valse, Saint-Étienne", 
-                desc: "Assemblée générale à 18h suivie à 19h de la projection du film 'Un pays qui se tient sage' et d'une discussion sur 'le monopole de la violence légitime'. Entrée prix libre reversée aux caisses de soutien lycéennes (gratuit pour les lycéen·nes et étudiant·es)." 
+                desc: "Assemblée générale à 18h suivie à 19h de la projection du film 'Un pays qui se tient sage' et d'une discussion sur 'le monopole de la violence légitime'. Entrée prix libre reversée aux caisses de soutien lycéennes (gratuit pour les lycéen·nes et étudiant·es)."[cite: 1]
             }
         ];
 
@@ -718,38 +718,37 @@
 
             // Si c'est la story hebdomadaire avec liste des événements
             if (ev.isWeekly && ev.weekEvents) {
-                // Titre principal XXL de la semaine
+                // Titre principal de la semaine géré pour éviter toute coupure
                 ctx.fillStyle = '#fbbf24'; // Jaune ambré percutant
-                ctx.font = 'bold 72px sans-serif';
-                ctx.fillText('PROGRAMME', 80, 340);
-                ctx.fillStyle = '#f4ede4';
-                ctx.fillText('DE LA SEMAINE', 80, 420);
+                ctx.font = 'bold 54px sans-serif';
+                ctx.fillText('PROGRAMME DE', 80, 330);
+                ctx.fillText('LA SEMAINE', 80, 395);
 
-                let listY = 520;
+                let listY = 470;
                 ev.weekEvents.forEach((item, idx) => {
-                    // Boîte pour chaque événement
+                    // Boîte pour chaque événement (hauteur adaptée pour tout loger sans dépasser)
                     ctx.fillStyle = 'rgba(244, 237, 228, 0.08)';
-                    ctx.fillRect(80, listY, 920, 210);
+                    ctx.fillRect(80, listY, 920, 195);
                     ctx.strokeStyle = '#8d211d';
                     ctx.lineWidth = 3;
-                    ctx.strokeRect(80, listY, 920, 210);
+                    ctx.strokeRect(80, listY, 920, 195);
 
-                    // Date et heure en haut du bloc
+                    // Date et heure
                     ctx.fillStyle = '#fbbf24';
-                    ctx.font = 'bold 32px monospace';
-                    ctx.fillText(`🗓️ ${item.day} ${item.month} — 🕒 ${item.time}`, 120, listY + 55);
+                    ctx.font = 'bold 30px monospace';
+                    ctx.fillText(`🗓️ ${item.day} ${item.month} — 🕒 ${item.time}`, 115, listY + 50);
 
-                    // Titre de l'événement
+                    // Titre de l'événement (tronqué proprement si trop long sur une ligne)
                     ctx.fillStyle = '#f4ede4';
-                    ctx.font = 'bold 38px sans-serif';
-                    ctx.fillText(item.title, 120, listY + 110, 840);
+                    ctx.font = 'bold 34px sans-serif';
+                    ctx.fillText(item.title, 115, listY + 102, 850);
 
                     // Lieu
                     ctx.fillStyle = 'rgba(244, 237, 228, 0.75)';
-                    ctx.font = '28px sans-serif';
-                    ctx.fillText(`📍 ${item.place}`, 120, listY + 165, 840);
+                    ctx.font = '26px sans-serif';
+                    ctx.fillText(`📍 ${item.place}`, 115, listY + 152, 850);
 
-                    listY += 240;
+                    listY += 215;
                 });
 
             } else {
