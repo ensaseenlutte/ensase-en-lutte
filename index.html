@@ -165,11 +165,11 @@
     <div class="bg-brand-red text-brand-cream border-b-2 border-brand-cream overflow-hidden select-none z-50 fixed top-0 left-0 right-0 w-full"
          style="padding-top: max(16px, calc(10px + env(safe-area-inset-top))); padding-bottom: 9px;">
         <div class="animate-ticker font-pancarte text-[11px] tracking-wider uppercase">
-            <span class="mx-4">🔥 20, 21 ET 22 NOVEMBRE : MOBILISATION EUROPÉENNE CONTRE LA VIE CHÈRE (SAINT-ÉTIENNE : À SUIVRE)</span>
+            <span class="mx-4">🔥 JEUDI 19/11 À 20H30 : SOIRÉE FESTIVE (KARAOKÉ, QUIZ) AU LIEU ROUGE</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">✊ JEUDI 19/11 À 18H00 : PRÉSENTATION DU PROGRAMME LFI (@LIEU.ROUGE)</span>
+            <span class="mx-4">✊ VENDREDI 20/11 À 18H : RASSEMBLEMENT TRÉFILERIE (CONTRE LA CONSCRIPTION)</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🔥 LUNDI 23/11 À 18H00 : AG & PROJECTION "UN PAYS QUI SE TIENT SAGE" (@MÉLIÈS SAINT-FRANÇOIS)</span>
+            <span class="mx-4">🔥 LUNDI 23/11 À 18H00 : AG & PROJECTION "UN PAYS QUI SE TIENT SAGE" (@MÉLIÈS)</span>
             <span class="mx-4">·</span>
         </div>
     </div>
@@ -454,7 +454,7 @@
         let initialHash = window.location.hash.replace('#', '');
         let currentPage = validTabs.includes(initialHash) ? initialHash : 'accueil';
 
-        // AGENDA : Événements triés strictement par ordre chronologique
+        // AGENDA : Événements triés strictement par ordre chronologique (du plus proche au plus lointain)
         let eventsData = [
             { 
                 id: 'e4', 
@@ -469,6 +469,18 @@
                 desc: "Présentation du programme par les jeunes insoumi·es." 
             },
             { 
+                id: 'e8', 
+                day: '19', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 16 au 22 novembre 2026',
+                time: '20h30', 
+                title: "Soirée Festive : Karaoké, Quiz, Jeux", 
+                type: 'SOIRÉE', 
+                place: "Lieu Rouge, 15 Rue Georges Dupré, Saint-Étienne", 
+                desc: "Gratuit et ouvert à toutes et tous les jeunes sympathisant·es LFI. Quiz sur le programme avec lots à gagner, karaoké et jeux[cite: 6]." 
+            },
+            { 
                 id: 'e3', 
                 day: '20-22', 
                 month: 'NOV', 
@@ -481,6 +493,18 @@
                 desc: "Syndicats, Gilets jaunes et associations de sept pays appellent à manifester contre la vie chère, pour les salaires et le contrôle des prix. Modalités locales à Saint-Étienne à suivre." 
             },
             { 
+                id: 'e9', 
+                day: '20', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 16 au 22 novembre 2026',
+                time: '18h00', 
+                title: "Journée européenne contre la conscription", 
+                type: 'RASSEMBLEMENT', 
+                place: "Tréfilerie, Saint-Étienne", 
+                desc: "Rassemblement contre la militarisation de la jeunesse et contre l'austérité au profit de la Défense[cite: 5]." 
+            },
+            { 
                 id: 'e5', 
                 day: '20', 
                 month: 'NOV', 
@@ -491,6 +515,18 @@
                 type: 'SOIRÉE', 
                 place: "MJC des Tilleuls, 8 Rue du pavillon chinois, Saint-Étienne", 
                 desc: "Concerts, table ronde autour du mouvement lycéen. Entrée et cantine à prix libre." 
+            },
+            { 
+                id: 'e10', 
+                day: '20', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 16 au 22 novembre 2026',
+                time: '20h00', 
+                title: "Rassemblement T-Dor — Souvenir trans'", 
+                type: 'RASSEMBLEMENT', 
+                place: "Hôtel de ville, Saint-Étienne", 
+                desc: "Rassemblement de mémoire et de lutte[cite: 5]." 
             },
             { 
                 id: 'e6', 
@@ -729,27 +765,27 @@
                 ctx.stroke();
 
                 let currentY = 350;
-                let spacing = Math.min(240, Math.floor((1200 - (ev.weekEvents.length * 90)) / ev.weekEvents.length) + 90);
+                let spacing = Math.min(200, Math.floor((1200 - (ev.weekEvents.length * 75)) / ev.weekEvents.length) + 75);
 
                 ev.weekEvents.forEach((item, idx) => {
-                    // Date ou plage de dates à gauche avec police ajustée si longue (ex: "20-22") pour éviter toute superposition
+                    // Date ou plage de dates à gauche avec police adaptée
                     ctx.fillStyle = '#f4ede4';
-                    let dateFontSize = item.day.length > 3 ? 65 : 85;
+                    let dateFontSize = item.day.length > 3 ? 55 : 75;
                     ctx.font = `bold ${dateFontSize}px sans-serif`;
-                    ctx.fillText(item.day, 80, currentY + 75);
+                    ctx.fillText(item.day, 80, currentY + 65);
 
-                    // Infos à droite décalées à 350px pour laisser de la place au texte de gauche
+                    // Infos à droite décalées à 320px
                     ctx.fillStyle = '#fbbf24';
-                    ctx.font = 'bold 24px monospace';
-                    ctx.fillText(`🕒 ${item.time}`, 350, currentY + 25);
+                    ctx.font = 'bold 22px monospace';
+                    ctx.fillText(`🕒 ${item.time}`, 320, currentY + 22);
 
                     ctx.fillStyle = '#f4ede4';
-                    ctx.font = 'bold 28px sans-serif';
-                    ctx.fillText(item.title, 350, currentY + 62, 650);
+                    ctx.font = 'bold 26px sans-serif';
+                    ctx.fillText(item.title, 320, currentY + 54, 680);
 
                     ctx.fillStyle = 'rgba(244, 237, 228, 0.8)';
-                    ctx.font = '22px sans-serif';
-                    ctx.fillText(`📍 ${item.place}`, 350, currentY + 98, 650);
+                    ctx.font = '20px sans-serif';
+                    ctx.fillText(`📍 ${item.place}`, 320, currentY + 85, 680);
 
                     currentY += spacing;
 
@@ -763,7 +799,7 @@
                     ctx.stroke();
                     ctx.setLineDash([]);
 
-                    currentY += 20;
+                    currentY += 15;
                 });
 
             } else {
