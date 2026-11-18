@@ -165,9 +165,7 @@
     <div class="bg-brand-red text-brand-cream border-b-2 border-brand-cream overflow-hidden select-none z-50 fixed top-0 left-0 right-0 w-full"
          style="padding-top: max(16px, calc(10px + env(safe-area-inset-top))); padding-bottom: 9px;">
         <div class="animate-ticker font-pancarte text-[11px] tracking-wider uppercase">
-            <span class="mx-4">✊ JEUDI 19/11 À 18H00 : PRÉSENTATION DU PROGRAMME LFI (@LIEU.ROUGE)</span>
-            <span class="mx-4">·</span>
-            <span class="mx-4">🔥 LUNDI 23/11 À 18H00 : AG & PROJECTION "UN PAYS QUI SE TIENT SAGE" (@MÉLIÈS SAINT-FRANÇOIS)</span>
+            <span class="mx-4">🔥 20, 21 ET 22 NOVEMBRE : MOBILISATION EUROPÉENNE CONTRE LA VIE CHÈRE (SAINT-ÉTIENNE : À SUIVRE)</span>
             <span class="mx-4">·</span>
             <span class="mx-4">✊ JEUDI 19/11 À 18H00 : PRÉSENTATION DU PROGRAMME LFI (@LIEU.ROUGE)</span>
             <span class="mx-4">·</span>
@@ -459,6 +457,18 @@
         // AGENDA : Événements à venir (à partir du 18 nov 2026)
         let eventsData = [
             { 
+                id: 'e3', 
+                day: '20-22', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 16 au 22 novembre 2026',
+                time: 'Toute la période', 
+                title: "Mobilisation européenne contre la vie chère", 
+                type: 'MOBILISATION', 
+                place: "Europe / Saint-Étienne (à suivre)", 
+                desc: "Syndicats, Gilets jaunes et associations de sept pays appellent à manifester contre la vie chère, pour les salaires et le contrôle des prix. Modalités locales à Saint-Étienne à suivre." 
+            },
+            { 
                 id: 'e4', 
                 day: '19', 
                 month: 'NOV', 
@@ -638,7 +648,7 @@
             openModal('modal-instagram');
         };
 
-        // Partager le programme complet de la semaine sous forme de planning minimaliste (inspiré des références)
+        // Partager le programme complet de la semaine avec gros titre "PLANNING DE LA SEMAINE" en haut et centrage parfait
         window.openWeeklyInstagramModal = function(weekName) {
             const weekEvents = eventsData.filter(e => e.weekLabel === weekName);
             if (weekEvents.length === 0) return;
@@ -650,7 +660,7 @@
                 year: 2026,
                 isWeekly: true,
                 weekEvents: weekEvents,
-                title: `AGENDA SEMAINE`,
+                title: `PLANNING DE LA SEMAINE`,
                 time: `${weekEvents.length} événements`,
                 place: 'Saint-Étienne',
                 desc: weekEvents.map(e => `• ${e.day} ${e.month} (${e.time}) : ${e.title}`).join('\n')
@@ -658,12 +668,12 @@
 
             $('#insta-prev-type').textContent = 'PROGRAMME DE LA SEMAINE';
             $('#insta-prev-date').textContent = weekName;
-            $('#insta-prev-title').textContent = `PROGRAMME DE LA SEMAINE`;
+            $('#insta-prev-title').textContent = `PLANNING DE LA SEMAINE`;
             $('#insta-prev-time').textContent = `${weekEvents.length} rdv de lutte`;
             $('#insta-prev-place').textContent = 'Saint-Étienne';
             $('#insta-prev-desc').textContent = weekEvents.map(e => `• ${e.day} ${e.month} (${e.time}) : ${e.title}`).join(' | ');
 
-            const caption = `🔥 PROGRAMME DE LA SEMAINE — ${weekName.toUpperCase()} 🔥\n\n` + 
+            const caption = `🔥 PLANNING DE LA SEMAINE — ${weekName.toUpperCase()} 🔥\n\n` + 
                 weekEvents.map(e => `🗓️ ${e.day} ${e.month} à ${e.time} : ${e.title}\n📍 ${e.place}\n`).join('\n') + 
                 `\n👉 Retrouve tous les détails sur notre site ! Lien en bio @ensase_en_lutte\n\n---\n#EnsaseEnLutte #SaintEtienne #ArchitectureEnLutte #MobilisationEtudiante #Ensase @ensase_en_lutte`;
 
@@ -693,24 +703,24 @@
             canvas.height = 1920;
             const ctx = canvas.getContext('2d');
 
-            // Fond couleur terracotta/terre typique de la DA des maquettes de référence
+            // Fond couleur terracotta/terre typique de la DA
             ctx.fillStyle = '#7a2219';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Si c'est le planning hebdomadaire style "Programme de la semaine"
+            // Si c'est le planning hebdomadaire
             if (ev.isWeekly && ev.weekEvents) {
-                // En-tête : PROGRAMME DE LA SEMAINE à gauche, Mois en grand à droite
+                // Gros titre "PLANNING DE LA SEMAINE" tout en haut et centré
                 ctx.fillStyle = '#f4ede4';
-                ctx.font = 'bold 36px sans-serif';
-                ctx.fillText('PROGRAMME', 80, 120);
-                ctx.fillText('DE LA SEMAINE', 80, 165);
+                ctx.font = 'bold 50px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('PLANNING DE LA SEMAINE', canvas.width / 2, 130);
 
-                ctx.font = 'bold 72px sans-serif';
-                ctx.textAlign = 'right';
-                ctx.fillText('NOV', canvas.width - 80, 150);
+                ctx.font = 'bold 28px monospace';
+                ctx.fillStyle = '#fbbf24';
+                ctx.fillText(ev.day.toUpperCase(), canvas.width / 2, 175);
                 ctx.textAlign = 'left'; // reset
 
-                // Ligne de séparation sous l'en-tête
+                // Ligne de séparation sous le titre
                 ctx.strokeStyle = 'rgba(244, 237, 228, 0.4)';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
@@ -719,26 +729,26 @@
                 ctx.stroke();
 
                 let currentY = 250;
-                let spacing = Math.min(240, Math.floor((1350 - (ev.weekEvents.length * 100)) / ev.weekEvents.length) + 100);
+                let spacing = Math.min(230, Math.floor((1300 - (ev.weekEvents.length * 90)) / ev.weekEvents.length) + 90);
 
                 ev.weekEvents.forEach((item, idx) => {
-                    // Numéro de jour immense à gauche
+                    // Numéro de jour à gauche
                     ctx.fillStyle = '#f4ede4';
-                    ctx.font = 'bold 120px sans-serif';
-                    ctx.fillText(item.day, 80, currentY + 95);
+                    ctx.font = 'bold 95px sans-serif';
+                    ctx.fillText(item.day, 80, currentY + 80);
 
                     // Infos sur la droite (Heure, Titre, Lieu)
-                    ctx.fillStyle = '#fbbf24'; // Jaune ambré pour l'heure
-                    ctx.font = 'bold 28px monospace';
-                    ctx.fillText(`🕒 ${item.time}`, 300, currentY + 30);
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.font = 'bold 24px monospace';
+                    ctx.fillText(`🕒 ${item.time}`, 270, currentY + 25);
 
                     ctx.fillStyle = '#f4ede4';
-                    ctx.font = 'bold 30px sans-serif';
-                    ctx.fillText(item.title, 300, currentY + 70, 700);
+                    ctx.font = 'bold 28px sans-serif';
+                    ctx.fillText(item.title, 270, currentY + 62, 730);
 
                     ctx.fillStyle = 'rgba(244, 237, 228, 0.8)';
-                    ctx.font = '24px sans-serif';
-                    ctx.fillText(`📍 ${item.place}`, 300, currentY + 110, 700);
+                    ctx.font = '22px sans-serif';
+                    ctx.fillText(`📍 ${item.place}`, 270, currentY + 98, 730);
 
                     currentY += spacing;
 
@@ -750,23 +760,23 @@
                     ctx.moveTo(80, currentY);
                     ctx.lineTo(canvas.width - 80, currentY);
                     ctx.stroke();
-                    ctx.setLineDash([]); // reset dash
+                    ctx.setLineDash([]);
 
-                    currentY += 30;
+                    currentY += 20;
                 });
 
             } else {
-                // Story d'un événement unique
+                // Story d'un événement unique avec description complète pour combler le vide
                 ctx.fillStyle = '#f4ede4';
                 ctx.font = 'bold 42px monospace';
-                ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 80, 200);
+                ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 80, 180);
 
                 ctx.fillStyle = '#f4ede4';
-                ctx.font = 'bold 84px sans-serif';
+                ctx.font = 'bold 76px sans-serif';
                 
                 let words = ev.title.split(' ');
                 let line = '';
-                let y = 350;
+                let y = 300;
                 let maxWidth = 920;
 
                 for(let i = 0; i < words.length; i++) {
@@ -774,27 +784,47 @@
                     if (ctx.measureText(testLine).width > maxWidth && i > 0) {
                         ctx.fillText(line, 80, y);
                         line = words[i] + ' ';
-                        y += 100;
+                        y += 90;
                     } else {
                         line = testLine;
                     }
                 }
                 ctx.fillText(line, 80, y);
 
-                y += 80;
+                y += 50;
                 ctx.fillStyle = 'rgba(244, 237, 228, 0.15)';
-                ctx.fillRect(80, y, 920, 240);
+                ctx.fillRect(80, y, 920, 220);
                 ctx.strokeStyle = '#fbbf24';
                 ctx.lineWidth = 2;
-                ctx.strokeRect(80, y, 920, 240);
+                ctx.strokeRect(80, y, 920, 220);
 
                 ctx.fillStyle = '#fbbf24';
-                ctx.font = 'bold 40px monospace';
-                ctx.fillText(`🕒 ${ev.time}`, 130, y + 80);
+                ctx.font = 'bold 38px monospace';
+                ctx.fillText(`🕒 ${ev.time}`, 130, y + 75);
 
                 ctx.fillStyle = '#f4ede4';
-                ctx.font = '34px sans-serif';
-                ctx.fillText(`📍 ${ev.place}`, 130, y + 160, 820);
+                ctx.font = '32px sans-serif';
+                ctx.fillText(`📍 ${ev.place}`, 130, y + 150, 820);
+
+                // Ajout de la description complète pour combler le vide du dessous
+                y += 270;
+                ctx.fillStyle = '#f4ede4';
+                ctx.font = '32px sans-serif';
+
+                let descWords = (ev.desc || '').split(' ');
+                let descLine = '';
+                let descY = y;
+                for(let i = 0; i < descWords.length; i++) {
+                    let testLine = descLine + descWords[i] + ' ';
+                    if (ctx.measureText(testLine).width > maxWidth && i > 0) {
+                        ctx.fillText(descLine, 80, descY);
+                        descLine = descWords[i] + ' ';
+                        descY += 45;
+                    } else {
+                        descLine = testLine;
+                    }
+                }
+                ctx.fillText(descLine, 80, descY);
             }
 
             // BANDEAU INCITATIF BAS (Lien en bio Instagram)
@@ -944,7 +974,7 @@
                             <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                 <div>
                                     <div class="flex justify-between items-start mb-3">
-                                        <div class="bg-brand-red text-white text-xs font-mono font-black px-3 py-1 border border-brand-cream uppercase tracking-wider shadow">
+                                        <div class="bg-brand-red text-white text-xs font-mono font-black px-3 py-1.5 border border-brand-cream uppercase tracking-wider shadow">
                                             🗓️ ${e.day} ${e.month} · 🕒 ${e.time}
                                         </div>
                                         <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
@@ -1020,7 +1050,7 @@
                                     <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                         <div>
                                             <div class="flex justify-between items-start mb-3">
-                                                <div class="bg-brand-red text-white text-xs font-mono font-black px-3 py-1 border border-brand-cream uppercase tracking-wider shadow">
+                                                <div class="bg-brand-red text-white text-xs font-mono font-black px-3 py-1.5 border border-brand-cream uppercase tracking-wider shadow">
                                                     🗓️ ${e.day} ${e.month} · 🕒 ${e.time}
                                                 </div>
                                                 <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
