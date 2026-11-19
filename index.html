@@ -165,11 +165,13 @@
     <div class="bg-brand-red text-brand-cream border-b-2 border-brand-cream overflow-hidden select-none z-50 fixed top-0 left-0 right-0 w-full"
          style="padding-top: max(16px, calc(10px + env(safe-area-inset-top))); padding-bottom: 9px;">
         <div class="animate-ticker font-pancarte text-[11px] tracking-wider uppercase">
-            <span class="mx-4">🔥 JEUDI 19/11 À 20H30 : SOIRÉE FESTIVE (KARAOKÉ, QUIZ) AU LIEU ROUGE</span>
+            <span class="mx-4">✊ JEUDI 19/11 : CONTRE LE PERMIS DE TUER POLICIER · 20H30 : SOIRÉE FESTIVE AU LIEU ROUGE</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">✊ VENDREDI 20/11 À 18H : RASSEMBLEMENT TRÉFILERIE (CONTRE LA CONSCRIPTION)</span>
+            <span class="mx-4">✊ VENDREDI 20/11 : GRÈVE INTERNATIONALE DE LA JEUNESSE CONTRE LA GUERRE · DÈS 18H : JOURNÉE EUROPÉENNE CONTRE LA CONSCRIPTION</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">🔥 LUNDI 23/11 À 18H00 : AG & PROJECTION "UN PAYS QUI SE TIENT SAGE" (@MÉLIÈS)</span>
+            <span class="mx-4">🔥 SAMEDI 21/11 : « NOUVEAU 17 OCTOBRE » MANIFESTATIONS MASSIVES PARTOUT</span>
+            <span class="mx-4">·</span>
+            <span class="mx-4">🎬 LUNDI 23/11 À 18H00 : CULTURES EN LUTTE — AG & PROJECTION "UN PAYS QUI SE TIENT SAGE" (@MÉLIÈS)</span>
             <span class="mx-4">·</span>
         </div>
     </div>
@@ -457,6 +459,18 @@
         // AGENDA : Événements triés strictement par ordre chronologique
         let eventsData = [
             { 
+                id: 'e11', 
+                day: '19', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 16 au 22 novembre 2026',
+                time: 'Journée', 
+                title: "Contre le permis de tuer policier", 
+                type: 'MANIFESTATION', 
+                place: "Dans la rue / Saint-Étienne (lieux à suivre)", 
+                desc: "Appel : Toutes et tous dans la rue contre le permis de tuer policier." 
+            },
+            { 
                 id: 'e8', 
                 day: '19', 
                 month: 'NOV', 
@@ -469,16 +483,16 @@
                 desc: "Gratuit et ouvert à toutes et tous les jeunes sympathisant·es LFI. Quiz sur le programme avec lots à gagner, karaoké et jeux." 
             },
             { 
-                id: 'e3', 
-                day: '20-22', 
+                id: 'e12', 
+                day: '20', 
                 month: 'NOV', 
                 year: 2026,
                 weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: 'Toute la période', 
-                title: "Mobilisation européenne contre la vie chère", 
-                type: 'MOBILISATION', 
-                place: "Europe / Saint-Étienne (à suivre)", 
-                desc: "Syndicats, Gilets jaunes et associations de sept pays appellent à manifester contre la vie chère, pour les salaires et le contrôle des prix. Modalités locales à Saint-Étienne à suivre." 
+                time: 'Journée', 
+                title: "Grève internationale de la jeunesse contre la guerre", 
+                type: 'GRÈVE & MANIF', 
+                place: "Dans la rue / Saint-Étienne (lieux à suivre)", 
+                desc: "Appel : Toutes et tous dans la rue pour la grève internationale de la jeunesse contre la guerre." 
             },
             { 
                 id: 'e9', 
@@ -486,35 +500,23 @@
                 month: 'NOV', 
                 year: 2026,
                 weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: '18h00', 
+                time: 'Dès 18h00', 
                 title: "Journée européenne contre la conscription", 
-                type: 'RASSEMBLEMENT', 
-                place: "Tréfilerie, Saint-Étienne", 
-                desc: "Rassemblement contre la militarisation de la jeunesse et contre l'austérité au profit de la Défense." 
+                type: 'MOBILISATION', 
+                place: "Saint-Étienne (Tréfilerie / MJC des Tilleuls / Hôtel de ville)", 
+                desc: "Saint-Étienne unitaire contre la guerre — Programme du 20 novembre :\n• 18h00 : Rassemblement contre la militarisation de la jeunesse et contre l'austérité au profit de la Défense (📍 Tréfilerie)\n• À partir de 19h00 : Soirée de soutien aux lycéen·nes — Concerts, table ronde autour du mouvement lycéen, entrée et cantine à prix libre (📍 MJC des Tilleuls, 8 Rue du pavillon chinois)\n• 20h00 : Rassemblement T-Dor — Souvenir trans' (📍 Hôtel de ville)" 
             },
             { 
-                id: 'e5', 
-                day: '20', 
+                id: 'e13', 
+                day: '21', 
                 month: 'NOV', 
                 year: 2026,
                 weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: '19h00', 
-                title: "Soirée de soutien à l'assemblée lycéenne", 
-                type: 'SOIRÉE', 
-                place: "MJC des Tilleuls, 8 Rue du pavillon chinois, Saint-Étienne", 
-                desc: "Concerts, table ronde autour du mouvement lycéen. Entrée et cantine à prix libre." 
-            },
-            { 
-                id: 'e10', 
-                day: '20', 
-                month: 'NOV', 
-                year: 2026,
-                weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: '20h00', 
-                title: "Rassemblement T-Dor — Souvenir trans'", 
-                type: 'RASSEMBLEMENT', 
-                place: "Hôtel de ville, Saint-Étienne", 
-                desc: "Rassemblement de mémoire et de lutte." 
+                time: 'Journée', 
+                title: "« Nouveau 17 Octobre » — Manifestations massives partout", 
+                type: 'MANIFESTATION', 
+                place: "Partout / Saint-Étienne (lieux à suivre)", 
+                desc: "Appel : Toutes et tous dans la rue — « Nouveau 17 Octobre », manifestations massives partout." 
             },
             { 
                 id: 'e6', 
@@ -535,10 +537,10 @@
                 year: 2026,
                 weekLabel: 'Semaine du 23 au 29 novembre 2026',
                 time: '18h00', 
-                title: "Assemblée Générale & Projection : Un pays qui se tient sage", 
+                title: "Cultures en lutte : AG & Projection « Un pays qui se tient sage »", 
                 type: 'AG & CINÉ', 
-                place: "Le Méliès Saint-François, 8 Rue de la Valse, Saint-Étienne", 
-                desc: "Assemblée générale à 18h suivie à 19h de la projection du film 'Un pays qui se tient sage' et d'une discussion sur 'le monopole de la violence légitime'. Entrée prix libre reversée aux caisses de soutien lycéennes (gratuit pour les lycéen·nes et étudiant·es)." 
+                place: "Le Méliès Saint-François, 8 Rue de la Valse, 42100 Saint-Étienne", 
+                desc: "Cultures en lutte soutient le mouvement étudiant et lycéen : Assemblée Générale à 18h suivie à 19h de la projection du film « Un pays qui se tient sage » et d'une discussion sur « le monopole de la violence légitime ». Entrée à prix libre entièrement reversée aux caisses de soutien aux actions lycéennes (gratuit pour les lycéen·nes et étudiant·es)." 
             }
         ];
 
@@ -631,9 +633,11 @@
             
             let hours = 9, minutes = 0;
             if (e.time) {
-                const parts = e.time.replace(':', 'h').split('h');
-                hours = parseInt(parts[0], 10) || 9;
-                minutes = parseInt(parts[1], 10) || 0;
+                const match = e.time.match(/(\d{1,2})[h:](\d{0,2})/i);
+                if (match) {
+                    hours = parseInt(match[1], 10) || 9;
+                    minutes = parseInt(match[2], 10) || 0;
+                }
             }
             
             const start = new Date(year, month, day, hours, minutes, 0);
@@ -665,7 +669,7 @@
             $('#insta-prev-place').textContent = ev.place;
             $('#insta-prev-desc').textContent = ev.desc;
 
-            const caption = `🔥 ${ev.title.toUpperCase()} 🔥\n\n🗓️ Date : ${ev.day} ${ev.month} ${ev.year || 2026} à ${ev.time}\n📍 Lieu : ${ev.place}\n\n${ev.desc}\n\n👉 + d'infos et tous les rendez-vous sur le site ! Lien en bio @ensase_en_lutte\n\n---\n#EnsaseEnLutte #SaintEtienne #ArchitectureEnLutte #MobilisationEtudiante #Ensase @ensase_en_lutte`;
+            const caption = `🔥 ${ev.title.toUpperCase()} 🔥\n\n🗓️ Date : ${ev.day} ${ev.month} ${ev.year || 2026} (${ev.time})\n📍 Lieu : ${ev.place}\n\n${ev.desc}\n\n👉 + d'infos et tous les rendez-vous sur le site ! Lien en bio @ensase_en_lutte\n\n---\n#EnsaseEnLutte #SaintEtienne #ArchitectureEnLutte #MobilisationEtudiante #Ensase @ensase_en_lutte`;
             
             $('#insta-caption-text').value = caption;
 
@@ -698,7 +702,7 @@
             $('#insta-prev-desc').textContent = weekEvents.map(e => `• ${e.day} ${e.month} (${e.time}) : ${e.title}`).join(' | ');
 
             const caption = `🔥 PLANNING DE LA SEMAINE — ${weekName.toUpperCase()} 🔥\n\n` + 
-                weekEvents.map(e => `🗓️ ${e.day} ${e.month} à ${e.time} : ${e.title}\n📍 ${e.place}\n`).join('\n') + 
+                weekEvents.map(e => `🗓️ ${e.day} ${e.month} (${e.time}) : ${e.title}\n📍 ${e.place}\n`).join('\n') + 
                 `\n👉 Retrouve tous les détails sur notre site ! Lien en bio @ensase_en_lutte\n\n---\n#EnsaseEnLutte #SaintEtienne #ArchitectureEnLutte #MobilisationEtudiante #Ensase @ensase_en_lutte`;
 
             $('#insta-caption-text').value = caption;
@@ -727,7 +731,7 @@
             canvas.height = 1920;
             const ctx = canvas.getContext('2d');
 
-            // Fond noir élégant et minimaliste (style DA de la référence IMG_5597.PNG)
+            // Fond noir élégant et minimaliste
             ctx.fillStyle = '#121212';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -736,7 +740,7 @@
             ctx.lineWidth = 16;
             ctx.strokeRect(16, 16, canvas.width - 32, canvas.height - 32);
 
-            // Badge supérieur "ENSASE EN LUTTE" (sécurisé en haut)
+            // Badge supérieur "ENSASE EN LUTTE"
             ctx.fillStyle = '#8d211d';
             ctx.fillRect(canvas.width - 400, 100, 320, 60);
             ctx.fillStyle = '#f4ede4';
@@ -745,7 +749,6 @@
 
             // Si c'est le planning hebdomadaire
             if (ev.isWeekly && ev.weekEvents) {
-                // Titre principal de la semaine
                 ctx.fillStyle = '#f4ede4';
                 ctx.font = 'bold 64px sans-serif';
                 ctx.fillText('PLANNING DE', 80, 240);
@@ -759,13 +762,11 @@
                 let spacing = Math.min(190, Math.floor((1100 - (ev.weekEvents.length * 80)) / ev.weekEvents.length) + 70);
 
                 ev.weekEvents.forEach((item, idx) => {
-                    // Date ou plage de dates à gauche
                     ctx.fillStyle = '#8d211d';
                     let dateFontSize = item.day.length > 3 ? 42 : 54;
                     ctx.font = `bold ${dateFontSize}px monospace`;
                     ctx.fillText(item.day, 80, currentY + 50);
 
-                    // Infos à droite décalées
                     ctx.fillStyle = '#fbbf24';
                     ctx.font = 'bold 22px monospace';
                     ctx.fillText(`🕒 ${item.time}`, 250, currentY + 22);
@@ -780,7 +781,6 @@
 
                     currentY += spacing;
 
-                    // Ligne de séparation fine
                     ctx.strokeStyle = 'rgba(244, 237, 228, 0.15)';
                     ctx.lineWidth = 1;
                     ctx.beginPath();
@@ -792,20 +792,17 @@
                 });
 
             } else {
-                // Story d'un événement unique (style épuré et moderne type IMG_5597.PNG)
-                // Type d'événement en haut dans un encadré beige/crème clair
+                // Story d'un événement unique
                 ctx.fillStyle = '#f4ede4';
                 ctx.fillRect(80, 200, 320, 56);
                 ctx.fillStyle = '#121212';
                 ctx.font = 'bold 26px monospace';
                 ctx.fillText((ev.type || 'ÉVÉNEMENT').toUpperCase(), 105, 238);
 
-                // Date
                 ctx.fillStyle = '#8d211d';
                 ctx.font = 'bold 36px monospace';
                 ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 80, 310);
 
-                // Titre de l'événement (Typographie XXL lisible)
                 ctx.fillStyle = '#f4ede4';
                 ctx.font = 'bold 68px sans-serif';
                 
@@ -826,11 +823,10 @@
                 }
                 ctx.fillText(line, 80, y);
 
-                // Bloc Heure & Lieu encadré élégant (style de la référence)
                 y += 50;
                 ctx.fillStyle = 'rgba(244, 237, 228, 0.05)';
                 ctx.fillRect(80, y, 920, 180);
-                ctx.strokeStyle = '#fbbf24'; // Bordure jaune ambrée
+                ctx.strokeStyle = '#fbbf24';
                 ctx.lineWidth = 2;
                 ctx.strokeRect(80, y, 920, 180);
 
@@ -842,25 +838,28 @@
                 ctx.font = '30px sans-serif';
                 ctx.fillText(`📍 ${ev.place}`, 130, y + 130, 820);
 
-                // Description complète pour combler le vide du dessous
                 y += 220;
                 ctx.fillStyle = 'rgba(244, 237, 228, 0.9)';
-                ctx.font = '30px sans-serif';
+                ctx.font = '28px sans-serif';
 
-                let descWords = (ev.desc || '').split(' ');
-                let descLine = '';
+                let paragraphs = (ev.desc || '').split('\n');
                 let descY = y;
-                for(let i = 0; i < descWords.length; i++) {
-                    let testLine = descLine + descWords[i] + ' ';
-                    if (ctx.measureText(testLine).width > maxWidth && i > 0) {
-                        ctx.fillText(descLine, 80, descY);
-                        descLine = descWords[i] + ' ';
-                        descY += 42;
-                    } else {
-                        descLine = testLine;
+                paragraphs.forEach(p => {
+                    let descWords = p.split(' ');
+                    let descLine = '';
+                    for(let i = 0; i < descWords.length; i++) {
+                        let testLine = descLine + descWords[i] + ' ';
+                        if (ctx.measureText(testLine).width > maxWidth && i > 0) {
+                            ctx.fillText(descLine, 80, descY);
+                            descLine = descWords[i] + ' ';
+                            descY += 38;
+                        } else {
+                            descLine = testLine;
+                        }
                     }
-                }
-                ctx.fillText(descLine, 80, descY);
+                    ctx.fillText(descLine, 80, descY);
+                    descY += 44;
+                });
             }
 
             // BANDEAU INCITATIF BAS (Lien en bio Instagram)
@@ -932,7 +931,7 @@
                 'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//ENSASE en lutte//FR', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
                 'BEGIN:VEVENT', `UID:${activeCalendarEvent.id}@ensase-en-lutte.fr`, `DTSTAMP:${nowFmt}`,
                 `DTSTART:${fmt(start)}`, `DTEND:${fmt(end)}`, `SUMMARY:${activeCalendarEvent.title}`,
-                `DESCRIPTION:${activeCalendarEvent.desc}`, `LOCATION:${activeCalendarEvent.place}`, 'END:VEVENT', 'END:VCALENDAR'
+                `DESCRIPTION:${(activeCalendarEvent.desc || '').replace(/\n/g, '\\n')}`, `LOCATION:${activeCalendarEvent.place}`, 'END:VEVENT', 'END:VCALENDAR'
             ].join('\r\n');
 
             const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
@@ -1009,12 +1008,12 @@
                         ${eventsData.map(e => `
                             <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                 <div>
-                                    <div class="flex justify-between items-start mb-3">
-                                        <span class="bg-brand-red text-white text-[10px] font-mono font-bold px-2 py-0.5 uppercase">${e.day} ${e.month} · ${e.time}</span>
-                                        <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
+                                    <div class="flex justify-between items-start mb-3 gap-2">
+                                        <span class="bg-brand-red text-white text-[10px] font-mono font-bold px-2 py-0.5 uppercase shrink-0">${e.day} ${e.month} · ${e.time}</span>
+                                        <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20 text-right">${e.place}</span>
                                     </div>
                                     <h3 class="font-pancarte text-base font-bold text-brand-cream mb-1.5">${esc(e.title)}</h3>
-                                    <p class="text-xs text-brand-cream/80 mb-3 leading-relaxed">${esc(e.desc)}</p>
+                                    <p class="text-xs text-brand-cream/80 mb-3 leading-relaxed whitespace-pre-line">${esc(e.desc)}</p>
                                 </div>
                                 <div class="pt-3 border-t border-brand-cream/20 flex justify-between items-center">
                                     <span class="text-[9px] font-mono text-brand-red font-semibold">${e.type}</span>
@@ -1083,12 +1082,12 @@
                                 ${weekEvents.map(e => `
                                     <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
                                         <div>
-                                            <div class="flex justify-between items-start mb-3">
-                                                <span class="bg-brand-red text-white text-[10px] font-mono font-bold px-2 py-0.5 uppercase">${e.day} ${e.month} · ${e.time}</span>
-                                                <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20">${e.place}</span>
+                                            <div class="flex justify-between items-start mb-3 gap-2">
+                                                <span class="bg-brand-red text-white text-[10px] font-mono font-bold px-2 py-0.5 uppercase shrink-0">${e.day} ${e.month} · ${e.time}</span>
+                                                <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20 text-right">${e.place}</span>
                                             </div>
                                             <h4 class="font-pancarte text-base font-bold text-brand-cream mb-1.5">${esc(e.title)}</h4>
-                                            <p class="text-xs text-brand-cream/80 mb-3 leading-relaxed">${esc(e.desc)}</p>
+                                            <p class="text-xs text-brand-cream/80 mb-3 leading-relaxed whitespace-pre-line">${esc(e.desc)}</p>
                                         </div>
                                         <div class="pt-3 border-t border-brand-cream/20 flex justify-between items-center">
                                             <span class="text-[9px] font-mono text-brand-red font-semibold">${e.type}</span>
