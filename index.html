@@ -165,13 +165,15 @@
     <div class="bg-brand-red text-brand-cream border-b-2 border-brand-cream overflow-hidden select-none z-50 fixed top-0 left-0 right-0 w-full"
          style="padding-top: max(16px, calc(10px + env(safe-area-inset-top))); padding-bottom: 9px;">
         <div class="animate-ticker font-pancarte text-[11px] tracking-wider uppercase">
-            <span class="mx-4">✊ JEUDI 19/11 : CONTRE LE PERMIS DE TUER POLICIER · 20H30 : SOIRÉE FESTIVE AU LIEU ROUGE</span>
-            <span class="mx-4">·</span>
-            <span class="mx-4">✊ VENDREDI 20/11 : GRÈVE INTERNATIONALE DE LA JEUNESSE CONTRE LA GUERRE · DÈS 18H : JOURNÉE EUROPÉENNE CONTRE LA CONSCRIPTION</span>
-            <span class="mx-4">·</span>
-            <span class="mx-4">🔥 SAMEDI 21/11 : « NOUVEAU 17 OCTOBRE » MANIFESTATIONS MASSIVES PARTOUT</span>
+            <span class="mx-4">🗣️ LUNDI 23/11 À 16H00 : REGARDS CROISÉS SUR LA MOBILISATION STÉPHANOISE (UJM TRÉFILERIE)</span>
             <span class="mx-4">·</span>
             <span class="mx-4">🎬 LUNDI 23/11 À 18H00 : CULTURES EN LUTTE — AG & PROJECTION "UN PAYS QUI SE TIENT SAGE" (@MÉLIÈS)</span>
+            <span class="mx-4">·</span>
+            <span class="mx-4">✊ MARDI 24/11 À 17H30 : RASSEMBLEMENT DEVANT LA DSDEN POUR L'ANNULATION DE LA MUTATION FORCÉE DE COLINE J.</span>
+            <span class="mx-4">·</span>
+            <span class="mx-4">✊ MERCREDI 25/11 À 14H00 : GOÛTER / APÉRO DE SOUTIEN AUX LYCÉEN·NE·S (BOURSE DU TRAVAIL)</span>
+            <span class="mx-4">·</span>
+            <span class="mx-4">📕 VENDREDI 27/11 À 18H30 : LOIRE ROUGE — CONFÉRENCE & SOIRÉE AU LIEU ROUGE</span>
             <span class="mx-4">·</span>
         </div>
     </div>
@@ -456,79 +458,19 @@
         let initialHash = window.location.hash.replace('#', '');
         let currentPage = validTabs.includes(initialHash) ? initialHash : 'accueil';
 
-        // AGENDA : Événements triés strictement par ordre chronologique
+        // AGENDA : Événements triés strictement par ordre chronologique (Semaine du 23 au 29 novembre 2026)
         let eventsData = [
             { 
-                id: 'e11', 
-                day: '19', 
+                id: 'e14', 
+                day: '23', 
                 month: 'NOV', 
                 year: 2026,
-                weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: 'Journée', 
-                title: "Contre le permis de tuer policier", 
-                type: 'MANIFESTATION', 
-                place: "Dans la rue / Saint-Étienne (lieux à suivre)", 
-                desc: "Appel : Toutes et tous dans la rue contre le permis de tuer policier." 
-            },
-            { 
-                id: 'e8', 
-                day: '19', 
-                month: 'NOV', 
-                year: 2026,
-                weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: '20h30', 
-                title: "Soirée Festive : Karaoké, Quiz, Jeux", 
-                type: 'SOIRÉE', 
-                place: "Lieu Rouge, 15 Rue Georges Dupré, Saint-Étienne", 
-                desc: "Gratuit et ouvert à toutes et tous les jeunes sympathisant·es LFI. Quiz sur le programme avec lots à gagner, karaoké et jeux." 
-            },
-            { 
-                id: 'e12', 
-                day: '20', 
-                month: 'NOV', 
-                year: 2026,
-                weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: 'Journée', 
-                title: "Grève internationale de la jeunesse contre la guerre", 
-                type: 'GRÈVE & MANIF', 
-                place: "Dans la rue / Saint-Étienne (lieux à suivre)", 
-                desc: "Appel : Toutes et tous dans la rue pour la grève internationale de la jeunesse contre la guerre." 
-            },
-            { 
-                id: 'e9', 
-                day: '20', 
-                month: 'NOV', 
-                year: 2026,
-                weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: 'Dès 18h00', 
-                title: "Journée européenne contre la conscription", 
-                type: 'MOBILISATION', 
-                place: "Saint-Étienne (Tréfilerie / MJC des Tilleuls / Hôtel de ville)", 
-                desc: "Saint-Étienne unitaire contre la guerre — Programme du 20 novembre :\n• 18h00 : Rassemblement contre la militarisation de la jeunesse et contre l'austérité au profit de la Défense (📍 Tréfilerie)\n• À partir de 19h00 : Soirée de soutien aux lycéen·nes — Concerts, table ronde autour du mouvement lycéen, entrée et cantine à prix libre (📍 MJC des Tilleuls, 8 Rue du pavillon chinois)\n• 20h00 : Rassemblement T-Dor — Souvenir trans' (📍 Hôtel de ville)" 
-            },
-            { 
-                id: 'e13', 
-                day: '21', 
-                month: 'NOV', 
-                year: 2026,
-                weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: 'Journée', 
-                title: "« Nouveau 17 Octobre » — Manifestations massives partout", 
-                type: 'MANIFESTATION', 
-                place: "Partout / Saint-Étienne (lieux à suivre)", 
-                desc: "Appel : Toutes et tous dans la rue — « Nouveau 17 Octobre », manifestations massives partout." 
-            },
-            { 
-                id: 'e6', 
-                day: '21', 
-                month: 'NOV', 
-                year: 2026,
-                weekLabel: 'Semaine du 16 au 22 novembre 2026',
-                time: '10h00', 
-                title: "Matinée d’intégration à la jeunesse communiste", 
-                type: 'RÉUNION', 
-                place: "Le lieu rouge, Saint-Étienne", 
-                desc: "Présentation du fonctionnement de l'organisation. Formation de base sur le marxisme. Repas commun (gratuit)." 
+                weekLabel: 'Semaine du 23 au 29 novembre 2026',
+                time: '16h00 - 18h00', 
+                title: "Regards croisés sur la mobilisation stéphanoise", 
+                type: 'DÉBAT & RENCONTRE', 
+                place: "UJM — Campus Tréfilerie, Bâtiment Central (K018)", 
+                desc: "Temps de rencontre et de débat ouvert aux étudiant·es, personnels de l'enseignement supérieur et de l'Éducation nationale mobilisé·es, ainsi qu'à celles et ceux qui s'interrogent ou souhaitent échanger sur le mouvement, sur le fond des revendications comme sur la forme des options stratégiques. (Heure d'information syndicale de 16h à 17h)." 
             },
             { 
                 id: 'e7', 
@@ -541,6 +483,42 @@
                 type: 'AG & CINÉ', 
                 place: "Le Méliès Saint-François, 8 Rue de la Valse, 42100 Saint-Étienne", 
                 desc: "Cultures en lutte soutient le mouvement étudiant et lycéen : Assemblée Générale à 18h suivie à 19h de la projection du film « Un pays qui se tient sage » et d'une discussion sur « le monopole de la violence légitime ». Entrée à prix libre entièrement reversée aux caisses de soutien aux actions lycéennes (gratuit pour les lycéen·nes et étudiant·es)." 
+            },
+            { 
+                id: 'e15', 
+                day: '24', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 23 au 29 novembre 2026',
+                time: '17h30', 
+                title: "Rassemblement contre la mutation forcée de Coline J.", 
+                type: 'RASSEMBLEMENT', 
+                place: "Devant la DSDEN de la Loire (à côté de Centre Deux), Saint-Étienne", 
+                desc: "Appel CGT Éduc'Action 42 : Depuis 80 jours, Coline J., documentaliste au Puits de la Loire mutée en raison de son handicap, attend la réponse définitive du Rectorat. Toutes et tous devant la DSDEN à 17h30 pour exiger l'annulation immédiate de la procédure." 
+            },
+            { 
+                id: 'e16', 
+                day: '25', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 23 au 29 novembre 2026',
+                time: '14h00', 
+                title: "Goûter / Apéro de soutien aux lycéen·ne·s", 
+                type: 'CONVIVIALITÉ & LUTTE', 
+                place: "Bourse du Travail, Saint-Étienne", 
+                desc: "Temps convivial ouvert aux compagnon·nes, lycéen·ne·s, étudiant·e·s et militant·e·s pour se retrouver, trouver des solutions communes, partager nos savoirs et faire émerger de nouvelles idées pour le mouvement lycéen étendu." 
+            },
+            { 
+                id: 'e17', 
+                day: '27', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 23 au 29 novembre 2026',
+                time: '18h30', 
+                title: "Loire Rouge — Conférence & Soirée festive", 
+                type: 'CONFÉRENCE & SOIRÉE', 
+                place: "Lieu Rouge, 15 Rue Georges Dupré, Saint-Étienne", 
+                desc: "Autour de la sortie de l'ouvrage « La Loire communiste : Origines, militants, organisations, actions (1914-1953) » de Jean-Michel Steiner et Antoine Vernet.\n• 18h30 - 20h30 : Conférence des auteurs et dédicace\n• 20h30 - minuit : Soirée festive\nEntrée libre." 
             }
         ];
 
