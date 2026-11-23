@@ -134,7 +134,7 @@
     .animate-ticker {
         display: inline-flex;
         white-space: nowrap;
-        animation: ticker 28s linear infinite;
+        animation: ticker 30s linear infinite;
     }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #121212; }
@@ -170,6 +170,8 @@
             <span class="mx-4">🎬 LUNDI 23/11 À 18H00 : CULTURES EN LUTTE — AG & PROJECTION "UN PAYS QUI SE TIENT SAGE" (@MÉLIÈS)</span>
             <span class="mx-4">·</span>
             <span class="mx-4">✊ MARDI 24/11 À 17H30 : RASSEMBLEMENT DEVANT LA DSDEN POUR COLINE J.</span>
+            <span class="mx-4">·</span>
+            <span class="mx-4">🚧 MERCREDI 25 & JEUDI 26/11 À 6H30 : BLOCUS LYCÉEN (USL 42 / ASSEMBLÉE LYCÉENNE / UNION DES LYCÉENS DE JEAN MONNET)</span>
             <span class="mx-4">·</span>
             <span class="mx-4">♀️ MERCREDI 25/11 : GRÈVE FÉMINISTE — MOBILISATION CONTRE LES VIOLENCES SEXISTES ET SEXUELLES</span>
             <span class="mx-4">·</span>
@@ -501,6 +503,18 @@
                 desc: "Appel CGT Éduc'Action 42 : Depuis 80 jours, Coline J., documentaliste au Puits de la Loire mutée en raison de son handicap, attend la réponse définitive du Rectorat. Toutes et tous devant la DSDEN à 17h30 pour exiger l'annulation immédiate de la procédure." 
             },
             { 
+                id: 'e20', 
+                day: '25', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 23 au 29 novembre 2026',
+                time: '6h30', 
+                title: "Blocus lycéen (Jour 1)", 
+                type: 'BLOCUS & ACTION', 
+                place: "Lycées de Saint-Étienne (Jean Monnet / USL 42)", 
+                desc: "Appel au blocus dès 6h30 porté par l'Union Syndicale Lycéenne 42 (USL 42), l'Assemblée Lycéenne et l'Union des Lycéens de Jean Monnet." 
+            },
+            { 
                 id: 'e18', 
                 day: '25', 
                 month: 'NOV', 
@@ -523,6 +537,18 @@
                 type: 'CONVIVIALITÉ & LUTTE', 
                 place: "Bourse du Travail, Saint-Étienne", 
                 desc: "Temps convivial ouvert aux compagnon·nes, lycéen·ne·s, étudiant·e·s et militant·e·s pour se retrouver, trouver des solutions communes, partager nos savoirs et faire émerger de nouvelles idées pour le mouvement lycéen étendu." 
+            },
+            { 
+                id: 'e21', 
+                day: '26', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 23 au 29 novembre 2026',
+                time: '6h30', 
+                title: "Blocus lycéen (Jour 2)", 
+                type: 'BLOCUS & ACTION', 
+                place: "Lycées de Saint-Étienne (Jean Monnet / USL 42)", 
+                desc: "Suite de la mobilisation et appel au blocus dès 6h30 porté par l'Union Syndicale Lycéenne 42 (USL 42), l'Assemblée Lycéenne et l'Union des Lycéens de Jean Monnet." 
             },
             { 
                 id: 'e17', 
@@ -764,26 +790,26 @@
                 ctx.fillStyle = '#fbbf24';
                 ctx.fillText(ev.day.toUpperCase(), 80, 370);
 
-                let currentY = 430;
-                let spacing = Math.min(180, Math.floor((1120 - (ev.weekEvents.length * 60)) / ev.weekEvents.length) + 55);
+                let currentY = 420;
+                let spacing = Math.min(145, Math.floor((1180 - (ev.weekEvents.length * 25)) / ev.weekEvents.length) + 25);
 
                 ev.weekEvents.forEach((item, idx) => {
                     ctx.fillStyle = '#8d211d';
-                    let dateFontSize = item.day.length > 3 ? 40 : 50;
+                    let dateFontSize = item.day.length > 3 ? 36 : 44;
                     ctx.font = `bold ${dateFontSize}px monospace`;
-                    ctx.fillText(item.day, 80, currentY + 48);
+                    ctx.fillText(item.day, 80, currentY + 42);
 
                     ctx.fillStyle = '#fbbf24';
-                    ctx.font = 'bold 20px monospace';
-                    ctx.fillText(`🕒 ${item.time}`, 230, currentY + 20);
+                    ctx.font = 'bold 18px monospace';
+                    ctx.fillText(`🕒 ${item.time}`, 215, currentY + 18);
 
                     ctx.fillStyle = '#f4ede4';
-                    ctx.font = 'bold 24px sans-serif';
-                    ctx.fillText(item.title, 230, currentY + 52, 770);
+                    ctx.font = 'bold 22px sans-serif';
+                    ctx.fillText(item.title, 215, currentY + 46, 785);
 
                     ctx.fillStyle = 'rgba(244, 237, 228, 0.75)';
-                    ctx.font = '19px sans-serif';
-                    ctx.fillText(`📍 ${item.place}`, 230, currentY + 82, 770);
+                    ctx.font = '18px sans-serif';
+                    ctx.fillText(`📍 ${item.place}`, 215, currentY + 72, 785);
 
                     currentY += spacing;
 
@@ -794,7 +820,7 @@
                     ctx.lineTo(canvas.width - 80, currentY);
                     ctx.stroke();
 
-                    currentY += 12;
+                    currentY += 10;
                 });
 
             } else {
