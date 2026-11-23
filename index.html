@@ -134,7 +134,7 @@
     .animate-ticker {
         display: inline-flex;
         white-space: nowrap;
-        animation: ticker 25s linear infinite;
+        animation: ticker 28s linear infinite;
     }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #121212; }
@@ -169,11 +169,15 @@
             <span class="mx-4">·</span>
             <span class="mx-4">🎬 LUNDI 23/11 À 18H00 : CULTURES EN LUTTE — AG & PROJECTION "UN PAYS QUI SE TIENT SAGE" (@MÉLIÈS)</span>
             <span class="mx-4">·</span>
-            <span class="mx-4">✊ MARDI 24/11 À 17H30 : RASSEMBLEMENT DEVANT LA DSDEN POUR L'ANNULATION DE LA MUTATION FORCÉE DE COLINE J.</span>
+            <span class="mx-4">✊ MARDI 24/11 À 17H30 : RASSEMBLEMENT DEVANT LA DSDEN POUR COLINE J.</span>
+            <span class="mx-4">·</span>
+            <span class="mx-4">♀️ MERCREDI 25/11 : GRÈVE FÉMINISTE — MOBILISATION CONTRE LES VIOLENCES SEXISTES ET SEXUELLES</span>
             <span class="mx-4">·</span>
             <span class="mx-4">✊ MERCREDI 25/11 À 14H00 : GOÛTER / APÉRO DE SOUTIEN AUX LYCÉEN·NE·S (BOURSE DU TRAVAIL)</span>
             <span class="mx-4">·</span>
             <span class="mx-4">📕 VENDREDI 27/11 À 18H30 : LOIRE ROUGE — CONFÉRENCE & SOIRÉE AU LIEU ROUGE</span>
+            <span class="mx-4">·</span>
+            <span class="mx-4">♀️ SAMEDI 28/11 : GRÈVE FÉMINISTE — MANIFESTATION POUR LES PLUS VULNÉRABLES CONTRE LES VIOLENCES FAITES AUX FEMMES</span>
             <span class="mx-4">·</span>
         </div>
     </div>
@@ -497,6 +501,18 @@
                 desc: "Appel CGT Éduc'Action 42 : Depuis 80 jours, Coline J., documentaliste au Puits de la Loire mutée en raison de son handicap, attend la réponse définitive du Rectorat. Toutes et tous devant la DSDEN à 17h30 pour exiger l'annulation immédiate de la procédure." 
             },
             { 
+                id: 'e18', 
+                day: '25', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 23 au 29 novembre 2026',
+                time: 'Journée', 
+                title: "Grève Féministe : Mobilisation contre les violences sexistes et sexuelles", 
+                type: 'MANIFESTATION', 
+                place: "Dans toute la France / Saint-Étienne (lieux à suivre)", 
+                desc: "À l'occasion de la Journée internationale de lutte contre les violences à l'égard des femmes, appel de la coalition Grève Féministe (signé par le Mouvement du Nid) : solidarité internationale avec nos sœurs du monde entier, exigence d'une loi intégrale et d'un budget intégral contre les violences faites aux femmes et aux enfants, EVARS effective, moyens pour les services publics et dénonciation de la répression policière." 
+            },
+            { 
                 id: 'e16', 
                 day: '25', 
                 month: 'NOV', 
@@ -519,6 +535,18 @@
                 type: 'CONFÉRENCE & SOIRÉE', 
                 place: "Lieu Rouge, 15 Rue Georges Dupré, Saint-Étienne", 
                 desc: "Autour de la sortie de l'ouvrage « La Loire communiste : Origines, militants, organisations, actions (1914-1953) » de Jean-Michel Steiner et Antoine Vernet.\n• 18h30 - 20h30 : Conférence des auteurs et dédicace\n• 20h30 - minuit : Soirée festive\nEntrée libre." 
+            },
+            { 
+                id: 'e19', 
+                day: '28', 
+                month: 'NOV', 
+                year: 2026,
+                weekLabel: 'Semaine du 23 au 29 novembre 2026',
+                time: 'Journée', 
+                title: "Grève Féministe : Manifestation pour les plus vulnérables", 
+                type: 'MANIFESTATION', 
+                place: "Dans toute la France / Saint-Étienne (lieux à suivre)", 
+                desc: "« Ensemble on nous opprime, Ensemble, révoltons-nous » — Manifestation nationale appelée par la coalition Grève Féministe (signée par le Mouvement du Nid) en soutien aux femmes les plus vulnérables (en situation de handicap, personnes LGBTQIA+, mères isolées, femmes migrantes et sans-abri) et pour l'adoption d'une loi cadre intégrale avant l'arrêt des travaux parlementaires." 
             }
         ];
 
@@ -736,26 +764,26 @@
                 ctx.fillStyle = '#fbbf24';
                 ctx.fillText(ev.day.toUpperCase(), 80, 370);
 
-                let currentY = 440;
-                let spacing = Math.min(190, Math.floor((1100 - (ev.weekEvents.length * 80)) / ev.weekEvents.length) + 70);
+                let currentY = 430;
+                let spacing = Math.min(180, Math.floor((1120 - (ev.weekEvents.length * 60)) / ev.weekEvents.length) + 55);
 
                 ev.weekEvents.forEach((item, idx) => {
                     ctx.fillStyle = '#8d211d';
-                    let dateFontSize = item.day.length > 3 ? 42 : 54;
+                    let dateFontSize = item.day.length > 3 ? 40 : 50;
                     ctx.font = `bold ${dateFontSize}px monospace`;
-                    ctx.fillText(item.day, 80, currentY + 50);
+                    ctx.fillText(item.day, 80, currentY + 48);
 
                     ctx.fillStyle = '#fbbf24';
-                    ctx.font = 'bold 22px monospace';
-                    ctx.fillText(`🕒 ${item.time}`, 250, currentY + 22);
+                    ctx.font = 'bold 20px monospace';
+                    ctx.fillText(`🕒 ${item.time}`, 230, currentY + 20);
 
                     ctx.fillStyle = '#f4ede4';
-                    ctx.font = 'bold 26px sans-serif';
-                    ctx.fillText(item.title, 250, currentY + 58, 750);
+                    ctx.font = 'bold 24px sans-serif';
+                    ctx.fillText(item.title, 230, currentY + 52, 770);
 
                     ctx.fillStyle = 'rgba(244, 237, 228, 0.75)';
-                    ctx.font = '20px sans-serif';
-                    ctx.fillText(`📍 ${item.place}`, 250, currentY + 90, 750);
+                    ctx.font = '19px sans-serif';
+                    ctx.fillText(`📍 ${item.place}`, 230, currentY + 82, 770);
 
                     currentY += spacing;
 
@@ -766,7 +794,7 @@
                     ctx.lineTo(canvas.width - 80, currentY);
                     ctx.stroke();
 
-                    currentY += 15;
+                    currentY += 12;
                 });
 
             } else {
@@ -782,11 +810,11 @@
                 ctx.fillText(`${ev.day} ${ev.month} ${ev.year || 2026}`.toUpperCase(), 80, 310);
 
                 ctx.fillStyle = '#f4ede4';
-                ctx.font = 'bold 68px sans-serif';
+                ctx.font = 'bold 64px sans-serif';
                 
                 let words = ev.title.split(' ');
                 let line = '';
-                let y = 420;
+                let y = 415;
                 let maxWidth = 920;
 
                 for(let i = 0; i < words.length; i++) {
@@ -794,14 +822,14 @@
                     if (ctx.measureText(testLine).width > maxWidth && i > 0) {
                         ctx.fillText(line, 80, y);
                         line = words[i] + ' ';
-                        y += 80;
+                        y += 76;
                     } else {
                         line = testLine;
                     }
                 }
                 ctx.fillText(line, 80, y);
 
-                y += 50;
+                y += 45;
                 ctx.fillStyle = 'rgba(244, 237, 228, 0.05)';
                 ctx.fillRect(80, y, 920, 180);
                 ctx.strokeStyle = '#fbbf24';
@@ -818,7 +846,7 @@
 
                 y += 220;
                 ctx.fillStyle = 'rgba(244, 237, 228, 0.9)';
-                ctx.font = '28px sans-serif';
+                ctx.font = '27px sans-serif';
 
                 let paragraphs = (ev.desc || '').split('\n');
                 let descY = y;
@@ -830,13 +858,13 @@
                         if (ctx.measureText(testLine).width > maxWidth && i > 0) {
                             ctx.fillText(descLine, 80, descY);
                             descLine = descWords[i] + ' ';
-                            descY += 38;
+                            descY += 36;
                         } else {
                             descLine = testLine;
                         }
                     }
                     ctx.fillText(descLine, 80, descY);
-                    descY += 44;
+                    descY += 42;
                 });
             }
 
