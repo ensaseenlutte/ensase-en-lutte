@@ -161,26 +161,11 @@
         </div>
     </div>
 
-    <!-- TICKER FIXÉ -->
+    <!-- TICKER FIXÉ (GÉNÉRÉ DYNAMIQUEMENT SELON LA DATE DU JOUR) -->
     <div class="bg-brand-red text-brand-cream border-b-2 border-brand-cream overflow-hidden select-none z-50 fixed top-0 left-0 right-0 w-full"
          style="padding-top: max(16px, calc(10px + env(safe-area-inset-top))); padding-bottom: 9px;">
-        <div class="animate-ticker font-pancarte text-[11px] tracking-wider uppercase">
-            <span class="mx-4">✊ MARDI 24/11 À 17H30 : RASSEMBLEMENT DEVANT LA DSDEN POUR COLINE J.</span>
-            <span class="mx-4">·</span>
-            <span class="mx-4">🇵🇸 MARDI 24/11 À 19H00 : RENCONTRE POUR LA PALESTINE — SOIRÉE DÉBAT À LA CALE (16 RUE ROYET)</span>
-            <span class="mx-4">·</span>
-            <span class="mx-4">🚧 MERCREDI 25 & JEUDI 26/11 À 6H30 : BLOCUS LYCÉEN (USL 42 / ASSEMBLÉE LYCÉENNE / UNION DES LYCÉENS DE JEAN MONNET)</span>
-            <span class="mx-4">·</span>
-            <span class="mx-4">✊ MERCREDI 25/11 À 14H00 : GOÛTER / APÉRO DE SOUTIEN AUX LYCÉEN·NE·S (BOURSE DU TRAVAIL)</span>
-            <span class="mx-4">·</span>
-            <span class="mx-4">📕 VENDREDI 27/11 À 18H30 : LOIRE ROUGE — CONFÉRENCE & SOIRÉE AU LIEU ROUGE</span>
-            <span class="mx-4">·</span>
-            <span class="mx-4">♀️ SAMEDI 28/11 À 14H00 : MANIFESTATION CONTRE LES VIOLENCES SEXISTES ET SEXUELLES (BOURSE DU TRAVAIL ST-ÉTIENNE / 14H30 ROANNE)</span>
-            <span class="mx-4">·</span>
-            <span class="mx-4">🎬 DIMANCHE 29/11 À 18H30 : JOURNÉE DE SOLIDARITÉ AVEC LE PEUPLE PALESTINIEN — CINÉ-DÉBAT « ENFANTS DE PALESTINE » (@MÉLIÈS)</span>
-            <span class="mx-4">·</span>
-            <span class="mx-4">🔥 MARDI 1/12 À 10H30 : EN GRÈVE PARTOUT ! POUR NOS SALAIRES, NOS PENSIONS ET NOS SERVICES PUBLICS (BOURSE DU TRAVAIL ST-ÉTIENNE / TRIBUNAL ROANNE)</span>
-            <span class="mx-4">·</span>
+        <div id="dynamic-ticker" class="animate-ticker font-pancarte text-[11px] tracking-wider uppercase">
+            <!-- Rempli automatiquement par le script -->
         </div>
     </div>
 
@@ -464,8 +449,8 @@
         let initialHash = window.location.hash.replace('#', '');
         let currentPage = validTabs.includes(initialHash) ? initialHash : 'accueil';
 
-        // AGENDA : Événements triés strictement par ordre chronologique
-        let eventsData = [
+        // AGENDA COMPLET : Tous les événements sont automatiquement filtrés selon la date du jour
+        const allEventsData = [
             { 
                 id: 'e14', 
                 day: '23', 
@@ -612,8 +597,47 @@
             }
         ];
 
+        // FILTRAGE AUTOMATIQUE SELON LA DATE DU JOUR
+        // Chaque événement reste visible jusqu'à la fin de sa journée (23h59:59) puis disparaît automatiquement le lendemain
+        function getUpcomingEvents() {
+            const monthsMap = { 'JAN': 0, 'FEV': 1, 'MAR': 2, 'AVR': 3, 'MAI': 4, 'JUIN': 5, 'JUIL': 6, 'AOU': 7, 'SEP': 8, 'OCT': 9, 'NOV': 10, 'DEC': 11 };
+            const now = new Date();
+            const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+
+            return allEventsData.filter(ev => {
+                const year = ev.year || 2026;
+                const month = monthsMap[ev.month.toUpperCase()] !== undefined ? monthsMap[ev.month.toUpperCase()] : 10;
+                const day = parseInt(ev.day, 10) || 1;
+                const eventDay = new Date(year, month, day, 0, 0, 0);
+                return eventDay >= todayStart;
+            });
+        }
+
+        let eventsData = getUpcomingEvents();
+
         const $ = s => document.querySelector(s);
         const esc = s => String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+        // Mise à jour dynamique du bandeau défilant avec les prochains événements actifs uniquement
+        function renderTicker() {
+            const tickerEl = $('#dynamic-ticker');
+            if (!tickerEl) return;
+            const monthsNum = { 'JAN': '01', 'FEV': '02', 'MAR': '03', 'AVR': '04', 'MAI': '05', 'JUIN': '06', 'JUIL': '07', 'AOU': '08', 'SEP': '09', 'OCT': '10', 'NOV': '11', 'DEC': '12' };
+            
+            if (eventsData.length === 0) {
+                tickerEl.innerHTML = `<span class="mx-4">✊ ENSASE EN LUTTE — RESTEZ MOBILISÉ·ES · PROCHAINES ACTIONS À VENIR SUR L'AGENDA</span>`;
+                return;
+            }
+
+            const itemsHtml = eventsData.slice(0, 8).map(e => {
+                const mNum = monthsNum[e.month.toUpperCase()] || e.month;
+                const timePart = e.time && e.time !== 'Journée' ? ` À ${e.time.toUpperCase()}` : '';
+                return `<span class="mx-4">✊ ${e.day}/${mNum}${timePart} : ${esc(e.title)} (${esc(e.place)})</span><span class="mx-4">·</span>`;
+            }).join('');
+
+            // Dupliqué pour assurer un défilement continu sans coupure
+            tickerEl.innerHTML = itemsHtml + itemsHtml;
+        }
 
         function showToast(msg) {
             const t = $('#toast');
@@ -625,6 +649,7 @@
         }
 
         function setPage(p) {
+            eventsData = getUpcomingEvents();
             currentPage = p;
             window.location.hash = p;
             render();
@@ -744,7 +769,7 @@
             openModal('modal-instagram');
         };
 
-        // Partager le programme complet de la semaine
+        // Partager le programme complet de la semaine (uniquement les événements restants de la semaine)
         window.openWeeklyInstagramModal = function(weekName) {
             const weekEvents = eventsData.filter(e => e.weekLabel === weekName);
             if (weekEvents.length === 0) return;
@@ -828,25 +853,25 @@
 
                 let currentY = 415;
                 let count = ev.weekEvents.length;
-                let spacing = Math.min(145, Math.floor((1210 - (count * 12)) / count));
+                let spacing = Math.min(165, Math.floor((1210 - (count * 12)) / count));
 
                 ev.weekEvents.forEach((item, idx) => {
                     ctx.fillStyle = '#8d211d';
-                    let dateFontSize = count > 9 ? 36 : 42;
+                    let dateFontSize = count > 8 ? 36 : 44;
                     ctx.font = `bold ${dateFontSize}px monospace`;
                     ctx.fillText(item.day, 80, currentY + 38);
 
                     ctx.fillStyle = '#fbbf24';
-                    ctx.font = 'bold 17px monospace';
+                    ctx.font = 'bold 18px monospace';
                     ctx.fillText(`🕒 ${item.time}`, 200, currentY + 16);
 
                     ctx.fillStyle = '#f4ede4';
-                    ctx.font = `bold ${count > 9 ? 20 : 22}px sans-serif`;
-                    ctx.fillText(item.title, 200, currentY + 42, 800);
+                    ctx.font = `bold ${count > 8 ? 20 : 24}px sans-serif`;
+                    ctx.fillText(item.title, 200, currentY + 44, 800);
 
                     ctx.fillStyle = 'rgba(244, 237, 228, 0.75)';
-                    ctx.font = `${count > 9 ? 16 : 18}px sans-serif`;
-                    ctx.fillText(`📍 ${item.place}`, 200, currentY + 66, 800);
+                    ctx.font = `${count > 8 ? 17 : 19}px sans-serif`;
+                    ctx.fillText(`📍 ${item.place}`, 200, currentY + 70, 800);
 
                     currentY += spacing;
 
@@ -857,7 +882,7 @@
                     ctx.lineTo(canvas.width - 80, currentY);
                     ctx.stroke();
 
-                    currentY += 8;
+                    currentY += 10;
                 });
 
             } else {
@@ -1025,6 +1050,8 @@
         }
 
         function render() {
+            eventsData = getUpcomingEvents();
+            renderTicker();
             const container = $('#app-content');
             if(currentPage === 'accueil') container.innerHTML = renderAccueil();
             else if(currentPage === 'agenda') container.innerHTML = renderAgenda();
@@ -1073,31 +1100,37 @@
                         <h2 class="font-pancarte text-xl sm:text-2xl text-brand-cream">PROCHAINS RDV DE LA LUTTE</h2>
                         <button onclick="setPage('agenda')" class="text-xs uppercase font-bold text-brand-red hover:underline">Tout voir →</button>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        ${eventsData.map(e => `
-                            <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
-                                <div>
-                                    <div class="flex justify-between items-start mb-3 gap-2">
-                                        <span class="bg-brand-red text-white text-[10px] font-mono font-bold px-2 py-0.5 uppercase shrink-0">${e.day} ${e.month} · ${e.time}</span>
-                                        <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20 text-right">${e.place}</span>
+                    ${eventsData.length === 0 ? `
+                        <div class="brutal-card bg-brand-black p-6 text-center text-xs text-brand-cream/80">
+                            Aucun événement prévu pour le moment. Tu peux en proposer un via le bouton <strong>+</strong> en haut !
+                        </div>
+                    ` : `
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            ${eventsData.map(e => `
+                                <div class="brutal-card bg-brand-black p-4 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-start mb-3 gap-2">
+                                            <span class="bg-brand-red text-white text-[10px] font-mono font-bold px-2 py-0.5 uppercase shrink-0">${e.day} ${e.month} · ${e.time}</span>
+                                            <span class="text-[9px] bg-brand-cream/10 text-brand-cream px-2 py-0.5 border border-brand-cream/20 text-right">${e.place}</span>
+                                        </div>
+                                        <h3 class="font-pancarte text-base font-bold text-brand-cream mb-1.5">${esc(e.title)}</h3>
+                                        <p class="text-xs text-brand-cream/80 mb-3 leading-relaxed whitespace-pre-line">${esc(e.desc)}</p>
                                     </div>
-                                    <h3 class="font-pancarte text-base font-bold text-brand-cream mb-1.5">${esc(e.title)}</h3>
-                                    <p class="text-xs text-brand-cream/80 mb-3 leading-relaxed whitespace-pre-line">${esc(e.desc)}</p>
-                                </div>
-                                <div class="pt-3 border-t border-brand-cream/20 flex justify-between items-center">
-                                    <span class="text-[9px] font-mono text-brand-red font-semibold">${e.type}</span>
-                                    <div class="flex items-center gap-2">
-                                        <button onclick="openInstagramModal('${e.id}')" class="text-xs bg-brand-red text-brand-cream font-bold px-2.5 py-1 border border-brand-cream hover:bg-brand-lightred flex items-center">
-                                            <i class="fa-brands fa-instagram mr-1"></i> Story
-                                        </button>
-                                        <button onclick="openCalendarModal('${e.id}')" class="text-xs bg-brand-cream text-brand-black font-bold px-2.5 py-1 border border-brand-red hover:bg-white flex items-center">
-                                            <i class="fa-solid fa-plus mr-1"></i> Agenda
-                                        </button>
+                                    <div class="pt-3 border-t border-brand-cream/20 flex justify-between items-center">
+                                        <span class="text-[9px] font-mono text-brand-red font-semibold">${e.type}</span>
+                                        <div class="flex items-center gap-2">
+                                            <button onclick="openInstagramModal('${e.id}')" class="text-xs bg-brand-red text-brand-cream font-bold px-2.5 py-1 border border-brand-cream hover:bg-brand-lightred flex items-center">
+                                                <i class="fa-brands fa-instagram mr-1"></i> Story
+                                            </button>
+                                            <button onclick="openCalendarModal('${e.id}')" class="text-xs bg-brand-cream text-brand-black font-bold px-2.5 py-1 border border-brand-red hover:bg-white flex items-center">
+                                                <i class="fa-solid fa-plus mr-1"></i> Agenda
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        `).join('')}
-                    </div>
+                            `).join('')}
+                        </div>
+                    `}
                 </div>
 
                 <!-- WIDGET SUR L'ÉCRAN D'ACCUEIL -->
@@ -1134,11 +1167,15 @@
                         <div>
                             <span class="text-brand-red font-mono text-xs uppercase tracking-widest font-bold">/// Manifestations & Actions</span>
                             <h2 class="font-pancarte text-3xl sm:text-4xl font-extrabold text-brand-cream mt-1">AGENDA DE LA LUTTE</h2>
-                            <p class="text-xs text-brand-cream/70 mt-1">Classé par semaine pour suivre et relayer les mobilisations.</p>
+                            <p class="text-xs text-brand-cream/70 mt-1">Classé par semaine — les événements passés disparaissent automatiquement chaque jour.</p>
                         </div>
                     </div>
 
-                    ${Object.entries(weeksMap).map(([weekName, weekEvents]) => `
+                    ${Object.keys(weeksMap).length === 0 ? `
+                        <div class="brutal-card bg-brand-black p-6 text-center text-xs text-brand-cream/80 mb-8">
+                            Aucun événement à venir n'est enregistré pour le moment.
+                        </div>
+                    ` : Object.entries(weeksMap).map(([weekName, weekEvents]) => `
                         <div class="mb-10 space-y-4">
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-brand-red pb-2 gap-2">
                                 <h3 class="font-pancarte text-lg sm:text-xl text-amber-300 uppercase">${esc(weekName)}</h3>
@@ -1353,9 +1390,15 @@
             `;
         }
         
-        // Lancement initial
+        // Lancement initial et vérification périodique en cas d'onglet laissé ouvert la nuit
         render();
         updateNavActive();
+        setInterval(() => {
+            const updated = getUpcomingEvents();
+            if (updated.length !== eventsData.length) {
+                render();
+            }
+        }, 60000);
     </script>
 </body>
 </html>
