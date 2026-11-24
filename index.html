@@ -143,24 +143,6 @@
 </head>
 <body class="texture-overlay min-h-screen flex flex-col selection:bg-brand-red selection:text-white pb-24">
 
-    <!-- MODALE AVERTISSEMENT / FLASH AU CHARGEMENT -->
-    <div id="modal-disclaimer" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-brand-black border-2 border-brand-red max-w-lg w-full p-6 brutal-card space-y-4">
-            <span class="text-[10px] font-mono text-brand-red font-bold uppercase tracking-widest">/// Avertissement important</span>
-            <h2 class="font-pancarte text-2xl font-extrabold text-brand-cream">ATTENTION CECI N'EST PAS EENSASE</h2>
-            <p class="text-xs text-brand-cream/90 leading-relaxed font-light">
-                Ce site est la plateforme indépendante et autogérée du collectif <strong>ENSASE en lutte</strong>. 
-                Nous représentons exclusivement les étudiant·es mobilisé·es et en lutte, et non l'administration, les enseignant·es ou l'ensemble de l'école institutionnelle.
-            </p>
-            <p class="text-xs text-brand-cream/80 leading-relaxed font-light">
-                À ne pas confondre avec <strong>EENSASE</strong> (l'école, les plannings et l'institution). D'ailleurs, si tu cherchais le site officiel de l'école : <a href="https://eensase.vercel.app" target="_blank" rel="noopener noreferrer" class="text-amber-300 font-bold underline hover:text-amber-200">c'est par ici ↗</a>.
-            </p>
-            <button onclick="closeDisclaimer()" class="w-full brutal-btn py-3 text-xs uppercase font-bold tracking-wider">
-                J'ai compris, entrer sur la plateforme
-            </button>
-        </div>
-    </div>
-
     <!-- TICKER FIXÉ (GÉNÉRÉ DYNAMIQUEMENT SELON LA DATE DU JOUR) -->
     <div class="bg-brand-red text-brand-cream border-b-2 border-brand-cream overflow-hidden select-none z-50 fixed top-0 left-0 right-0 w-full"
          style="padding-top: max(16px, calc(10px + env(safe-area-inset-top))); padding-bottom: 9px;">
@@ -1167,7 +1149,7 @@
                         <div>
                             <span class="text-brand-red font-mono text-xs uppercase tracking-widest font-bold">/// Manifestations & Actions</span>
                             <h2 class="font-pancarte text-3xl sm:text-4xl font-extrabold text-brand-cream mt-1">AGENDA DE LA LUTTE</h2>
-                            <p class="text-xs text-brand-cream/70 mt-1">Classé par semaine — les événements passés disparaissent automatiquement chaque jour.</p>
+                            <p class="text-xs text-brand-cream/70 mt-1">Classé par semaine — mis à jour chaque lundi et jeudi</p>
                         </div>
                     </div>
 
